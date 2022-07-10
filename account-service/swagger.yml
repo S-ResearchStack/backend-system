@@ -1,0 +1,293 @@
+openapi: 3.0.0
+info:
+  version: 0.7.0
+  title: Account Service
+paths:
+  /account-service/invitations:
+    post:
+      summary: Invite a new user for specific project
+      description: |
+        when someone is invited, platform will send a invitation mail with invitation-link to given email address.
+      tags:
+        - Invitation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvitationReq"
+      responses:
+        "201":
+          description: A new account was created with given email.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/user/password/reset:
+    post:
+      summary: Reset password
+      tags:
+        - Researcher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordReq"
+      responses:
+        "200":
+          description: The operation was successful.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/signin:
+    post:
+      summary: Signin a user with email and password
+      tags:
+        - Researcher
+      security: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignReq"
+      responses:
+        "200":
+          description: The operation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignInResponse"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/user/roles:
+    put:
+      summary: Assign roles to user
+      tags:
+        - Role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleReq"
+      responses:
+        "200":
+          description: The operation was successful.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/user/roles/remove:
+    post:
+      summary: Remove roles from user
+      tags:
+        - Role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleReq"
+      responses:
+        "200":
+          description: The operation was successful.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/roles:
+    put:
+      summary: Create roles
+      description: This api is only for internal-use.
+      tags:
+        - Role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Roles"
+      responses:
+        "200":
+          description: The operation was successful.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /account-service/users:
+    get:
+      summary: Get user list
+      tags:
+        - User
+      parameters:
+        - in: query
+          name: projectId
+          description: specific project id to retrieve users
+          schema:
+            $ref: '#/components/schemas/ProjectId'
+      responses:
+        "200":
+          description: The operation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    InvitationReq:
+      type: array
+      items:
+        $ref: "#/components/schemas/Invitation"
+    Invitation:
+      required:
+        - email
+        - roles
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        roles:
+          $ref: "#/components/schemas/Roles"
+    Roles:
+      type: array
+      items:
+        $ref: "#/components/schemas/Role"
+    Role:
+      type: string
+      description: |
+        A role is either system role or project role.
+        Researchers must have project roles to access specific project.
+        - The format of project role is as follow: $project_id:$role_name
+      example: project_sample:researcher
+    ResetPasswordReq:
+      required:
+        - resetToken
+        - password
+      properties:
+        resetToken:
+          $ref: "#/components/schemas/ResetToken"
+        password:
+          type: string
+        profile:
+          $ref: "#/components/schemas/Profile"
+    SignReq:
+      required:
+        - email
+        - password
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        password:
+          type: string
+    SignInResponse:
+      required:
+        - id
+        - email
+        - jwt
+        - roles
+        - profile
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        id:
+          $ref: "#/components/schemas/AccountId"
+        jwt:
+          $ref: "#/components/schemas/Token"
+        roles:
+          $ref: "#/components/schemas/Roles"
+        profile:
+          $ref: "#/components/schemas/Profile"
+    RoleReq:
+      required:
+        - accountId
+        - roles
+      properties:
+        accountId:
+          $ref: "#/components/schemas/AccountId"
+        roles:
+          $ref: "#/components/schemas/Roles"
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    User:
+      required:
+        - email
+        - id
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        id:
+          $ref: "#/components/schemas/AccountId"
+        roles:
+          $ref: "#/components/schemas/Roles"
+        profile:
+          $ref: "#/components/schemas/Profile"
+    Profile:
+      type: object
+      description: Account information in JSON without pre-defined fields
+      example: { "name": "david.lee" , "status": "active" }
+    Token:
+      description: |
+        Signed Json Web Token
+        payload is as below.
+        {
+          "email": "cubist@samsung.com",
+          "roles": ["study_1:owner", "study_2:research"],
+          "iss": "https://research-hub.io/",
+          "exp": 1660377937,
+          "iat": 1660291536
+        }
+      type: string
+      example: eyJhbGc...ssw5c
+    Email:
+      type: string
+      format: email
+      example: cubist@samsung.com
+    AccountId:
+      type: string
+      example: 7d08351b-85b6-488e-a8a2-b8653defb865
+    ProjectId:
+      type: string
+      example: 100
+    ResetToken:
+      type: string
+      example: aadfad...badfdfad
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: [ ]

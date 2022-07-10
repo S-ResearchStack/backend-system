@@ -1,0 +1,21 @@
+app:
+  jwk:
+    url: ${JWK_URL:http://localhost:3567/recipe/jwt/jwks}
+  invitation:
+    url: ${INVITATION_URL}
+
+spring:
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${MAIL_USER}
+    password: ${MAIL_USER_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+superTokens:
+  url: ${SUPER_TOKEN_URL:http://localhost:3567}

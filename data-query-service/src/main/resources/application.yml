@@ -1,0 +1,13 @@
+config:
+  trino:
+    url: jdbc:trino://${TRINO_HOST}:${TRINO_PORT}
+    catalog: ${TRINO_CATALOG}
+    user: ${TRINO_DEFAULT_USER}
+  db:
+    prefix: project_
+    postfix: _research
+  jwks:
+    url: ${JWK_URL}
+
+server:
+  port: 3030
