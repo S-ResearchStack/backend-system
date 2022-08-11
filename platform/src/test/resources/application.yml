@@ -1,0 +1,39 @@
+config:
+  db:
+    url: postgresql://localhost:5432/test
+    host: localhost
+    port: 5432
+    name: test
+    schema: public
+    user: postgres
+    password: postgres
+  new-database-config:
+    prefix: project_
+    postfix: _research
+  security:
+    google:
+      client-id: client-id
+      client-secret: client-secret
+
+spring:
+  r2dbc:
+    url: r2dbc:${config.db.url}
+    username: ${config.db.user}
+    password: ${config.db.password}
+  flyway:
+    url: jdbc:${config.db.url}
+    user: ${config.db.user}
+    password: ${config.db.password}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${config.security.google.client-id}
+            client-secret: ${config.security.google.client-secret}
+            scope:
+              - email
+              - profile
+
+server:
+  port: 3030

@@ -1,0 +1,319 @@
+openapi: 3.0.0
+info:
+  version: 0.5.0
+  title: Healthcare Research Platform
+paths:
+  /api/projects:
+    get:
+      summary: get all project lists
+      operationId: listProjects
+      tags:
+        - Project
+      responses:
+        "200":
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectsRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Create a new study project for healthcare research
+      operationId: createProject
+      tags:
+        - Project
+      requestBody:
+        description: project descrption
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/projects/{projectId}:
+    get:
+      summary: Info for a specific project
+      operationId: getProjectById
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the pet to retrieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/projects/{projectId}/sql:
+    post:
+      summary: Search Health Data by executing the given SQL statement
+      operationId: executeQuery
+      tags:
+        - Health Data
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the project to retrieve
+          schema:
+            type: string
+      requestBody:
+        description: SQL statement. Only allowed to retrieve data
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - sql
+              properties:
+                sql:
+                  type: string
+              example:
+                sql: select * from heartrates where user_id='u1'
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                required:
+                  - data
+                properties:
+                  metadata:
+                    columns:
+                      type: array
+                    count:
+                      type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                example:
+                  metadata:
+                    columns:
+                      - user_id
+                      - ...
+                    count: 8
+                  data:
+                    - id: "1"
+                      user_id: u1
+                      time: 2019-05-21
+                      bpm: 120
+                    - id: "2"
+                      user_id: u1
+                      time: 2019-05-22
+                      bpm: 108
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/projects/{projectId}/users:
+    post:
+      summary: Register user as a participant of project
+      operationId: registerParticipant
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the project to register user
+          schema:
+            type: string
+      requestBody:
+        description: participant information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Participant"
+      responses:
+        "201":
+          description: Null response
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/projects/{projectId}/users/{userId}:
+    get:
+      summary: get user information
+      operationId: getParticipant
+      tags:
+        - Project
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the project to retrieve
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          description: The id of the user to retrieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Participant"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/projects/{projectId}/researchers:
+    get:
+      summary: get all researchers in the project (WIP!!!!)
+      operationId: getResearcher
+      tags:
+        - Project
+        - WIP
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          description: The id of the project to retrieve
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Researchers"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Id:
+      required:
+        - value
+      properties:
+        value:
+          type: integer
+    BaseTime:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+    Project:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        isOpen:
+          type: boolean
+        info:
+          type: object
+          additionalProperties:
+            type: object
+    ProjectRes:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: object
+              $ref: "#/components/schemas/Id"
+        - $ref: "#/components/schemas/Project"
+        - $ref: "#/components/schemas/BaseTime"
+    ProjectsRes:
+      type: array
+      items:
+        $ref: "#/components/schemas/ProjectRes"
+    Projects:
+      type: array
+      items:
+        $ref: "#/components/schemas/Project"
+    Participant:
+      required:
+        - name
+      properties:
+        userId:
+          type: string
+          description: Unique id of user (generated by firebase)
+          example: 1cUoc4KcejOY89f2PzDc9Z8Fyf53
+        profile:
+          type: object
+          description: Participant information in JSON with no pre-defined fields
+          example: { "birth": "1992-02-24", "gender": "female" }
+    Participants:
+      type: array
+      items:
+        $ref: "#/components/schemas/Participant"
+    Researcher:
+      required:
+        - id
+        - role
+      properties:
+        id:
+          type: string
+          description: Unique id of researcher
+          example: 57e8df14-b766-4c90-8f4e-f7afc74123c6
+        role:
+          type: string
+          description: Role of the researcher
+          enum: [ researcher, project-manager, project-admin ]
+    Researchers:
+      type: array
+      items:
+        $ref: "#/components/schemas/Researcher"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: [ ]

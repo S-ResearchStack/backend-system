@@ -1,0 +1,39 @@
+config:
+  db:
+    url: postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    host: ${DB_HOST}
+    port: ${DB_PORT}
+    name: ${DB_NAME}
+    schema: ${DB_SCHEMA}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  new-database-config:
+    prefix: project_
+    postfix: _research
+  security:
+    google:
+      client-id: ${GOOGLE_CLIENT_ID}
+      client-secret: ${GOOGLE_CLIENT_SECRET}
+
+logging:
+  level:
+    root: info
+
+spring:
+  flyway:
+    url: jdbc:${config.db.url}
+    user: ${config.db.user}
+    password: ${config.db.password}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${config.security.google.client-id}
+            client-secret: ${config.security.google.client-secret}
+            scope:
+              - email
+              - profile
+
+server:
+  port: 3030
