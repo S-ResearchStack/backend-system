@@ -12,9 +12,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain
 
 @Configuration
 @EnableWebFluxSecurity
-class SecurityConfig(
-    private val oAuth2SuccessHandler: OAuth2SuccessHandler,
-) {
+class SecurityConfig {
     @Bean
     fun firebaseApp(): FirebaseApp {
         // checks $GOOGLE_APPLICATION_CREDENTIALS
@@ -26,20 +24,9 @@ class SecurityConfig(
     }
 
     @Bean
-    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
-        http.authorizeExchange {
-            it.pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers("/api/**").permitAll()
-                .anyExchange().permitAll()
-        }
-            .cors { it.disable() }
+    fun securityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain =
+        http
             .csrf { it.disable() }
-            .httpBasic()
-            .and()
-            .oauth2Login {
-                it.authenticationSuccessHandler(oAuth2SuccessHandler)
-            }
-
-        return http.build()
-    }
+            .httpBasic { it.disable() }
+            .build()
 }

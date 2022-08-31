@@ -10,10 +10,6 @@ config:
   new-database-config:
     prefix: project_
     postfix: _research
-  security:
-    google:
-      client-id: ${GOOGLE_CLIENT_ID}
-      client-secret: ${GOOGLE_CLIENT_SECRET}
 
 logging:
   level:
@@ -24,16 +20,6 @@ spring:
     url: jdbc:${config.db.url}
     user: ${config.db.user}
     password: ${config.db.password}
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${config.security.google.client-id}
-            client-secret: ${config.security.google.client-secret}
-            scope:
-              - email
-              - profile
 
 server:
   port: 3030
