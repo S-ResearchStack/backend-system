@@ -1,5 +1,10 @@
-# Healthcare Research Platform
-The _Samsung Health Stack Backend System_ is a backend system that makes it easy to analyze data and manage users for clinical/medical research.
+# Samsung Health Stack Backend System
+The backend system for the Samsung Health Stack consists of backend services and a data engine available through application programming interface (API) endpoints that makes it easy to analyze data and manage users for clinical/medical studies. The stack also includes:
+
+-   A software development kit (SDK) for app development
+-   A web portal for survey creation, participant management, and data analysis
+
+Refer to https://s-healthstack.io for documentation, including complete installation instructions and getting started tutorial.
 
 ## Getting Started
 
