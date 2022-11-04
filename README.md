@@ -4,35 +4,8 @@ The backend system for the Samsung Health Stack consists of backend services and
 -   A software development kit (SDK) for app development
 -   A web portal for survey creation, participant management, and data analysis
 
-Refer to https://s-healthstack.io for documentation, including complete installation instructions and getting started tutorial.
-
-## Getting Started
-
-### Prerequisite
-- java 17
-
-### Build
-```bash
-# clean all modules
-$ ./gradlew clean
-
-# build all modules
-$ ./gradlew build
-
-# build only platform module
-$ ./gradlew :platform:build -x test
-```
-
-### Unit Test
-```bash
-# test all modules
-$ ./gradlew test
-
-# test only platform
-$ ./gradlew :platform:test
-```
-
-### Check coding Style
-```bash
-$ ./gradlew ktlintCheck
-```
+Refer to <a href="https://s-healthstack.io" target="_blank">https://s-healthstack.io</a> for documentation, or jump directly to:
+- The <a href="https://s-healthstack.io/installing-the-backend.html" target="_blank">backend system installation instructions</a>
+- The <a href="https://s-healthstack.io/installing-the-sdk.html" target="_blank">app SDK installation instructions</a>
+- The <a href="https://s-healthstack.io/installing-the-portal.html" target="_blank">web portal installation instructions</a>
+- The <a href="https://s-healthstack.io/tutorial.html" target="_blank">getting statred tutorial</a>
