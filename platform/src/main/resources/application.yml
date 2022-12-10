@@ -1,11 +1,11 @@
 config:
   db:
-    url: postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    host: ${DB_HOST}
-    port: ${DB_PORT}
-    name: ${DB_NAME}
-    schema: ${DB_SCHEMA}
-    user: ${DB_USERNAME}
+    url: postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5432}
+    name: ${DB_NAME:postgres}
+    schema: ${DB_SCHEMA:public}
+    user: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD}
   new-database-config:
     prefix: project_
