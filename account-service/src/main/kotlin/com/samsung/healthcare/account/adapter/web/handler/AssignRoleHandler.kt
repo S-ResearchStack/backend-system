@@ -22,5 +22,10 @@ class AssignRoleHandler(
             }
             .then(ServerResponse.ok().build())
 
-    data class RoleRequest(val accountId: String, val roles: List<String> = emptyList())
+    data class RoleRequest(val accountId: String, val roles: List<String> = emptyList()) {
+        init {
+            require(accountId.isNotBlank())
+            require(roles.isNotEmpty())
+        }
+    }
 }

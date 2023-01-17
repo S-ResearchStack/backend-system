@@ -1,5 +1,7 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
+import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.platform.application.authorize.Authorizer
 import com.samsung.healthcare.platform.application.exception.BadRequestException
 import com.samsung.healthcare.platform.application.port.input.project.task.GetTaskCommand
 import com.samsung.healthcare.platform.application.port.input.project.task.GetTaskUseCase
@@ -13,6 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.reactor.asFlux
 import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.reactor.mono
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -23,19 +26,41 @@ class GetTaskService(
     private val itemOutputPort: ItemOutputPort
 ) : GetTaskUseCase {
     /**
-     * Returns relevant task results between the startTime and endTime specified by [GetTaskCommand].
+     * Returns relevant task results that have created time between the startTime and endTime specified by [GetTaskCommand]. First checks that the user is authorized, then utilizes [byCreatedAt].
+     *
+     * @param projectId The id of the project
+     * @param command [GetTaskCommand] with request specifications.
+     * @throws [BadRequestException] if the provided [TaskStatus] is not valid.
+     * @return A parsed Flow of all relevant tasks that meet the given timeframe.
+     */
+    override suspend fun findByPeriodFromResearcher(
+        projectId: String,
+        command: GetTaskCommand
+    ): Flow<Map<String, Any?>> {
+        if (command.status != null && !TaskStatus.values().any { it.name == command.status })
+            throw BadRequestException("Invalid TaskStatus type: ${command.status}")
+
+        return Authorizer.getAccount(AccessProjectAuthority(projectId))
+            .flatMap {
+                mono {
+                    byCreatedAt(command)
+                }
+            }.awaitSingle()
+    }
+
+    /**
+     * Returns relevant task results that have published time between the lastSyncTime and endTime specified by [GetTaskCommand].
      *
      * @param command [GetTaskCommand] with request specifications.
      * @throws [BadRequestException] if the provided [TaskStatus] is not valid.
      * @return A parsed Flow of all relevant tasks that meet the given timeframe.
      */
-    override suspend fun findByPeriod(command: GetTaskCommand): Flow<Map<String, Any?>> =
+    override suspend fun findByPeriodFromParticipant(command: GetTaskCommand): Flow<Map<String, Any?>> {
         if (command.status != null && !TaskStatus.values().any { it.name == command.status })
             throw BadRequestException("Invalid TaskStatus type: ${command.status}")
-        else if (null != command.lastSyncTime)
-            byPublishedAt(command)
-        else
-            byCreatedAt(command)
+
+        return byPublishedAt(command)
+    }
 
     /**
      * Returns all tasks with relevant [createdAt][Task.createdAt] and [TaskStatus] values specified by [GetTaskCommand].
@@ -84,18 +109,25 @@ class GetTaskService(
             }
 
     /**
-     * Returns the task associated with the given id.
+     * Returns the task associated with the given id. Before that, checks that the user is authorized first.
      *
-     * @param id The id of the task
+     * @param projectId The id of the project
+     * @param taskId The id of the task
      * @return A parsed Flow of the task with the given id.
      */
-    override suspend fun findById(id: String): Flow<Map<String, Any?>> {
-        return taskOutputPort.findById(id)
-            .map { it.unrollTask() }
-            .flatMapConcat {
-                it["items"] = itemOutputPort.findByRevisionIdAndTaskId(it["revisionId"] as Int, it["id"].toString())
-                    .map { item -> item.unrollItem() }.asFlux().collectList().awaitSingle()
-                flowOf(it)
-            }
+    override suspend fun findById(projectId: String, taskId: String): Flow<Map<String, Any?>> {
+        return Authorizer.getAccount(AccessProjectAuthority(projectId))
+            .flatMap {
+                mono {
+                    taskOutputPort.findById(taskId)
+                        .map { it.unrollTask() }
+                        .flatMapConcat {
+                            it["items"] = itemOutputPort
+                                .findByRevisionIdAndTaskId(it["revisionId"] as Int, it["id"].toString())
+                                .map { item -> item.unrollItem() }.asFlux().collectList().awaitSingle()
+                            flowOf(it)
+                        }
+                }
+            }.awaitSingle()
     }
 }

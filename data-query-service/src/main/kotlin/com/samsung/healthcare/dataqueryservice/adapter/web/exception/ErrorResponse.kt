@@ -1,4 +1,4 @@
-package com.samsung.healthcare.dataqueryservice.application.exception
+package com.samsung.healthcare.dataqueryservice.adapter.web.exception
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import java.time.LocalDateTime

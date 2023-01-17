@@ -1,5 +1,8 @@
-package com.samsung.healthcare.dataqueryservice.application.exception
+package com.samsung.healthcare.dataqueryservice.adapter.web.exception
 
+import com.samsung.healthcare.dataqueryservice.application.exception.ForbiddenSqlStatementTypeException
+import com.samsung.healthcare.dataqueryservice.application.exception.UnauthorizedException
+import io.trino.sql.parser.ParsingException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.security.oauth2.jwt.BadJwtException
@@ -17,17 +20,31 @@ class GlobalExceptionHandler(
     @Value("#{environment.getProperty('debug') != null && environment.getProperty('debug') != 'false'}")
     private val isDebug: Boolean,
 ) {
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException::class)
     fun handleUnauthorizedException(e: UnauthorizedException) = ErrorResponse(
-        message = "Unauthorized",
+        message = "Unauthorized.",
         reason = if (isDebug) e.message else null
     )
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadJwtException::class)
     fun handleBadJwtException(e: BadJwtException) = ErrorResponse(
-        message = "Bad JWT Exception",
+        message = "Bad JWT Exception.",
+        reason = if (isDebug) e.message else null
+    )
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(ForbiddenSqlStatementTypeException::class)
+    fun handleForbiddenSqlStatementException(e: ForbiddenSqlStatementTypeException) = ErrorResponse(
+        message = "Forbidden SQL statement type.",
+        reason = if (isDebug) e.message else null
+    )
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ParsingException::class)
+    fun handleParsingException(e: ParsingException) = ErrorResponse(
+        message = "Invalid SQL statement.",
         reason = if (isDebug) e.message else null
     )
 

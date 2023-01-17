@@ -23,7 +23,8 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
             InternalServerException::class to HttpStatus.INTERNAL_SERVER_ERROR,
             NotFoundException::class to HttpStatus.NOT_FOUND,
             UnauthorizedException::class to HttpStatus.UNAUTHORIZED,
-            NotImplementedException::class to HttpStatus.NOT_IMPLEMENTED
+            NotImplementedException::class to HttpStatus.NOT_IMPLEMENTED,
+            UserAlreadyExistsException::class to HttpStatus.CONFLICT
         )
     }
 

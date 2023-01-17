@@ -1,10 +1,20 @@
 app:
+  db:
+    url: postgresql://${DB_URL}/${DB_NAME}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jwk:
-    url: ${JWK_URL:http://localhost:3567/recipe/jwt/jwks}
+    url: ${JWK_URL:http://127.0.0.1:3567/recipe/jwt/jwks}
   invitation:
     url: ${INVITATION_URL}
+  verification:
+    url: ${VERIFICATION_URL}
 
 spring:
+  r2dbc:
+    url: r2dbc:${app.db.url}
+    username: ${app.db.user}
+    password: ${app.db.password}
   mail:
     host: ${SMTP_HOST:smtp.gmail.com}
     port: ${SMTP_PORT:587}

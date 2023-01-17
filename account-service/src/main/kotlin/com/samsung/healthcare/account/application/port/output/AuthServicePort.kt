@@ -25,9 +25,21 @@ interface AuthServicePort {
 
     fun listUserRoles(id: String): Mono<List<Role>>
 
+    fun getAccount(id: String): Mono<Account>
+
     // TODO handle pagination
     fun listUsers(): Mono<List<Account>>
     fun retrieveUsersAssociatedWithRoles(projectRoles: List<ProjectRole>): Mono<List<Account>>
 
     fun updateAccountProfile(accountId: String, profile: Map<String, Any>): Mono<Map<String, Any>>
+
+    fun generateEmailVerificationToken(accountId: String, email: Email): Mono<String>
+
+    fun generateEmailVerificationToken(email: Email): Mono<String>
+
+    fun verifyEmail(emailVerificationToken: String): Mono<Account>
+
+    fun isVerifiedEmail(accountId: String, email: Email): Mono<Boolean>
+
+    fun countUsers(): Mono<Int>
 }

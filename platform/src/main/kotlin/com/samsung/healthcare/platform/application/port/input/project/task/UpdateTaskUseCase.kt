@@ -4,7 +4,8 @@ import com.samsung.healthcare.platform.domain.project.task.RevisionId
 
 interface UpdateTaskUseCase {
     suspend fun updateTask(
-        id: String,
+        projectId: String,
+        taskId: String,
         revisionId: RevisionId,
         command: UpdateTaskCommand,
     )

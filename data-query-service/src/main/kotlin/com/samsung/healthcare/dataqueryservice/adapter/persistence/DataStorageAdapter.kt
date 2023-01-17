@@ -13,12 +13,23 @@ import java.util.Properties
 class DataStorageAdapter(
     private val config: ApplicationProperties,
 ) : QueryDataPort {
-    override fun executeQuery(projectId: String, accountId: String?, sql: String): QueryDataResult {
+
+    override fun executeQuery(projectId: String, accountId: String?, sql: String): QueryDataResult =
+        executeQuery(projectId, accountId, sql, emptyList())
+
+    override fun executeQuery(projectId: String, accountId: String?, sql: String, params: List<Any>): QueryDataResult {
+        require(projectId.isNotBlank())
+
         val data = mutableListOf<Map<String, Any?>>()
         val columns = mutableListOf<String>()
 
         dbConnection(projectId, accountId).use { conn ->
-            val resultSet = conn.createStatement().executeQuery(sql)
+            val preparedStatement = conn.prepareStatement(sql).apply {
+                params.forEachIndexed { index, any ->
+                    setObject(index + 1, any)
+                }
+            }
+            val resultSet = preparedStatement.executeQuery()
             val numCol: Int = resultSet.metaData.columnCount
 
             for (i in 1..numCol) {

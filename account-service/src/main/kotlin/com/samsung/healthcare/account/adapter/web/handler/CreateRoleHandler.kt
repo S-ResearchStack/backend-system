@@ -14,7 +14,6 @@ class CreateRoleHandler(
 ) {
     fun createProjectRoles(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<CreateProjectRoleRequest>()
-            .log()
             .flatMap { createRequest ->
                 registerRolesService.createProjectRoles(createRequest)
             }

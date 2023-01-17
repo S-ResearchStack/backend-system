@@ -31,5 +31,7 @@ dependencies {
     kapt(Libs.MAPSTRUCT_ANNOTATION)
     testImplementation(Libs.SPRING_BOOT_STARTER_TEST)
     testImplementation(Libs.REACTOR_TEST)
+    testImplementation(Libs.KOTLINX_COROUTINES_TEST)
     testImplementation(Libs.MOCKK)
+    testImplementation(Libs.SPRING_MOCKK)
 }

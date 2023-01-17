@@ -13,5 +13,8 @@ dependencies {
     implementation(Libs.KOTLIN_REFLECT)
     implementation(Libs.GSON)
     implementation(Libs.KOTLIN_LOGGING)
+
     testImplementation(Libs.SPRING_BOOT_STARTER_TEST)
+    testImplementation(Libs.MOCKK)
+    testImplementation(Libs.WIRE_MOCK)
 }

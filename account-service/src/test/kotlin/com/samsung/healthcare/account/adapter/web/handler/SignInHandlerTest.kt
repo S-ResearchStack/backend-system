@@ -1,6 +1,8 @@
 package com.samsung.healthcare.account.adapter.web.handler
 
 import com.ninjasquad.springmockk.MockkBean
+import com.samsung.healthcare.account.NEGATIVE_TEST
+import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.adapter.web.config.SecurityConfig
 import com.samsung.healthcare.account.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.account.adapter.web.exception.GlobalExceptionHandler
@@ -12,10 +14,13 @@ import com.samsung.healthcare.account.application.port.input.SignInCommand
 import com.samsung.healthcare.account.application.port.input.SignInUseCase
 import com.samsung.healthcare.account.domain.Email
 import io.mockk.every
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.context.annotation.Import
+import org.springframework.http.HttpStatus
 import org.springframework.test.web.reactive.server.WebTestClient
 import reactor.core.publisher.Mono
 
@@ -41,41 +46,56 @@ internal class SignInHandlerTest {
     private val email = Email("cubist@reserch-hub.test.com")
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `should return ok`() {
         val pw = "secret"
         every { signInService.signIn(SignInCommand(email, pw)) } returns Mono.empty()
 
-        webClient.post(SIGN_IN_PATH, TestRequest(email.value, pw))
-            .expectStatus()
-            .isOk
+        val result = webClient.post(SIGN_IN_PATH, TestRequest(email.value, pw))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.OK)
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `should return bad request when email is not valid`() {
-        webClient.post(SIGN_IN_PATH, TestRequest("invalid-email", "secret"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(SIGN_IN_PATH, TestRequest("invalid-email", "secret"))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `should return bad request when email is null`() {
-        webClient.post(SIGN_IN_PATH, TestRequest(null, "secret"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(SIGN_IN_PATH, TestRequest(null, "secret"))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `should return bad request when password is null`() {
-        webClient.post(SIGN_IN_PATH, TestRequest(email.value, null))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(SIGN_IN_PATH, TestRequest(email.value, null))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `should return bad request when password is not valid`() {
-        webClient.post(SIGN_IN_PATH, TestRequest(email.value, ""))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(SIGN_IN_PATH, TestRequest(email.value, ""))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     private data class TestRequest(val email: String?, val password: String?)

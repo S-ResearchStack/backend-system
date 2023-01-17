@@ -5,6 +5,9 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.WebTestClient.RequestBodySpec
 import org.springframework.web.reactive.function.BodyInserters
 
+internal fun WebTestClient.get(path: String) =
+    this.get().uri(path).exchange()
+
 internal fun WebTestClient.post(path: String, param: Any) =
     exchangeWithParam(
         this.post().uri(path),

@@ -1,9 +1,11 @@
 package com.samsung.healthcare.account.application.service
 
+import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.application.port.input.ResetPasswordCommand
 import com.samsung.healthcare.account.application.port.output.AuthServicePort
 import io.mockk.every
 import io.mockk.mockk
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import reactor.core.publisher.Mono
 import reactor.kotlin.test.verifyError
@@ -15,6 +17,7 @@ internal class ResetPasswordServiceTest {
     private val resetPasswordService = ResetPasswordService(authServicePort)
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `resetPasswordService should not emit event`() {
         every { authServicePort.resetPassword(any(), any()) } returns Mono.empty()
         StepVerifier.create(
@@ -24,6 +27,7 @@ internal class ResetPasswordServiceTest {
 
     // TODO define error case and then handle them
     @Test
+    @Tag(POSITIVE_TEST)
     fun `registerRoles should throw exception when something is wrong`() {
         every { authServicePort.resetPassword(any(), any()) } returns Mono.error(Exception())
 

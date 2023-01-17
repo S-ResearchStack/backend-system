@@ -7,12 +7,19 @@ fun ResultSet.get(i: Int): Any? {
     return when (this.metaData.getColumnType(i)) {
         Types.BIGINT, Types.DECIMAL, Types.INTEGER ->
             this.getLong(i)
+
         Types.DATE ->
             this.getDate(i)
+
         Types.TIME ->
             this.getTime(i)
+
         Types.TIMESTAMP, Types.TIMESTAMP_WITH_TIMEZONE ->
             this.getTimestamp(i)
+
+        Types.DOUBLE, Types.FLOAT ->
+            this.getDouble(i)
+
         else ->
             this.getString(i)
     }

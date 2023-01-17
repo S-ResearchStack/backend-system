@@ -2,7 +2,9 @@ package com.samsung.healthcare.account.adapter.auth.supertoken
 
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.GET_ACCOUNT_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_ASSIGN_ROLE_PATH
+import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_COUNT_USERS_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_CREATE_ROLE_PATH
+import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_GENERATE_EMAIL_VERIFICATION_TOKEN_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_GENERATE_RESET_TOKEN_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_GET_ROLE_USER_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_GET_USER_ROLE_PATH
@@ -13,6 +15,7 @@ import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_SIGN_IN_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_SIGN_UP_PATH
 import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_USER_META_DATA_PATH
+import com.samsung.healthcare.account.adapter.auth.supertoken.PathConstant.SUPER_TOKEN_VERIFY_EMAIL_PATH
 import feign.Headers
 import feign.Param
 import feign.RequestLine
@@ -73,6 +76,27 @@ interface SuperTokensApi {
     @RequestLine("GET $SUPER_TOKEN_GET_ROLE_USER_PATH?role={role}")
     fun listUsersOfRole(@Param role: String): Mono<RoleUsersResponse>
 
+    @RequestLine("POST $SUPER_TOKEN_GENERATE_EMAIL_VERIFICATION_TOKEN_PATH")
+    @Headers("Content-Type: application/json")
+    fun generateEmailVerificationToken(
+        generateEmailVerificationTokenRequest: GenerateEmailVerificationTokenRequest,
+    ): Mono<GenerateEmailVerificationTokenResponse>
+
+    @RequestLine("POST $SUPER_TOKEN_VERIFY_EMAIL_PATH")
+    @Headers("Content-Type: application/json")
+    fun verifyEmail(
+        verifyEmailRequest: VerifyEmailRequest,
+    ): Mono<VerifyEmailResponse>
+
+    @RequestLine("GET $SUPER_TOKEN_VERIFY_EMAIL_PATH?userId={userId}&email={email}")
+    fun isVerifiedEmail(
+        @Param userId: String,
+        @Param email: String,
+    ): Mono<IsVerifiedEmailResponse>
+
+    @RequestLine("GET $SUPER_TOKEN_COUNT_USERS_PATH")
+    fun countUsers(): Mono<CountUsersResponse>
+
     class ResetPasswordRequest(
         val token: String,
         val newPassword: String,
@@ -124,9 +148,43 @@ interface SuperTokensApi {
         val jwt: String
     )
 
+    data class GenerateEmailVerificationTokenRequest(
+        val userId: String,
+        val email: String,
+    )
+
+    data class GenerateEmailVerificationTokenResponse(
+        val status: Status,
+        val token: String?,
+    )
+
+    data class VerifyEmailRequest(
+        val token: String,
+    ) {
+        val method = "token"
+    }
+
+    data class VerifyEmailResponse(
+        val status: Status,
+        val userId: String?,
+        val email: String?,
+    )
+
+    data class IsVerifiedEmailResponse(
+        val status: Status,
+        val isVerified: Boolean?,
+    )
+
+    data class CountUsersResponse(
+        val status: Status,
+        val count: Int,
+    )
+
     enum class Status {
         OK,
         EMAIL_ALREADY_EXISTS_ERROR,
+        EMAIL_ALREADY_VERIFIED_ERROR,
+        EMAIL_VERIFICATION_INVALID_TOKEN_ERROR,
         WRONG_CREDENTIALS_ERROR,
         UNKNOWN_USER_ID_ERROR,
         RESET_PASSWORD_INVALID_TOKEN_ERROR,

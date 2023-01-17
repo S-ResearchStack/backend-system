@@ -26,8 +26,8 @@ class JwtAuthenticationInterceptor(
     }
 
     private fun getAccountFromToken(jwt: String): Account {
-        val decodedJwt = jwtDecoder.decode(jwt)
         return kotlin.runCatching {
+            val decodedJwt = jwtDecoder.decode(jwt)
             Account(
                 id = decodedJwt.subject,
                 email = decodedJwt.getEmail(),

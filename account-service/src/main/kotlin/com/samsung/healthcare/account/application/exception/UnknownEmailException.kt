@@ -1,3 +1,3 @@
 package com.samsung.healthcare.account.application.exception
 
-class UnknownEmailException : RuntimeException()
+class UnknownEmailException(message: String = "unknown email") : RuntimeException(message)

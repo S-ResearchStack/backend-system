@@ -22,7 +22,7 @@ class AccountServiceAdapter(
 
     override fun getUsers(): List<User> {
         val response = rt.exchange(
-            "${config.accountService.url}/account-service/users",
+            "${config.accountService.url}/internal/account-service/users",
             HttpMethod.GET,
             HttpEntity(LinkedMultiValueMap<String, String>(), HttpHeaders()),
             String::class.java,

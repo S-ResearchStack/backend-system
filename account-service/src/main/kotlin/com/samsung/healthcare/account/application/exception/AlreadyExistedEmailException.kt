@@ -1,3 +1,3 @@
 package com.samsung.healthcare.account.application.exception
 
-class AlreadyExistedEmailException : Exception()
+class AlreadyExistedEmailException(message: String = "already exists") : RuntimeException(message)

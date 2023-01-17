@@ -5,7 +5,7 @@ import com.samsung.healthcare.platform.enums.ItemType
 /**
  * Represents items, which are actionables within a [Task].
  *
- * @property id id asociated with an Item instance.
+ * @property id id associated with an Item instance.
  * @property revisionId revisionId of the associated Task instance.
  * @property taskId taskId of the associated Task instance.
  * @property name Name of an Item instance.

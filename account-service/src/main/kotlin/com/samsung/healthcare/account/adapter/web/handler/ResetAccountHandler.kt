@@ -41,5 +41,10 @@ class ResetAccountHandler(
         val resetToken: String,
         val password: String,
         val profile: Map<String, Any>
-    )
+    ) {
+        init {
+            require(resetToken.isNotBlank())
+            require(password.isNotBlank())
+        }
+    }
 }

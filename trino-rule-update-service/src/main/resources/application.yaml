@@ -1,0 +1,14 @@
+fixed-delay: ${FIXED_DELAY_MILLISEC}
+
+config:
+  database-config:
+    prefix: project_
+    postfix: _research
+  account-service:
+    url: ${ACCOUNT_SERVICE_URL:http://127.0.0.1:8080}
+  trino:
+    access-control:
+      config-file-path: ${TRINO_ACCESS_CONTROL_CONFIG_FILE_PATH:/etc/trino/access-control/rules.json}
+
+server:
+  port: 3030

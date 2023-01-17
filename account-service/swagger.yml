@@ -15,16 +15,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/InvitationReq"
+              $ref: '#/components/schemas/InvitationReq'
       responses:
-        "201":
+        '200':
           description: A new account was created with given email.
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /account-service/user/password/reset:
     post:
       summary: Reset password
@@ -35,41 +35,66 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ResetPasswordReq"
+              $ref: '#/components/schemas/ResetPasswordReq'
       responses:
-        "200":
+        '200':
           description: The operation was successful.
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /account-service/signin:
     post:
       summary: Signin a user with email and password
       tags:
         - Researcher
-      security: [ ]
+      security: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SignReq"
+              $ref: '#/components/schemas/SignInReq'
       responses:
-        "200":
+        '200':
           description: The operation was successful.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SignInResponse"
+                $ref: '#/components/schemas/SignInResponse'
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
+  /account-service/signup:
+    post:
+      summary: Signup a new user
+      description: |
+        Signup a new user. The server will then send a verification link to the given email address.
+      tags:
+        - Researcher
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpReq'
+      responses:
+        '200':
+          description: A new account was created.
+        '409':
+          description: Given email was already registered.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /account-service/user/roles:
     put:
       summary: Assign roles to user
@@ -80,16 +105,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RoleReq"
+              $ref: '#/components/schemas/RoleReq'
       responses:
-        "200":
+        '200':
           description: The operation was successful.
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /account-service/user/roles/remove:
     post:
       summary: Remove roles from user
@@ -100,37 +125,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RoleReq"
+              $ref: '#/components/schemas/RoleReq'
       responses:
-        "200":
+        '200':
           description: The operation was successful.
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
-  /account-service/roles:
-    put:
-      summary: Create roles
-      description: This api is only for internal-use.
-      tags:
-        - Role
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Roles"
-      responses:
-        "200":
-          description: The operation was successful.
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
   /account-service/users:
     get:
       summary: Get user list
@@ -140,40 +144,119 @@ paths:
         - in: query
           name: projectId
           description: specific project id to retrieve users
+          required: true
           schema:
             $ref: '#/components/schemas/ProjectId'
       responses:
-        "200":
+        '200':
           description: The operation was successful.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Users"
+                $ref: '#/components/schemas/Users'
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
+  /account-service/token/refresh:
+    post:
+      summary: Refresh access token
+      description: |
+        Request new token by sending pair of jwt(accessToken) and refreshToken.
+      tags:
+        - Researcher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshReq'
+      responses:
+        '200':
+          description: The operation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshResponse'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /account-service/user/email/verify:
+    post:
+      summary: Verify email with token
+      tags:
+        - Email Verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmailReq'
+      responses:
+        '200':
+          description: The operation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyEmailResponse'
+        '401':
+          description: invalid token error
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /account-service/verification:
+    post:
+      summary: Resend a verification mail
+      description: |
+        The server will resend a verification link to the given email address.
+      tags:
+        - Email Verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificationReq'
+      responses:
+        '200':
+          description: The operation was successful.
+        '409':
+          description: The email was already verified.
+        '400':
+          description: bad request
+        '500':
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     InvitationReq:
       type: array
       items:
-        $ref: "#/components/schemas/Invitation"
+        $ref: '#/components/schemas/Invitation'
     Invitation:
       required:
         - email
         - roles
       properties:
         email:
-          $ref: "#/components/schemas/Email"
+          $ref: '#/components/schemas/Email'
         roles:
-          $ref: "#/components/schemas/Roles"
+          $ref: '#/components/schemas/Roles'
     Roles:
       type: array
       items:
-        $ref: "#/components/schemas/Role"
+        $ref: '#/components/schemas/Role'
     Role:
       type: string
       description: |
@@ -187,18 +270,18 @@ components:
         - password
       properties:
         resetToken:
-          $ref: "#/components/schemas/ResetToken"
+          $ref: '#/components/schemas/ResetToken'
         password:
           type: string
         profile:
-          $ref: "#/components/schemas/Profile"
-    SignReq:
+          $ref: '#/components/schemas/Profile'
+    SignInReq:
       required:
         - email
         - password
       properties:
         email:
-          $ref: "#/components/schemas/Email"
+          $ref: '#/components/schemas/Email'
         password:
           type: string
     SignInResponse:
@@ -206,49 +289,115 @@ components:
         - id
         - email
         - jwt
+        - refreshToken
         - roles
         - profile
       properties:
         email:
-          $ref: "#/components/schemas/Email"
+          $ref: '#/components/schemas/Email'
         id:
-          $ref: "#/components/schemas/AccountId"
+          $ref: '#/components/schemas/AccountId'
         jwt:
-          $ref: "#/components/schemas/Token"
+          $ref: '#/components/schemas/Token'
+        refreshToken:
+          $ref: '#/components/schemas/RefreshToken'
         roles:
-          $ref: "#/components/schemas/Roles"
+          $ref: '#/components/schemas/Roles'
         profile:
-          $ref: "#/components/schemas/Profile"
+          $ref: '#/components/schemas/Profile'
+    SignUpReq:
+      required:
+        - email
+        - password
+        - profile
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+        profile:
+          $ref: '#/components/schemas/Profile'
     RoleReq:
       required:
         - accountId
         - roles
       properties:
         accountId:
-          $ref: "#/components/schemas/AccountId"
+          $ref: '#/components/schemas/AccountId'
         roles:
-          $ref: "#/components/schemas/Roles"
+          $ref: '#/components/schemas/Roles'
+    RefreshReq:
+      required:
+        - jwt
+        - refreshToken
+      properties:
+        jwt:
+          $ref: '#/components/schemas/Token'
+        refreshToken:
+          $ref: '#/components/schemas/RefreshToken'
+    RefreshResponse:
+      required:
+        - jwt
+        - refreshToken
+      properties:
+        jwt:
+          $ref: '#/components/schemas/Token'
+        refreshToken:
+          $ref: '#/components/schemas/RefreshToken'
+    VerifyEmailReq:
+      required:
+        - token
+      properties:
+        token:
+          $ref: '#/components/schemas/VerifyEmailToken'
+    VerifyEmailResponse:
+      required:
+        - id
+        - email
+        - jwt
+        - refreshToken
+        - roles
+        - profile
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        id:
+          $ref: '#/components/schemas/AccountId'
+        jwt:
+          $ref: '#/components/schemas/Token'
+        refreshToken:
+          $ref: '#/components/schemas/RefreshToken'
+        roles:
+          $ref: '#/components/schemas/Roles'
+        profile:
+          $ref: '#/components/schemas/Profile'
+    VerificationReq:
+      required:
+        - email
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
     Users:
       type: array
       items:
-        $ref: "#/components/schemas/User"
+        $ref: '#/components/schemas/User'
     User:
       required:
         - email
         - id
       properties:
         email:
-          $ref: "#/components/schemas/Email"
+          $ref: '#/components/schemas/Email'
         id:
-          $ref: "#/components/schemas/AccountId"
+          $ref: '#/components/schemas/AccountId'
         roles:
-          $ref: "#/components/schemas/Roles"
+          $ref: '#/components/schemas/Roles'
         profile:
-          $ref: "#/components/schemas/Profile"
+          $ref: '#/components/schemas/Profile'
     Profile:
       type: object
       description: Account information in JSON without pre-defined fields
-      example: { "name": "david.lee" , "status": "active" }
+      example: { 'name': 'david.lee', 'status': 'active' }
     Token:
       description: |
         Signed Json Web Token
@@ -275,6 +424,12 @@ components:
     ResetToken:
       type: string
       example: aadfad...badfdfad
+    RefreshToken:
+      type: string
+      example: aadfad...badfdfad
+    VerifyEmailToken:
+      type: string
+      example: aadfad...badfdfad
     Error:
       required:
         - code
@@ -290,4 +445,4 @@ components:
       scheme: bearer
       bearerFormat: JWT
 security:
-  - bearerAuth: [ ]
+  - bearerAuth: []

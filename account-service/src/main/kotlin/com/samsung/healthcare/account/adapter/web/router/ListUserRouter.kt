@@ -15,6 +15,7 @@ class ListUserRouter {
         handler: ListUserHandler
     ): RouterFunction<ServerResponse> =
         RouterFunctions.route()
-            .GET(LIST_USER_PATH, handler::listUsers)
+            .GET(LIST_PROJECT_USER_PATH, handler::listProjectUsers)
+            .GET(LIST_ALL_USER_PATH, handler::listAllUsers)
             .build()
 }

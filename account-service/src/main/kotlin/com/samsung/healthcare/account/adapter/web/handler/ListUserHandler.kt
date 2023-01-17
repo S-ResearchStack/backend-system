@@ -1,7 +1,6 @@
 package com.samsung.healthcare.account.adapter.web.handler
 
 import com.samsung.healthcare.account.application.port.input.ListUserUseCase
-import com.samsung.healthcare.account.domain.Account
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
@@ -12,25 +11,31 @@ import reactor.core.publisher.Mono
 class ListUserHandler(
     private val listUserService: ListUserUseCase
 ) {
-    fun listUsers(req: ServerRequest): Mono<ServerResponse> =
-        listUsers(req.queryParamOrNull("projectId"))
-            .flatMap { users ->
-                ServerResponse.ok()
-                    .bodyValue(
-                        users.map { account ->
-                            UserResponse(
-                                account.id,
-                                account.email.value,
-                                account.roles.map { it.roleName },
-                                account.profiles
-                            )
-                        }
-                    )
-            }
+    fun listProjectUsers(req: ServerRequest): Mono<ServerResponse> {
+        val projectId = req.queryParamOrNull("projectId") ?: throw IllegalArgumentException("projectId was empty")
+        return listUsers(projectId)
+            .flatMap { ServerResponse.ok().bodyValue(it) }
+    }
 
-    private fun listUsers(projectId: String?): Mono<List<Account>> =
-        projectId?.let { id -> listUserService.usersOfProject(id) }
-            ?: listUserService.listAllUsers()
+    fun listAllUsers(req: ServerRequest): Mono<ServerResponse> =
+        listUsers(null)
+            .flatMap { ServerResponse.ok().bodyValue(it) }
+
+    private fun listUsers(projectId: String?): Mono<List<UserResponse>> {
+        val accounts = projectId?.let { id -> listUserService.usersOfProject(id) } ?: listUserService.listAllUsers()
+
+        return accounts
+            .map { users ->
+                users.map { account ->
+                    UserResponse(
+                        account.id,
+                        account.email.value,
+                        account.roles.map { it.roleName },
+                        account.profiles
+                    )
+                }
+            }
+    }
 
     data class UserResponse(val id: String, val email: String, val roles: List<String>, val profile: Map<String, Any>)
 }

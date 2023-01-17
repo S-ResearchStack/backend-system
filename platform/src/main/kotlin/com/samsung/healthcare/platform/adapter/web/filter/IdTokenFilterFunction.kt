@@ -16,6 +16,8 @@ import reactor.core.publisher.Mono
 @Component
 class IdTokenFilterFunction : HandlerFilterFunction<ServerResponse, ServerResponse> {
     override fun filter(request: ServerRequest, next: HandlerFunction<ServerResponse>): Mono<ServerResponse> {
+        // TODO: By using user-agent, assert that it is called from the mobile application
+
         val idToken: String? = request.headers().firstHeader("id-token")
 
         if (!StringUtils.hasText(idToken)) throw UnauthorizedException("You must provide id-token")

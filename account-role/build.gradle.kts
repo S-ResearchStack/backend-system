@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id(Plugins.SPRING_BOOT.name)
     kotlin("jvm")
@@ -16,3 +18,6 @@ dependencies {
     testImplementation(Libs.REACTOR_TEST)
     testImplementation(Libs.MOCKK)
 }
+
+val bootJar: BootJar by tasks
+bootJar.enabled = false

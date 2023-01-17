@@ -1,5 +1,7 @@
 package com.samsung.healthcare.account.application.service
 
+import com.samsung.healthcare.account.NEGATIVE_TEST
+import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.application.exception.AlreadyExistedEmailException
 import com.samsung.healthcare.account.application.port.output.AuthServicePort
 import com.samsung.healthcare.account.domain.Account
@@ -8,6 +10,7 @@ import com.samsung.healthcare.account.domain.Role.TeamAdmin
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import reactor.core.publisher.Mono
 import reactor.kotlin.test.verifyError
@@ -27,6 +30,7 @@ internal class AccountServiceTest {
     private val email = Email("test@account-service-test.com")
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `assignRoles should not emit event`() {
         every { authServicePort.assignRoles(accountId, any()) } returns Mono.empty()
         StepVerifier.create(
@@ -35,6 +39,7 @@ internal class AccountServiceTest {
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `assignRoles should throw illegal argument exception when roles is empty`() {
         StepVerifier.create(
             accountService.assignRoles(accountId, emptyList())
@@ -42,21 +47,29 @@ internal class AccountServiceTest {
     }
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `inviteUser should send invitation email`() {
         val account = Account(UUID.randomUUID().toString(), email, listOf())
-        every { authServicePort.registerNewUser(any(), any()) } returns Mono.just(account)
-        every { authServicePort.generateResetToken(any()) } returns Mono.just(UUID.randomUUID().toString())
+        val verificationToken = "verification-token"
+        val resetToken = UUID.randomUUID().toString()
+        every { authServicePort.registerNewUser(email, any()) } returns Mono.just(account)
+        every {
+            authServicePort.generateEmailVerificationToken(account.id, account.email)
+        } returns Mono.just(verificationToken)
+        every { authServicePort.verifyEmail(verificationToken) } returns Mono.empty()
+        every { authServicePort.generateResetToken(account.id) } returns Mono.just(resetToken)
         every { authServicePort.assignRoles(account.id, any()) } returns Mono.empty()
-        every { mailService.sendMail(email, any()) } returns Mono.empty()
+        every { mailService.sendResetPasswordMail(email, resetToken) } returns Mono.empty()
 
         StepVerifier.create(
             accountService.inviteUser(email, listOf(TeamAdmin))
         ).verifyComplete()
 
-        verify { mailService.sendMail(email, any()) }
+        verify { mailService.sendResetPasswordMail(email, any()) }
     }
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `inviteUser should assign roles to when email is already registered`() {
         every { authServicePort.registerNewUser(any(), any()) } returns Mono.error(
             AlreadyExistedEmailException()
@@ -72,6 +85,7 @@ internal class AccountServiceTest {
     }
 
     @Test
+    @Tag(NEGATIVE_TEST)
     fun `removeRolesFromAccount should throw illegal argument exception when roles is empty`() {
         StepVerifier.create(
             accountService.removeRolesFromAccount(accountId, emptyList())
@@ -79,6 +93,7 @@ internal class AccountServiceTest {
     }
 
     @Test
+    @Tag(POSITIVE_TEST)
     fun `removeRolesFromAccount should not emit event`() {
         every { authServicePort.removeRolesFromAccount(any(), any()) } returns Mono.empty()
         StepVerifier.create(

@@ -5,10 +5,31 @@ plugins {
     id(Plugins.DEPENDENCY_MANAGEMENT.name) version Plugins.DEPENDENCY_MANAGEMENT.version apply false
     id(Plugins.GRADLE_KTLINT.name) version Plugins.GRADLE_KTLINT.version apply false
     id(Plugins.ARTURBOSCH_DETEKT.name) version Plugins.ARTURBOSCH_DETEKT.version apply false
+    id("java")
+    id("jacoco")
 
     kotlin("jvm") version Versions.KOTLIN apply false
     kotlin("plugin.spring") version Versions.KOTLIN apply false
     kotlin("kapt") version Versions.KOTLIN apply false
+}
+
+tasks.register<JacocoReport>("jacocoRootReport") {
+    subprojects {
+        this@subprojects.plugins.withType<JacocoPlugin>().configureEach {
+            this@subprojects.tasks.matching {
+                it.extensions.findByType<JacocoTaskExtension>() != null
+            }.configureEach {
+                sourceSets(this@subprojects.the<SourceSetContainer>().named("main").get())
+                executionData(this)
+            }
+        }
+    }
+
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(true)
+    }
 }
 
 allprojects {
@@ -17,6 +38,11 @@ allprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    apply {
+        plugin("java")
+        plugin("jacoco")
     }
 
     tasks.withType<JavaCompile> {
@@ -34,6 +60,44 @@ allprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+        finalizedBy(tasks.jacocoTestReport)
+    }
+
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+        reports {
+            xml.required.set(true)
+            csv.required.set(false)
+            html.required.set(true)
+        }
+        finalizedBy(tasks.jacocoTestCoverageVerification)
+    }
+
+    tasks.jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    counter = "LINE"
+                    value = "COVEREDRATIO"
+                    minimum = "0.8".toBigDecimal()
+                }
+            }
+        }
+    }
+
+    tasks.register<Test>("negativeTest") {
+        useJUnitPlatform {
+            includeTags("negative")
+        }
+    }
+
+    tasks.register<Test>("positiveTest") {
+        useJUnitPlatform {
+            includeTags("positive")
+        }
     }
 }
 
