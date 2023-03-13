@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class TaskDatabaseAdapterTest {
 
     private val taskRepository = mockk<TaskRepository>()

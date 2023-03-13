@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class ItemDatabaseAdapterTest {
 
     private val itemRepository = mockk<ItemRepository>()

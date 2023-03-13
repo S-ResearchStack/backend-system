@@ -11,18 +11,13 @@ data class Token(
 
     companion object {
         private val CHAR_POOL = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-
-        // TODO config
-        private const val REFRESH_TOKEN_LIFE_TIME = 14 * 24 * 60 * 60L
-
         private const val TOKEN_LENGTH = 500
 
         fun newToken(accountId: String, accessToken: String, refreshToken: String, expiredAt: Instant): Token =
             Token(accountId, accessToken, refreshToken, expiredAt)
 
-        fun generateToken(accountId: String, accessToken: String): Token =
-            // TODO config refresh-token lifetime
-            Token(accountId, accessToken, randomTokenString(), Instant.now().plusSeconds(REFRESH_TOKEN_LIFE_TIME))
+        fun generateToken(accountId: String, accessToken: String, lifetime: Long): Token =
+            Token(accountId, accessToken, randomTokenString(), Instant.now().plusSeconds(lifetime))
 
         private fun randomTokenString(): String =
             // TODO config refresh-token length

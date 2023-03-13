@@ -199,4 +199,25 @@ internal class ProjectHandlerTest {
 
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `findProjectById should return bad request when project path variable is not valid`() {
+        every {
+            getAccountUseCase.getAccountFromToken("adminToken")
+        } returns Account(
+            "testAdmin",
+            Email("testAdmin@s-healthstack.com"),
+            listOf(Role.TeamAdmin)
+        ).toMono()
+
+        val result = webTestClient.get()
+            .uri("/api/projects/invalid-project-id")
+            .header(AUTHORIZATION, "Bearer adminToken")
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
 }

@@ -17,12 +17,14 @@ class JwtAuthenticationFilterFunction(
     private val getAccountUseCase: GetAccountUseCase
 ) : HandlerFilterFunction<ServerResponse, ServerResponse> {
 
+    private val bearerPrefix = "Bearer "
+
     override fun filter(request: ServerRequest, next: HandlerFunction<ServerResponse>): Mono<ServerResponse> {
 
-        val jwt = request.headers().firstHeader(HttpHeaders.AUTHORIZATION)
-            ?.substring("Bearer ".length) ?: throw UnauthorizedException()
+        val bearerString = request.headers().firstHeader(HttpHeaders.AUTHORIZATION) ?: throw UnauthorizedException()
+        if (!bearerString.startsWith(bearerPrefix)) throw UnauthorizedException()
 
-        return getAccountUseCase.getAccountFromToken(jwt)
+        return getAccountUseCase.getAccountFromToken(bearerString.substring(bearerPrefix.length))
             .flatMap { account ->
                 ContextHolder.setAccount(next.handle(request), account)
             }.onErrorMap(JwtException::class.java) { throw UnauthorizedException() }

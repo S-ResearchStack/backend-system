@@ -153,7 +153,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `signIn should throw SignInException when supertoken returns WRONG_CREDENTIALS_ERROR`() {
         wm.post {
             url equalTo SUPER_TOKEN_SIGN_IN_PATH
@@ -193,7 +193,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `registerNewUser should throw AlreadyExistedEmailEx when supertoken returns EMAIL_ALREADY_EXISTS_ERROR`() {
         wm.post {
             url equalTo SUPER_TOKEN_SIGN_UP_PATH
@@ -224,13 +224,13 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.generateResetToken("accountId")
+            superTokenAdapter.generateResetToken(UUID.randomUUID().toString())
         ).expectNext(resetToken)
             .verifyComplete()
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `generateResetToken should throw UnknownAccountIdException when supertoken returns UNKNOWN_USER_ID_ERROR`() {
         wm.post {
             url equalTo SUPER_TOKEN_GENERATE_RESET_TOKEN_PATH
@@ -242,7 +242,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.generateResetToken("accountId")
+            superTokenAdapter.generateResetToken(UUID.randomUUID().toString())
         ).verifyError<UnknownAccountIdException>()
     }
 
@@ -264,7 +264,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `resetPassword should throw InvalidResetTokenEx event when supertoken returns RESET_PW_INVALID_TOKEN_ERROR`() {
         wm.post {
             url equalTo SUPER_TOKEN_RESET_PASSWORD_PATH
@@ -283,6 +283,22 @@ internal class SuperTokenAdapterTest {
     @Test
     @Tag(POSITIVE_TEST)
     fun `assignRoles should not emit event when supertoken returns ok`() {
+        val accountId = UUID.randomUUID().toString()
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?userId=$accountId"
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "user": {
+    "email": "$email",
+    "id": "$accountId",
+    "timeJoined": 1659407200104
+    }
+}
+"""
+        }
+
         wm.put {
             url equalTo SUPER_TOKEN_ASSIGN_ROLE_PATH
         } returnsJson {
@@ -293,13 +309,29 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles("account-id", listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
         ).verifyComplete()
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `assignRoles should throw UnknownRoleException when supertoken returns UNKNOWN_ROLE_ERROR`() {
+        val accountId = UUID.randomUUID().toString()
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?userId=$accountId"
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "user": {
+    "email": "$email",
+    "id": "$accountId",
+    "timeJoined": 1659407200104
+    }
+}
+"""
+        }
+
         wm.put {
             url equalTo SUPER_TOKEN_ASSIGN_ROLE_PATH
         } returnsJson {
@@ -311,7 +343,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles("account-id", listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
         ).verifyError<UnknownRoleException>()
     }
 
@@ -323,6 +355,21 @@ internal class SuperTokenAdapterTest {
         val accountId = UUID.randomUUID().toString()
         wm.get {
             url equalTo "$GET_ACCOUNT_PATH?email=$encodedEmail"
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "user": {
+    "email": "$email",
+    "id": "$accountId",
+    "timeJoined": 1659407200104
+    }
+}
+"""
+        }
+
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?userId=$accountId"
         } returnsJson {
             body =
                 """{
@@ -351,7 +398,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `assignRolesWithEmail should throw UnknownEmailException when supertoken returns UnknownEmailError`() {
         val email = "cubist@test.com"
         val encodedEmail = URLEncoder.encode(email, "utf-8")
@@ -371,7 +418,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `assignRoles should throw exception when supertoken returns some error`() {
         wm.put {
             url equalTo SUPER_TOKEN_ASSIGN_ROLE_PATH
@@ -389,13 +436,32 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles("account-id", listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(
+                UUID.randomUUID().toString(), listOf(TeamAdmin, ProjectOwner("project-x"))
+            )
         ).verifyError<Exception>()
     }
 
     @Test
     @Tag(POSITIVE_TEST)
     fun `removeRolesFromAccount should not emit event when supertoken returns ok`() {
+        val accountId = UUID.randomUUID().toString()
+
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?userId=$accountId"
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "user": {
+    "email": "$email",
+    "id": "$accountId",
+    "timeJoined": 1659407200104
+    }
+}
+"""
+        }
+
         wm.post {
             url equalTo SUPER_TOKEN_REMOVE_USER_ROLE_PATH
         } returnsJson {
@@ -406,7 +472,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.removeRolesFromAccount("account-id", listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.removeRolesFromAccount(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
         ).verifyComplete()
     }
 
@@ -437,7 +503,7 @@ internal class SuperTokenAdapterTest {
     @Test
     @Tag(POSITIVE_TEST)
     fun `listUserRoles should return roles when supertoken returns ok`() {
-        val accountId = "account-id"
+        val accountId = UUID.randomUUID().toString()
         val projectRole = HeadResearcher("project-x")
         wm.get {
             url equalTo "$SUPER_TOKEN_GET_USER_ROLE_PATH?userId=$accountId"
@@ -603,7 +669,7 @@ internal class SuperTokenAdapterTest {
     @Test
     @Tag(POSITIVE_TEST)
     fun `listUsers should return all accounts`() {
-        val accountId = "account-id"
+        val accountId = UUID.randomUUID().toString()
         val projectRole = HeadResearcher("project-x")
 
         wm.get {
@@ -647,7 +713,11 @@ internal class SuperTokenAdapterTest {
 
         StepVerifier.create(
             superTokenAdapter.listUsers()
-        ).expectNext(listOf(Account(accountId, email, listOf(projectRole)))).verifyComplete()
+        ).expectNext(
+            listOf(
+                Account(accountId, email, listOf(projectRole))
+            )
+        ).verifyComplete()
     }
 
     @Test
@@ -901,7 +971,7 @@ internal class SuperTokenAdapterTest {
     }
 
     @Test
-    @Tag(POSITIVE_TEST)
+    @Tag(NEGATIVE_TEST)
     fun `should throw InvalidEmailVerificationTokenE when supertoken returns EMAIL_VERIFICATION_INVALID_TOKEN_ERROR`() {
         wm.post {
             url equalTo SUPER_TOKEN_VERIFY_EMAIL_PATH
@@ -952,7 +1022,9 @@ internal class SuperTokenAdapterTest {
 
         StepVerifier.create(
             superTokenAdapter.verifyEmail("token")
-        ).expectError(IllegalArgumentException::class.java)
+        )
+            .expectError(IllegalArgumentException::class.java)
+            .verify()
     }
 
     @Test
@@ -990,7 +1062,9 @@ internal class SuperTokenAdapterTest {
 
         StepVerifier.create(
             superTokenAdapter.verifyEmail("token")
-        ).expectError(IllegalArgumentException::class.java)
+        )
+            .expectError(IllegalArgumentException::class.java)
+            .verify()
     }
 
     @ParameterizedTest

@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import reactor.core.publisher.Mono
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class CreateProjectServiceTest {
     private val createProjectPort = mockk<CreateProjectPort>()
     private val createProjectRoleService = mockk<CreateProjectRolePort>()

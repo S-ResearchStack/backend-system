@@ -25,6 +25,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.reactor.mono
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Tag
@@ -33,6 +34,7 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class UpdateTaskServiceTest {
     private val taskOutputPort = mockk<TaskOutputPort>()
     private val itemOutputPort = mockk<ItemOutputPort>()
@@ -60,7 +62,7 @@ internal class UpdateTaskServiceTest {
                 wrongProjectId.toString(),
                 "test-task",
                 RevisionId.from(1),
-                UpdateTaskCommand(title = "", status = TaskStatus.DRAFT, items = emptyList()),
+                UpdateTaskCommand(title = "title", status = TaskStatus.DRAFT, items = emptyList()),
             )
         }
     }
@@ -82,15 +84,13 @@ internal class UpdateTaskServiceTest {
         val task = Task(
             revisionId,
             taskId,
-            mapOf(
-                "title" to "not yet published",
-                "description" to "updating without publishing"
-            ),
-            TaskStatus.DRAFT
+            updateTaskCommand.properties,
+            updateTaskCommand.status
         )
 
+        coEvery { taskOutputPort.findByIdAndRevisionId(taskId, revisionId) } returns task
+        coEvery { taskOutputPort.findById(taskId) } returns flowOf(task)
         coEvery { taskOutputPort.update(task) } returns task
-
         coJustRun { itemOutputPort.update(revisionId.value, emptyList()) }
 
         updateTaskService.updateTask(
@@ -111,41 +111,53 @@ internal class UpdateTaskServiceTest {
 
         val taskId = "test-task"
         val revisionId = RevisionId.from(1)
+        val contentsSample = mapOf(
+            "title" to "myTitle",
+            "type" to "CHOICE",
+            "properties" to mapOf(
+                "tag" to "RADIO",
+                "options" to listOf(
+                    mapOf("value" to "value")
+                )
+            )
+        )
         val updateTaskCommand = UpdateTaskCommand(
             title = "endTime test",
             description = "should default to 3 months later",
-            schedule = "weekly",
+            schedule = "0 0 0/1 1/1 * ? *",
             startTime = LocalDateTime.parse("2022-01-20T10:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             validTime = 12,
             status = TaskStatus.PUBLISHED,
             items = listOf(
-                UpdateTaskCommand.UpdateItemCommand(mapOf("test item 0" to "blah"), ItemType.QUESTION, 0),
-                UpdateTaskCommand.UpdateItemCommand(mapOf("test item 1" to "blep"), ItemType.QUESTION, 1)
+                UpdateTaskCommand.UpdateItemCommand(contentsSample, ItemType.QUESTION, 0),
+                UpdateTaskCommand.UpdateItemCommand(contentsSample, ItemType.QUESTION, 1)
             )
         )
         mockkStatic(LocalDateTime::class)
         val testLocalDateTime = LocalDateTime.parse("2022-10-21T17:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         every { LocalDateTime.now() } returns testLocalDateTime
+
+        val returnedTask = Task(
+            revisionId,
+            taskId,
+            updateTaskCommand.properties,
+            TaskStatus.DRAFT,
+        )
+
         val task = Task(
             revisionId,
             taskId,
-            mapOf(
-                "title" to "endTime test",
-                "description" to "should default to 3 months later",
-                "schedule" to "weekly",
-                "startTime" to LocalDateTime.parse("2022-01-20T10:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                "endTime" to LocalDateTime.parse("2022-04-20T10:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                "validTime" to 12
-            ),
-            TaskStatus.PUBLISHED,
-            publishedAt = LocalDateTime.now()
+            updateTaskCommand.properties,
+            updateTaskCommand.status,
+            publishedAt = testLocalDateTime
         )
+
         val item1 = Item(
             null,
             revisionId,
             taskId,
             "Question0",
-            mapOf("test item 0" to "blah"),
+            contentsSample,
             ItemType.QUESTION,
             0
         )
@@ -154,11 +166,13 @@ internal class UpdateTaskServiceTest {
             revisionId,
             taskId,
             "Question1",
-            mapOf("test item 1" to "blep"),
+            contentsSample,
             ItemType.QUESTION,
             1
         )
 
+        coEvery { taskOutputPort.findByIdAndRevisionId(taskId, revisionId) } returns returnedTask
+        coEvery { taskOutputPort.findById(taskId) } returns flowOf(returnedTask)
         coEvery { taskOutputPort.update(task) } returns task
         coJustRun { itemOutputPort.update(revisionId.value, listOf(item1, item2)) }
 
@@ -166,7 +180,7 @@ internal class UpdateTaskServiceTest {
 
         coVerifyOrder {
             taskOutputPort.update(task)
-            itemOutputPort.update(1, listOf(item1, item2))
+            itemOutputPort.update(revisionId.value, listOf(item1, item2))
         }
     }
 }

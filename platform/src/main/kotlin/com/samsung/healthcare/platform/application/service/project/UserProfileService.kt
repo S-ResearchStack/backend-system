@@ -2,7 +2,6 @@ package com.samsung.healthcare.platform.application.service.project
 
 import com.samsung.healthcare.platform.adapter.web.context.ContextHolder.getFirebaseToken
 import com.samsung.healthcare.platform.application.exception.ForbiddenException
-import com.samsung.healthcare.platform.application.exception.UserAlreadyExistsException
 import com.samsung.healthcare.platform.application.port.input.CreateUserCommand
 import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
 import com.samsung.healthcare.platform.application.port.input.project.UpdateUserProfileLastSyncedTimeUseCase
@@ -23,7 +22,6 @@ class UserProfileService(
      *
      * @param command [CreateUserCommand] with request parameters.
      * @throws [ForbiddenException] if the uid associated with the Firebase token does not match the userId.
-     * * @throws [UserAlreadyExistsException] if the uid already exists.
      */
     override suspend fun registerUser(command: CreateUserCommand) {
         if (command.userId != getFirebaseToken().uid)

@@ -47,4 +47,13 @@ class GetProjectService(
                 loadProjectPort.findProjectByIdIn(projectIds)
                     .asFlux()
             }.asFlow()
+
+    /**
+     * Check a project associated with the given ProjectId.
+     *
+     * @param id ProjectId
+     * @return [Boolean]
+     */
+    override suspend fun existsProject(id: ProjectId): Boolean =
+        loadProjectPort.existsById(id)
 }

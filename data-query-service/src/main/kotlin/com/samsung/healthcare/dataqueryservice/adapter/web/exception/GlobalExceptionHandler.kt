@@ -5,6 +5,7 @@ import com.samsung.healthcare.dataqueryservice.application.exception.Unauthorize
 import io.trino.sql.parser.ParsingException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
+import org.springframework.http.converter.HttpMessageConversionException
 import org.springframework.security.oauth2.jwt.BadJwtException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -87,10 +88,25 @@ class GlobalExceptionHandler(
         reason = if (isDebug) e.message else null
     )
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(RuntimeException::class)
-    fun handleException(e: RuntimeException) = ErrorResponse(
-        message = "Internal server error occurred. Please try again later.",
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageConversionException::class)
+    fun handleHttpMessageConversionException(e: HttpMessageConversionException) = ErrorResponse(
+        message = "HttpMessageConversionException",
         reason = if (isDebug) e.message else null
     )
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgumentException(e: IllegalArgumentException) = ErrorResponse(
+        message = "IllegalArgumentException",
+        reason = if (isDebug) e.message else null
+    )
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(RuntimeException::class)
+    fun handleException(e: RuntimeException): ErrorResponse =
+        ErrorResponse(
+            message = "Internal server error occurred. Please try again later.",
+            reason = if (isDebug) e.message else null
+        )
 }

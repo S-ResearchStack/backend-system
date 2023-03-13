@@ -6,7 +6,7 @@ import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.adapter.web.config.SecurityConfig
 import com.samsung.healthcare.account.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.account.adapter.web.exception.GlobalExceptionHandler
-import com.samsung.healthcare.account.adapter.web.filter.JwtTokenAuthenticationFilter
+import com.samsung.healthcare.account.adapter.web.filter.JwtAuthenticationFilterFunction
 import com.samsung.healthcare.account.adapter.web.router.SIGN_IN_PATH
 import com.samsung.healthcare.account.adapter.web.router.SignInRouter
 import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
@@ -30,7 +30,7 @@ import reactor.core.publisher.Mono
     SignInRouter::class,
     GlobalExceptionHandler::class,
     GlobalErrorAttributes::class,
-    JwtTokenAuthenticationFilter::class,
+    JwtAuthenticationFilterFunction::class,
     SecurityConfig::class,
 )
 internal class SignInHandlerTest {

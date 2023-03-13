@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Component
 class CreateRoleHandler(
@@ -14,6 +15,7 @@ class CreateRoleHandler(
 ) {
     fun createProjectRoles(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<CreateProjectRoleRequest>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap { createRequest ->
                 registerRolesService.createProjectRoles(createRequest)
             }

@@ -27,6 +27,7 @@ data class Task(
     val deletedAt: LocalDateTime? = null,
 ) {
     companion object {
+        const val TASK_ID_LENGTH = 320
         fun newTask(): Task =
             Task(
                 null,

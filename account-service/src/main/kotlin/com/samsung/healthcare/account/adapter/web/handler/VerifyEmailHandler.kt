@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Component
 class VerifyEmailHandler(
@@ -14,6 +15,7 @@ class VerifyEmailHandler(
 ) {
     fun verifyEmail(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<VerifyEmailRequest>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap {
                 verifyEmailUseCase.verifyEmail(it.token)
             }
@@ -31,6 +33,7 @@ class VerifyEmailHandler(
 
     fun resendVerificationEmail(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<ResendVerificationEmailRequest>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap {
                 verifyEmailUseCase.resendVerificationEmail(Email(it.email))
             }

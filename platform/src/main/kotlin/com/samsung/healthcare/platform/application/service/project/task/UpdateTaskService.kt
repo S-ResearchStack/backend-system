@@ -2,6 +2,8 @@ package com.samsung.healthcare.platform.application.service.project.task
 
 import com.samsung.healthcare.account.domain.AccessProjectAuthority
 import com.samsung.healthcare.platform.application.authorize.Authorizer
+import com.samsung.healthcare.platform.application.exception.BadRequestException
+import com.samsung.healthcare.platform.application.exception.NotFoundException
 import com.samsung.healthcare.platform.application.port.input.project.task.UpdateTaskCommand
 import com.samsung.healthcare.platform.application.port.input.project.task.UpdateTaskUseCase
 import com.samsung.healthcare.platform.application.port.output.project.task.ItemOutputPort
@@ -10,6 +12,7 @@ import com.samsung.healthcare.platform.domain.project.task.Item
 import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.TaskStatus
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.mono
 import org.springframework.stereotype.Service
@@ -46,14 +49,24 @@ class UpdateTaskService(
                     else
                         Task(revisionId, taskId, command.properties, command.status)
 
+                    if (taskOutputPort.findByIdAndRevisionId(taskId, revisionId) == null)
+                        throw NotFoundException("Not Found")
+
+                    taskOutputPort.findById(taskId).collect {
+                        if (it.status === TaskStatus.PUBLISHED) {
+                            throw BadRequestException("Published Task cannot be changed.")
+                        }
+                    }
+
                     taskOutputPort.update(
                         task
-                    ).let { task ->
-                        requireNotNull(task.revisionId)
+                    ).let { updatedTask ->
+                        requireNotNull(updatedTask.revisionId)
                         itemOutputPort.update(
-                            task.revisionId.value,
+                            updatedTask.revisionId.value,
                             command.items.map {
-                                Item.newItem(task, it.contents, it.type, it.sequence)
+                                requireNotNull(it.sequence)
+                                Item.newItem(updatedTask, it.contents, it.type, it.sequence)
                             }
                         )
                     }

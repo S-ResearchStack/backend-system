@@ -1,5 +1,6 @@
 package com.samsung.healthcare.account.adapter.web.router
 
+import com.samsung.healthcare.account.adapter.web.filter.JwtAuthenticationFilterFunction
 import com.samsung.healthcare.account.adapter.web.handler.CreateRoleHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,7 +15,8 @@ class CreateRoleRouter {
 
     @Bean
     fun routeCreateRole(
-        handler: CreateRoleHandler
+        handler: CreateRoleHandler,
+        jwtAuthenticationFilterFunction: JwtAuthenticationFilterFunction
     ): RouterFunction<ServerResponse> =
         RouterFunctions.route()
             .PUT(

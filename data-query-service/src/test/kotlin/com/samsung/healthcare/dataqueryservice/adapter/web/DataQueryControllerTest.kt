@@ -10,6 +10,7 @@ import com.samsung.healthcare.dataqueryservice.adapter.web.interceptor.JwtAuthen
 import com.samsung.healthcare.dataqueryservice.application.port.input.QueryDataResultSet
 import com.samsung.healthcare.dataqueryservice.application.service.QueryDataService
 import io.mockk.every
+import io.trino.sql.parser.ParsingException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -188,6 +189,128 @@ internal class DataQueryControllerTest {
 
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql is not valid`() {
+        every { queryDataService.execute(any(), any(), any()) } throws ParsingException(
+            "invalid-sql"
+        )
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = webClient.post().uri("/api/projects/project-id/sql")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header(AUTHORIZATION, "Bearer some_token")
+            .body(BodyInserters.fromValue(TestRequest("select insert")))
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql is blank`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = webClient.post().uri("/api/projects/project-id/sql")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header(AUTHORIZATION, "Bearer some_token")
+            .body(BodyInserters.fromValue(TestRequest("   ")))
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql is not given`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = webClient.post().uri("/api/projects/project-id/sql")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header(AUTHORIZATION, "Bearer some_token")
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql query is not given`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = postRequestWithBody("""{"sql":}""")
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql query is not valid`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = postRequestWithBody(
+            """{
+            "sql": "select * from item_results" "aaaaa"
+            }"""
+        )
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql query is array type`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = postRequestWithBody(
+            """{
+            "sql":  ["Invalid_Array"]
+            }"""
+        )
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql query is object type`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = postRequestWithBody(
+            """{
+            "sql":  { "Invalid_Object": "Invalid_String" }
+            }"""
+        )
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `controller should return bad request when sql key is not given`() {
+        every { jwtDecoder.decode(any()) } returns testJwt
+
+        val result = postRequestWithBody(
+            """{
+            "":  "select * from item_results"
+            }"""
+        )
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    private fun postRequestWithBody(obj: Any) = webClient.post().uri("/api/projects/project-id/sql")
+        .contentType(MediaType.APPLICATION_JSON)
+        .header(AUTHORIZATION, "Bearer some_token")
+        .body(
+            BodyInserters.fromValue(obj)
+        )
+        .exchange()
+        .expectBody()
+        .returnResult()
 
     private data class TestRequest(val sql: String)
 }

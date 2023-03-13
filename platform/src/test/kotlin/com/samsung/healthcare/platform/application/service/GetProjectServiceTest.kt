@@ -31,6 +31,7 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import java.time.LocalDateTime
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class GetProjectServiceTest {
     private val loadProjectPort = mockk<LoadProjectPort>()
     private val getProjectService = GetProjectService(loadProjectPort)

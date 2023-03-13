@@ -6,7 +6,7 @@ import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.adapter.web.config.SecurityConfig
 import com.samsung.healthcare.account.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.account.adapter.web.exception.GlobalExceptionHandler
-import com.samsung.healthcare.account.adapter.web.filter.JwtTokenAuthenticationFilter
+import com.samsung.healthcare.account.adapter.web.exception.GlobalExceptionHandler.ErrorResponse
 import com.samsung.healthcare.account.adapter.web.router.REFRESH_TOKEN_PATH
 import com.samsung.healthcare.account.adapter.web.router.TokenRefreshRouter
 import com.samsung.healthcare.account.application.exception.ExpiredRefreshTokenException
@@ -14,24 +14,17 @@ import com.samsung.healthcare.account.application.exception.InvalidTokenExceptio
 import com.samsung.healthcare.account.application.port.input.TokenRefreshResponse
 import com.samsung.healthcare.account.application.port.input.TokenRefreshUsecase
 import io.mockk.every
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.FilterType
 import org.springframework.context.annotation.Import
+import org.springframework.http.HttpStatus
 import org.springframework.test.web.reactive.server.WebTestClient
 import reactor.core.publisher.Mono
 
-@WebFluxTest(
-    excludeFilters = [
-        ComponentScan.Filter(
-            type = FilterType.ASSIGNABLE_TYPE,
-            classes = [JwtTokenAuthenticationFilter::class]
-        )
-    ]
-)
+@WebFluxTest
 @Import(
     TokenRefreshHandler::class,
     TokenRefreshRouter::class,
@@ -52,9 +45,10 @@ internal class TokenRefreshHandlerTest {
         val tokenRefreshResponse = TokenRefreshResponse("access.token.jwt", "RandomRefreshToken")
         every { tokenRefreshUsecase.refreshToken(any()) } returns Mono.just(tokenRefreshResponse)
 
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
-            .expectStatus()
-            .isOk
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
+            .returnResult(TokenRefreshResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.OK)
     }
 
     @Test
@@ -62,9 +56,10 @@ internal class TokenRefreshHandlerTest {
     fun `should return NotFound when token is invalid`() {
         every { tokenRefreshUsecase.refreshToken(any()) } returns Mono.error(InvalidTokenException())
 
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
-            .expectStatus()
-            .isNotFound
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.NOT_FOUND)
     }
 
     @Test
@@ -72,9 +67,10 @@ internal class TokenRefreshHandlerTest {
     fun `should return UnAuthorized when refreshToken is expired`() {
         every { tokenRefreshUsecase.refreshToken(any()) } returns Mono.error(ExpiredRefreshTokenException())
 
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
-            .expectStatus()
-            .isUnauthorized
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("jwt", "refreshToken"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.UNAUTHORIZED)
     }
 
     @Test
@@ -83,49 +79,55 @@ internal class TokenRefreshHandlerTest {
         val tokenRefreshResponse = TokenRefreshResponse("access.token.jwt", "RandomRefreshToken")
         every { tokenRefreshUsecase.refreshToken(any()) } returns Mono.just(tokenRefreshResponse)
 
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand(refreshToken = "refreshToken"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand(refreshToken = "refreshToken"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
     @Tag(NEGATIVE_TEST)
     fun `should return BadRequest when jwt is blank`() {
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("    ", "refreshToken"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("    ", "refreshToken"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
     @Tag(NEGATIVE_TEST)
     fun `should return BadRequest when refreshToken is null`() {
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand(jwt = "jwt-token"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand(jwt = "jwt-token"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
     @Tag(NEGATIVE_TEST)
     fun `should return BadRequest when refreshToken is blank`() {
-        webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("access-token", "    "))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, TestTokenRefreshCommand("access-token", "    "))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
     @Tag(NEGATIVE_TEST)
     fun `should return BadRequest when refreshToken is not given`() {
-        webClient.post(REFRESH_TOKEN_PATH, mapOf("jwt" to "jwt-token"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, mapOf("jwt" to "jwt-token"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
     @Tag(NEGATIVE_TEST)
     fun `should return BadRequest when jwt is not given`() {
-        webClient.post(REFRESH_TOKEN_PATH, mapOf("refreshToken" to "randomRefreshToken"))
-            .expectStatus()
-            .isBadRequest
+        val result = webClient.post(REFRESH_TOKEN_PATH, mapOf("refreshToken" to "randomRefreshToken"))
+            .returnResult(ErrorResponse::class.java)
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     private data class TestTokenRefreshCommand(val jwt: String? = null, val refreshToken: String? = null)

@@ -34,7 +34,7 @@ internal class SignInServiceTest {
         val encodedJwt = "encoded-jwt-string"
         every { authServicePort.signIn(email, password) } returns Mono.just(account)
         every { authServicePort.isVerifiedEmail(account.id, account.email) } returns Mono.just(true)
-        every { tokenService.generateToken(account) } returns Mono.just(Token.generateToken(account.id, encodedJwt))
+        every { tokenService.generateToken(account) } returns Mono.just(Token.generateToken(account.id, encodedJwt, 1))
 
         StepVerifier.create(
             signInService.signIn(SignInCommand(email, password))

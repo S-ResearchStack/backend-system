@@ -7,4 +7,10 @@ data class GetTaskCommand(
     val endTime: LocalDateTime?,
     val lastSyncTime: LocalDateTime?,
     val status: String?,
-)
+) {
+    init {
+        if (startTime != null && endTime != null) {
+            require(startTime.isBefore(endTime)) { "invalid period" }
+        }
+    }
+}

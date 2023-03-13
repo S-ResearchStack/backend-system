@@ -25,6 +25,7 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class UserProfileServiceTest {
     private val userProfileOutputPort = mockk<UserProfileOutputPort>()
     private val userProfileService = UserProfileService(userProfileOutputPort)

@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Component
 class ResetAccountHandler(
@@ -18,6 +19,7 @@ class ResetAccountHandler(
 ) {
     fun resetAccount(req: ServerRequest): Mono<ServerResponse> {
         return req.bodyToMono<ResetAccountRequest>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap { resetPasswordAndUpdateProfile(it) }
             .flatMap {
                 ServerResponse.ok().bodyValue(it)

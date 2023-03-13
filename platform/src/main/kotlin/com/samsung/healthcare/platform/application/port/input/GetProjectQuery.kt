@@ -9,4 +9,6 @@ interface GetProjectQuery {
 
     // TODO return project list which user can access to
     fun listProject(): Flow<Project>
+
+    suspend fun existsProject(id: ProjectId): Boolean
 }

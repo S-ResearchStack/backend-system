@@ -14,6 +14,7 @@ import com.samsung.healthcare.platform.adapter.web.filter.IdTokenFilterFunction
 import com.samsung.healthcare.platform.adapter.web.filter.TenantHandlerFilterFunction
 import com.samsung.healthcare.platform.adapter.web.security.SecurityConfig
 import com.samsung.healthcare.platform.application.exception.GlobalErrorAttributes
+import com.samsung.healthcare.platform.application.port.input.GetProjectQuery
 import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
 import com.samsung.healthcare.platform.application.port.input.project.UpdateUserProfileLastSyncedTimeUseCase
 import com.samsung.healthcare.platform.application.port.input.project.task.UploadTaskResultCommand
@@ -26,6 +27,7 @@ import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -52,12 +54,24 @@ internal class TaskResultHandlerTest {
 
     @MockkBean
     private lateinit var updateUserProfileLastSyncedTimeUseCase: UpdateUserProfileLastSyncedTimeUseCase
+
+    @MockkBean
+    private lateinit var getProjectQuery: GetProjectQuery
+
     @MockkBean
     private lateinit var existUserProfileUseCase: ExistUserProfileUseCase
+
     @Autowired
     private lateinit var webTestClient: WebTestClient
 
     private val projectId = 1
+
+    @BeforeEach
+    fun setup() {
+        coEvery {
+            getProjectQuery.existsProject(any())
+        } returns true
+    }
 
     @Test
     @Tag(POSITIVE_TEST)
@@ -93,7 +107,7 @@ internal class TaskResultHandlerTest {
             .expectBody()
             .returnResult()
 
-        assertThat(result.status).isEqualTo(HttpStatus.OK)
+        assertThat(result.status).isEqualTo(HttpStatus.CREATED)
     }
 
     @Test

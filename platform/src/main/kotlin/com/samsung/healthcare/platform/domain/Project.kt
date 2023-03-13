@@ -1,5 +1,6 @@
 package com.samsung.healthcare.platform.domain
 
+import com.samsung.healthcare.platform.domain.Project.ProjectId
 import java.time.LocalDateTime
 
 /**
@@ -22,6 +23,7 @@ data class Project(
     val deletedAt: LocalDateTime? = null,
 ) {
     companion object {
+        const val PROJECT_NAME_LENGTH = 32
         fun newProject(name: String, info: Map<String, Any>, isOpen: Boolean): Project =
             Project(null, name, info, isOpen)
     }

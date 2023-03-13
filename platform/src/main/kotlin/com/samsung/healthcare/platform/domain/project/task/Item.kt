@@ -23,6 +23,7 @@ data class Item(
     val sequence: Int
 ) {
     companion object {
+        const val ITEM_NAME_LENGTH = 320
         private const val QUESTION_PREFIX = "Question"
         fun newItem(
             task: Task,

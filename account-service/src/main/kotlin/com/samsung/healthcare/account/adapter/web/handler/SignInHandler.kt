@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Component
 class SignInHandler(
@@ -16,6 +17,7 @@ class SignInHandler(
 
     fun signIn(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<SignInRequest>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap {
                 signInUseCase.signIn(
                     SignInCommand(Email(it.email), it.password)

@@ -13,15 +13,18 @@ import com.samsung.healthcare.platform.adapter.web.filter.IdTokenFilterFunction
 import com.samsung.healthcare.platform.adapter.web.filter.TenantHandlerFilterFunction
 import com.samsung.healthcare.platform.adapter.web.security.SecurityConfig
 import com.samsung.healthcare.platform.application.exception.GlobalErrorAttributes
+import com.samsung.healthcare.platform.application.port.input.GetProjectQuery
 import com.samsung.healthcare.platform.application.port.input.project.UpdateUserProfileLastSyncedTimeUseCase
 import com.samsung.healthcare.platform.application.port.input.project.healthdata.SaveHealthDataCommand
 import com.samsung.healthcare.platform.application.port.input.project.healthdata.SaveHealthDataUseCase
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData
+import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -49,10 +52,20 @@ internal class HealthDataHandlerTest {
     @MockkBean
     private lateinit var updateUserProfileLastSyncedTimeUseCase: UpdateUserProfileLastSyncedTimeUseCase
 
+    @MockkBean
+    private lateinit var getProjectQuery: GetProjectQuery
+
     @Autowired
     private lateinit var webTestClient: WebTestClient
 
     private val projectId = 1
+
+    @BeforeEach
+    fun setup() {
+        coEvery {
+            getProjectQuery.existsProject(any())
+        } returns true
+    }
 
     @Test
     @Tag(NEGATIVE_TEST)
@@ -141,6 +154,28 @@ internal class HealthDataHandlerTest {
             .header("id-token", "testToken")
             .body(
                 BodyInserters.fromValue(mapOf("type" to "HeartRate"))
+            )
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `should return bad request when type is not valid`() {
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance().verifyIdToken(any()) } returns mockk(relaxed = true)
+
+        val result = webTestClient.post()
+            .uri("/api/projects/$projectId/health-data")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("id-token", "testToken")
+            .body(
+                BodyInserters.fromValue(
+                    mapOf("type" to "InvalidHealthData")
+                )
             )
             .exchange()
             .expectBody()

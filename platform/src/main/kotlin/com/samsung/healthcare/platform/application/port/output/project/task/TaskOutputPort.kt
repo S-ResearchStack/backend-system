@@ -1,5 +1,6 @@
 package com.samsung.healthcare.platform.application.port.output.project.task
 
+import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime
@@ -17,6 +18,8 @@ interface TaskOutputPort {
     ): Flow<Task>
 
     suspend fun findById(id: String): Flow<Task>
+
+    suspend fun findByIdAndRevisionId(id: String, revisionId: RevisionId): Task?
 
     suspend fun create(task: Task): Task
 

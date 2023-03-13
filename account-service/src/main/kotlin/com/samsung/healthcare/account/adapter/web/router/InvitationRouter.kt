@@ -1,5 +1,6 @@
 package com.samsung.healthcare.account.adapter.web.router
 
+import com.samsung.healthcare.account.adapter.web.filter.JwtAuthenticationFilterFunction
 import com.samsung.healthcare.account.adapter.web.handler.InvitationHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,9 +15,11 @@ class InvitationRouter {
 
     @Bean
     fun routeInvitation(
-        handler: InvitationHandler
+        handler: InvitationHandler,
+        jwtAuthenticationFilterFunction: JwtAuthenticationFilterFunction
     ): RouterFunction<ServerResponse> =
         route()
             .POST(INVITATION_PATH, contentType(MediaType.APPLICATION_JSON), handler::inviteUser)
+            .filter(jwtAuthenticationFilterFunction)
             .build()
 }

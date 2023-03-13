@@ -25,4 +25,6 @@ interface TaskRepository : CoroutineCrudRepository<TaskEntity, Int> {
     ): Flow<TaskEntity>
 
     suspend fun findByIdIn(id: List<String>): Flow<TaskEntity>
+
+    suspend fun findByIdAndRevisionId(id: String, revisionId: Int): TaskEntity?
 }

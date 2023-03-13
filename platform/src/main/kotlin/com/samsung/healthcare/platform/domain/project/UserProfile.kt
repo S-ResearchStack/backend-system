@@ -15,6 +15,7 @@ class UserProfile(
     val lastSyncedAt: LocalDateTime,
 ) {
     companion object {
+        const val USER_PROFILE_LENGTH = 320
         fun newUserProfile(userId: String, profile: Map<String, Any>): UserProfile =
             UserProfile(UserId.from(userId), profile, LocalDateTime.now())
     }

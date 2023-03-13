@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.r2dbc.core.DatabaseClient
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class ProjectDatabaseAdapterTest {
 
     private val objectMapper = mockk<ObjectMapper>()

@@ -27,6 +27,7 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.assertThrows
 import reactor.core.publisher.Mono
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class CreateTaskServiceTest {
     private val taskOutputPort = mockk<TaskOutputPort>()
     private val createTaskService = CreateTaskService(

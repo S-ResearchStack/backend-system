@@ -9,6 +9,9 @@ app:
     url: ${INVITATION_URL}
   verification:
     url: ${VERIFICATION_URL}
+  token-lifetime:
+    access-token: ${ACCESS_TOKEN_LIFETIME:3600}
+    refresh-token: ${REFRESH_TOKEN_LIFETIME:1209600}
 
 spring:
   r2dbc:

@@ -2,6 +2,7 @@ package com.samsung.healthcare.platform.adapter.persistence.project.task
 
 import com.samsung.healthcare.platform.adapter.persistence.entity.project.task.toEntity
 import com.samsung.healthcare.platform.application.port.output.project.task.TaskOutputPort
+import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -33,6 +34,9 @@ class TaskDatabaseAdapter(
     override suspend fun findById(id: String): Flow<Task> {
         return taskRepository.findByIdIn(listOf(id)).map { it.toDomain() }
     }
+
+    override suspend fun findByIdAndRevisionId(id: String, revisionId: RevisionId): Task? =
+        taskRepository.findByIdAndRevisionId(id, revisionId.value)?.toDomain()
 
     override suspend fun create(task: Task): Task =
         taskRepository.save(task.toEntity()).toDomain()

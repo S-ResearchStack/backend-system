@@ -37,6 +37,7 @@ import reactor.core.publisher.Mono
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 internal class GetTaskServiceTest {
     private val taskOutputPort = mockk<TaskOutputPort>()
     private val itemOutputPort = mockk<ItemOutputPort>()

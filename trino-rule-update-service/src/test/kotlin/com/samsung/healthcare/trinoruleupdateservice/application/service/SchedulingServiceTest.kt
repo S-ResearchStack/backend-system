@@ -12,6 +12,7 @@ import com.samsung.healthcare.trinoruleupdateservice.application.port.output.Get
 import com.samsung.healthcare.trinoruleupdateservice.application.port.output.UpdateRulePort
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verifyAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -36,6 +37,10 @@ internal class SchedulingServiceTest {
         every { updateRulePort.updateAccessControlConfigFile(any()) } returns Unit
 
         schedulingService.fetchUsers()
+        verifyAll {
+            getUsersPort.getUsers()
+            updateRulePort.updateAccessControlConfigFile(any())
+        }
     }
 
     @Test

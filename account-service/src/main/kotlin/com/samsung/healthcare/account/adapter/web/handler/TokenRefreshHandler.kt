@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyToMono
 import reactor.core.publisher.Mono
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Component
 class TokenRefreshHandler(
@@ -15,6 +16,7 @@ class TokenRefreshHandler(
 
     fun refreshToken(req: ServerRequest): Mono<ServerResponse> =
         req.bodyToMono<TokenRefreshCommand>()
+            .switchIfEmpty { Mono.error(IllegalArgumentException()) }
             .flatMap { tokenRefreshService.refreshToken(it) }
             .flatMap { ServerResponse.ok().bodyValue(it) }
 }

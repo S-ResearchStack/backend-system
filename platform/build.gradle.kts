@@ -26,6 +26,7 @@ dependencies {
     implementation(Libs.LOGBACK)
     implementation(Libs.FIREBASE_ADMIN)
     implementation(Libs.MAPSTRUCT_IMPL)
+    implementation(Libs.CRON_EXPRESSION)
     runtimeOnly(Libs.JDBC_POSTGRESQL)
     kapt(Libs.SPRING_BOOT_CONFIGURATION_PROCESSOR)
     kapt(Libs.MAPSTRUCT_ANNOTATION)

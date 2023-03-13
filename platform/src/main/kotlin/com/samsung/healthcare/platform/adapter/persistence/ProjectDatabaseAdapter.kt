@@ -3,6 +3,7 @@ package com.samsung.healthcare.platform.adapter.persistence
 import com.samsung.healthcare.platform.adapter.persistence.config.ReactivePostgresConfig
 import com.samsung.healthcare.platform.adapter.persistence.entity.toEntity
 import com.samsung.healthcare.platform.application.config.ProjectConfig.NewProjectConfig
+import com.samsung.healthcare.platform.application.exception.DuplicateProjectNameException
 import com.samsung.healthcare.platform.application.port.output.CreateProjectPort
 import com.samsung.healthcare.platform.application.port.output.LoadProjectPort
 import com.samsung.healthcare.platform.domain.Project
@@ -14,6 +15,7 @@ import io.r2dbc.spi.Option
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.reactive.awaitLast
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.stereotype.Component
 import reactor.kotlin.core.publisher.toMono
@@ -27,9 +29,13 @@ class ProjectDatabaseAdapter(
     private val reactivePostgresConfig: ReactivePostgresConfig,
 ) : CreateProjectPort, LoadProjectPort {
     override suspend fun create(project: Project): ProjectId {
-        val projectId = ProjectId.from(
-            projectRepository.save(project.toEntity()).id
-        )
+        val projectId = try {
+            ProjectId.from(
+                projectRepository.save(project.toEntity()).id
+            )
+        } catch (_: DataIntegrityViolationException) {
+            throw DuplicateProjectNameException()
+        }
 
         val schemaName = schemaNameOf(projectId)
 
@@ -79,4 +85,7 @@ class ProjectDatabaseAdapter(
         projectRepository.findByIdIn(
             idList.map { it.value }
         ).map { it.toDomain() }
+
+    override suspend fun existsById(id: ProjectId): Boolean =
+        projectRepository.existsById(id.value)
 }

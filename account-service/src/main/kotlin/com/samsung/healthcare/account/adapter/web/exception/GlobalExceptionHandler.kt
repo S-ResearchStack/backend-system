@@ -40,7 +40,7 @@ class GlobalExceptionHandler(
             .status(errorAttributes[GlobalErrorAttributes.STATUS] as HttpStatus)
             .bodyValue(
                 ErrorResponse(
-                    errorAttributes[GlobalErrorAttributes.MESSAGE] as? String ?: "unexpected error occurred"
+                    errorAttributes[GlobalErrorAttributes.MESSAGE] as? String ?: ""
                 )
             )
     }

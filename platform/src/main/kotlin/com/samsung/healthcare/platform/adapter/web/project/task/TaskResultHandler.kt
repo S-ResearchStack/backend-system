@@ -1,5 +1,6 @@
 package com.samsung.healthcare.platform.adapter.web.project.task
 
+import com.samsung.healthcare.platform.adapter.web.common.getProjectId
 import com.samsung.healthcare.platform.adapter.web.context.ContextHolder
 import com.samsung.healthcare.platform.application.exception.ForbiddenException
 import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
@@ -11,6 +12,7 @@ import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.awaitBody
 import org.springframework.web.reactive.function.server.buildAndAwait
+import java.net.URI
 
 @Component
 class TaskResultHandler(
@@ -27,6 +29,6 @@ class TaskResultHandler(
         uploadTaskResultUseCase.uploadResults(
             req.awaitBody()
         )
-        return ServerResponse.ok().buildAndAwait()
+        return ServerResponse.created(URI.create("/api/projects/${req.getProjectId()}/tasks")).buildAndAwait()
     }
 }

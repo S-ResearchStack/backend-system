@@ -3,6 +3,7 @@ package com.samsung.healthcare.account.adapter.web.handler
 import com.ninjasquad.springmockk.MockkBean
 import com.samsung.healthcare.account.NEGATIVE_TEST
 import com.samsung.healthcare.account.POSITIVE_TEST
+import com.samsung.healthcare.account.adapter.web.config.JacksonConfig
 import com.samsung.healthcare.account.adapter.web.config.SecurityConfig
 import com.samsung.healthcare.account.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.account.adapter.web.exception.GlobalExceptionHandler
@@ -30,6 +31,7 @@ import reactor.core.publisher.Mono
     GlobalExceptionHandler::class,
     GlobalErrorAttributes::class,
     SecurityConfig::class,
+    JacksonConfig::class
 )
 internal class SignUpHandlerTest {
     @MockkBean
@@ -55,6 +57,16 @@ internal class SignUpHandlerTest {
             .returnResult()
 
         assertThat(result.status).isEqualTo(HttpStatus.OK)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `should return bad request when password is not string`() {
+        val result = webClient.post(SIGN_UP_PATH, TestRequest(email.value, 1, profile))
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
     @Test
@@ -97,5 +109,5 @@ internal class SignUpHandlerTest {
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
     }
 
-    private data class TestRequest(val email: String?, val password: String?, val profile: Map<String, Any>?)
+    private data class TestRequest(val email: String?, val password: Any?, val profile: Map<String, Any>?)
 }

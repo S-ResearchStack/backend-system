@@ -3,9 +3,11 @@ package com.samsung.healthcare.account.application.service
 import com.samsung.healthcare.account.NEGATIVE_TEST
 import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.application.exception.AlreadyExistedEmailException
+import com.samsung.healthcare.account.application.exception.UnknownRoleException
 import com.samsung.healthcare.account.application.port.output.AuthServicePort
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
+import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
 import com.samsung.healthcare.account.domain.Role.TeamAdmin
 import io.mockk.every
 import io.mockk.mockk
@@ -99,5 +101,16 @@ internal class AccountServiceTest {
         StepVerifier.create(
             accountService.removeRolesFromAccount(accountId, listOf(TeamAdmin))
         ).verifyComplete()
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `assignRoles should throw Unknown exception when roles does not exist`() {
+        val accountId = UUID.randomUUID().toString()
+        every { authServicePort.assignRoles(accountId, any()) } returns Mono.error(UnknownRoleException())
+
+        StepVerifier.create(
+            accountService.assignRoles(accountId, listOf(Researcher("1")))
+        ).verifyError<UnknownRoleException>()
     }
 }

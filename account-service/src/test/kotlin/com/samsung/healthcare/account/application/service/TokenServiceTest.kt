@@ -1,6 +1,7 @@
 package com.samsung.healthcare.account.application.service
 
 import com.samsung.healthcare.account.POSITIVE_TEST
+import com.samsung.healthcare.account.application.config.TokenLifetimeProperties
 import com.samsung.healthcare.account.application.exception.ExpiredRefreshTokenException
 import com.samsung.healthcare.account.application.exception.InvalidTokenException
 import com.samsung.healthcare.account.application.port.input.TokenRefreshCommand
@@ -23,11 +24,13 @@ import java.util.UUID
 
 class TokenServiceTest {
 
+    private val properties = TokenLifetimeProperties(1, 1)
+
     private val authServicePort = mockk<AuthServicePort>()
     private val tokenSigningPort = mockk<TokenSigningPort>()
     private val tokenStoragePort = mockk<TokenStoragePort>()
 
-    private val tokenService = TokenService(tokenSigningPort, tokenStoragePort, authServicePort)
+    private val tokenService = TokenService(properties, tokenSigningPort, tokenStoragePort, authServicePort)
 
     private val accountId = UUID.randomUUID().toString()
     private val tokenRefreshCommand = TokenRefreshCommand("access-token", "refreshtokensample")

@@ -10,4 +10,6 @@ interface LoadProjectPort {
     fun findAll(): Flow<Project>
 
     fun findProjectByIdIn(idList: List<ProjectId>): Flow<Project>
+
+    suspend fun existsById(id: ProjectId): Boolean
 }

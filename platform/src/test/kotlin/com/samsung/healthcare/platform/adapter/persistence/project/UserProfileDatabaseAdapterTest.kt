@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.dao.DuplicateKeyException
 
+@kotlinx.coroutines.ExperimentalCoroutinesApi
 class UserProfileDatabaseAdapterTest {
     private val userProfileRepository = mockk<UserProfileRepository>()
     private val userProfileDatabaseAdapter = UserProfileDatabaseAdapter(userProfileRepository)

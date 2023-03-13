@@ -17,11 +17,15 @@ import javax.servlet.http.HttpServletResponse
 class JwtAuthenticationInterceptor(
     private val jwtDecoder: JwtDecoder,
 ) : HandlerInterceptor {
+    private val bearerPrefix = "Bearer "
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val jwt = request.getHeader(HttpHeaders.AUTHORIZATION)
-            ?.substring("Bearer ".length) ?: throw UnauthorizedException()
+        val bearerString = request.getHeader(HttpHeaders.AUTHORIZATION) ?: throw UnauthorizedException()
+        if (!bearerString.startsWith(bearerPrefix)) throw UnauthorizedException()
 
-        AuthContext.setValue(AuthContext.ACCOUNT_ID_KEY_NAME, getAccountFromToken(jwt).id)
+        AuthContext.setValue(
+            AuthContext.ACCOUNT_ID_KEY_NAME,
+            getAccountFromToken(bearerString.substring(bearerPrefix.length)).id
+        )
         return true
     }
 

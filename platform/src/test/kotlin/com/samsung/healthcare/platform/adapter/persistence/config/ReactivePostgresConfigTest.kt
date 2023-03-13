@@ -5,6 +5,7 @@ import com.samsung.healthcare.platform.NEGATIVE_TEST
 import com.samsung.healthcare.platform.POSITIVE_TEST
 import com.samsung.healthcare.platform.application.config.ApplicationProperties
 import io.mockk.mockk
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -40,14 +41,14 @@ internal class ReactivePostgresConfigTest {
 
     @Test
     @Tag(POSITIVE_TEST)
-    fun `connectionFactory should not emit event`() {
-        reactivePostgresConfig.connectionFactory()
+    fun `connectionFactory should not return null`() {
+        assertNotNull(reactivePostgresConfig.connectionFactory())
     }
 
     @Test
     @Tag(POSITIVE_TEST)
-    fun `connectionFactoryOptionsBuilder should not emit event`() {
-        reactivePostgresConfig.connectionFactoryOptionsBuilder()
+    fun `connectionFactoryOptionsBuilder should not return null`() {
+        assertNotNull(reactivePostgresConfig.connectionFactoryOptionsBuilder())
     }
 
     @Test

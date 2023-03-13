@@ -1,5 +1,6 @@
 package com.samsung.healthcare.account.application.service
 
+import com.samsung.healthcare.account.application.config.TokenLifetimeProperties
 import com.samsung.healthcare.account.application.exception.ExpiredRefreshTokenException
 import com.samsung.healthcare.account.application.exception.InvalidTokenException
 import com.samsung.healthcare.account.application.port.input.TokenRefreshCommand
@@ -16,11 +17,9 @@ import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.switchIfEmpty
 import java.time.Instant
 
-// TODO config lifetime
-private const val ACCESS_TOKEN_LIFETIME = 1 * 60 * 60 * 24L
-
 @Service
 class TokenService(
+    private val tokenLifetimeProperties: TokenLifetimeProperties,
     private val tokenSigningPort: TokenSigningPort,
     private val tokenStoragePort: TokenStoragePort,
     private val authServicePort: AuthServicePort,
@@ -33,10 +32,10 @@ class TokenService(
             subject = account.id,
             email = account.email.value,
             roles = account.roles,
-            lifeTime = ACCESS_TOKEN_LIFETIME,
+            lifeTime = tokenLifetimeProperties.accessToken,
         )
     ).map { accessToken ->
-        Token.generateToken(account.id, accessToken)
+        Token.generateToken(account.id, accessToken, tokenLifetimeProperties.refreshToken)
     }.flatMap { token ->
         tokenStoragePort.save(token).thenReturn(token)
     }

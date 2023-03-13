@@ -18,8 +18,12 @@ fun ServerRequest.getLastSyncTime(): LocalDateTime? = this.queryParam("last_sync
     LocalDateTime.parse(it, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 }.orElse(null)
 
-fun ServerRequest.getRevisionId(): Int? = this.queryParam("revision_id").map {
-    it.toInt()
-}.orElse(null)
+fun ServerRequest.getRevisionId(): Int? = try {
+    this.queryParam("revision_id").map {
+        it.toInt()
+    }.orElse(null)
+} catch (_: NumberFormatException) {
+    throw IllegalArgumentException()
+}
 
 fun ServerRequest.getTaskId(): String = this.pathVariable("taskId")

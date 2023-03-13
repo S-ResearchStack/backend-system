@@ -11,7 +11,7 @@ import com.samsung.healthcare.account.adapter.web.handler.VerifyEmailHandler.Ver
 import com.samsung.healthcare.account.adapter.web.router.RESEND_VERIFICATION_EMAIL_PATH
 import com.samsung.healthcare.account.adapter.web.router.VERIFY_EMAIL_PATH
 import com.samsung.healthcare.account.adapter.web.router.VerifyEmailRouter
-import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
+import com.samsung.healthcare.account.application.exception.InvalidEmailVerificationTokenException
 import com.samsung.healthcare.account.application.port.input.SignInResponse
 import com.samsung.healthcare.account.application.service.VerifyEmailService
 import com.samsung.healthcare.account.domain.Account
@@ -39,9 +39,6 @@ internal class VerifyEmailHandlerTest {
     @MockkBean
     private lateinit var verifyEmailService: VerifyEmailService
 
-    @MockkBean
-    private lateinit var getAccountService: GetAccountUseCase
-
     @Autowired
     private lateinit var webClient: WebTestClient
 
@@ -52,7 +49,7 @@ internal class VerifyEmailHandlerTest {
     fun `verifyEmail should return ok`() {
         every { verifyEmailService.verifyEmail(token) } returns Mono.just(
             SignInResponse(
-                Account("id", Email("cubist@reserch-hub.test.com"), emptyList(), emptyMap()),
+                Account("id", Email("cubist@reserch-hub.test.com"), emptyList()),
                 "accessToken",
                 "refreshToken"
             )
@@ -86,5 +83,18 @@ internal class VerifyEmailHandlerTest {
             .returnResult()
 
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `verifyEmail should return unauthorized when verify token is not valid`() {
+
+        every { verifyEmailService.verifyEmail(token) } throws InvalidEmailVerificationTokenException()
+
+        val result = webClient.post(VERIFY_EMAIL_PATH, VerifyEmailRequest(token))
+            .expectBody()
+            .returnResult()
+        // why UNAUTHORIZED?
+        assertThat(result.status).isEqualTo(HttpStatus.UNAUTHORIZED)
     }
 }

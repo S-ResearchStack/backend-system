@@ -1,5 +1,6 @@
 package com.samsung.healthcare.account.adapter.web.router
 
+import com.samsung.healthcare.account.adapter.web.filter.JwtAuthenticationFilterFunction
 import com.samsung.healthcare.account.adapter.web.handler.AssignRoleHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,13 +14,14 @@ import org.springframework.web.reactive.function.server.ServerResponse
 class AssignRoleRouter {
     @Bean
     fun routeRoleAssign(
-        handler: AssignRoleHandler
+        handler: AssignRoleHandler,
+        jwtAuthenticationFilterFunction: JwtAuthenticationFilterFunction
     ): RouterFunction<ServerResponse> =
         RouterFunctions.route()
             .PUT(
                 ASSIGN_ROLE_PATH,
                 RequestPredicates.contentType(MediaType.APPLICATION_JSON),
                 handler::assignRoles
-            )
+            ).filter(jwtAuthenticationFilterFunction)
             .build()
 }

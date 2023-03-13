@@ -48,7 +48,7 @@ internal class QueryDataServiceTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = ["invalid", " ", "SELECT * FROM t1;", "SELECT * FROM (SHOW COLUMNS FROM t1)"])
+    @ValueSource(strings = ["invalid", "SELECT * FROM t1;", "SELECT * FROM (SHOW COLUMNS FROM t1)"])
     @Tag(NEGATIVE_TEST)
     fun `executeQuery should throw ParsingException when sql statement was invalid`(sql: String) {
         assertThrows<ParsingException> {

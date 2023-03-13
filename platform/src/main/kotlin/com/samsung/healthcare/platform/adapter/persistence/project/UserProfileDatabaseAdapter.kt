@@ -5,7 +5,7 @@ import com.samsung.healthcare.platform.application.exception.ForbiddenException
 import com.samsung.healthcare.platform.application.exception.UserAlreadyExistsException
 import com.samsung.healthcare.platform.application.port.output.project.UserProfileOutputPort
 import com.samsung.healthcare.platform.domain.project.UserProfile
-import org.springframework.dao.DuplicateKeyException
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -16,7 +16,7 @@ class UserProfileDatabaseAdapter(
     override suspend fun create(userProfile: UserProfile) {
         try {
             repository.save(userProfile.toEntity().also { it.setNew() })
-        } catch (_: DuplicateKeyException) {
+        } catch (_: DataIntegrityViolationException) {
             throw UserAlreadyExistsException()
         }
     }
