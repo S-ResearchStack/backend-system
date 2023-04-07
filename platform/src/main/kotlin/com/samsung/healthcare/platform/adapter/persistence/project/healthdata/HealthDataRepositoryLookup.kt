@@ -12,16 +12,20 @@ class HealthDataRepositoryLookup(
     stepsRepository: StepsRepository,
     sleepSessionRepository: SleepSessionRepository,
     sleepStageRepository: SleepStageRepository,
+    weightRepository: WeightRepository,
+    spO2Repository: OxygenSaturationRepository,
 ) {
     @Suppress("UNCHECKED_CAST")
     private val typeToRepository: Map<HealthDataType, HealthDataRepository<HealthDataEntity>> =
         mapOf(
-            HealthDataType.BLOOD_PRESSURE to (bloodPressureRepository as HealthDataRepository<HealthDataEntity>),
-            HealthDataType.HEART_RATE to (heartRateRepository as HealthDataRepository<HealthDataEntity>),
-            HealthDataType.STEPS to (stepsRepository as HealthDataRepository<HealthDataEntity>),
-            HealthDataType.SLEEP_SESSION to (sleepSessionRepository as HealthDataRepository<HealthDataEntity>),
-            HealthDataType.SLEEP_STAGE to (sleepStageRepository as HealthDataRepository<HealthDataEntity>),
-        )
+            HealthDataType.BLOOD_PRESSURE to bloodPressureRepository,
+            HealthDataType.HEART_RATE to heartRateRepository,
+            HealthDataType.STEPS to stepsRepository,
+            HealthDataType.SLEEP_SESSION to sleepSessionRepository,
+            HealthDataType.SLEEP_STAGE to sleepStageRepository,
+            HealthDataType.WEIGHT to weightRepository,
+            HealthDataType.OXYGEN_SATURATION to spO2Repository,
+        ) as Map<HealthDataType, HealthDataRepository<HealthDataEntity>>
 
     fun getRepository(type: HealthDataType): HealthDataRepository<HealthDataEntity>? =
         typeToRepository[type]

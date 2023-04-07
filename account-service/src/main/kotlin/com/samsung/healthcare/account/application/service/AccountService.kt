@@ -30,7 +30,7 @@ class AccountService(
                     authServicePort.generateResetToken(account.id),
                 ).map { it.t3 }
             }.flatMap { resetToken ->
-                mailService.sendResetPasswordMail(email, resetToken)
+                mailService.sendInvitationMail(email, resetToken)
             }.onErrorResume(AlreadyExistedEmailException::class.java) {
                 authServicePort.assignRoles(email, roles)
             }

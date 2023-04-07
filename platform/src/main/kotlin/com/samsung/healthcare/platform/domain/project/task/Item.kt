@@ -24,7 +24,12 @@ data class Item(
 ) {
     companion object {
         const val ITEM_NAME_LENGTH = 320
-        private const val QUESTION_PREFIX = "Question"
+        private val PREFIX = mapOf(
+            ItemType.QUESTION to "Question",
+            ItemType.ACTIVITY to "Activity",
+            ItemType.SECTION to "Section"
+        )
+
         fun newItem(
             task: Task,
             contents: Map<String, Any>,
@@ -32,7 +37,7 @@ data class Item(
             sequence: Int
         ): Item {
             requireNotNull(task.revisionId)
-            return Item(null, task.revisionId, task.id, "$QUESTION_PREFIX$sequence", contents, type, sequence)
+            return Item(null, task.revisionId, task.id, "${PREFIX[type]}$sequence", contents, type, sequence)
         }
     }
 

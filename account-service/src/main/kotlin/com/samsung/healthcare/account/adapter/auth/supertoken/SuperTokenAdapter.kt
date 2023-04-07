@@ -65,6 +65,16 @@ class SuperTokenAdapter(
             }
     }
 
+    override fun generateResetToken(email: Email): Mono<String> =
+        apiClient.getAccountWithEmail(email.value)
+            .mapNotNull {
+                if (it.status == OK && it.user != null) it.user.id
+                else throw UnknownEmailException()
+            }
+            .flatMap { accountId ->
+                generateResetToken(accountId)
+            }
+
     override fun resetPassword(resetToken: String, newPassword: String): Mono<String> {
         require(resetToken.isNotBlank())
         require(newPassword.isNotBlank())

@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter
 
 fun ServerRequest.getProjectId(): String = this.pathVariable("projectId")
 
+fun ServerRequest.getUserId(): String = this.pathVariable("userId")
+
 fun ServerRequest.getStartTime(): LocalDateTime? = this.queryParam("start_time").map {
     LocalDateTime.parse(it, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 }.orElse(null)

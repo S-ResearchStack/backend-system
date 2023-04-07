@@ -2,6 +2,7 @@ package com.samsung.healthcare.platform.application.service.project.task
 
 import com.samsung.healthcare.account.domain.AccessProjectAuthority
 import com.samsung.healthcare.platform.application.authorize.Authorizer
+import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskCommand
 import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskResponse
 import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskUseCase
 import com.samsung.healthcare.platform.application.port.output.project.task.TaskOutputPort
@@ -23,12 +24,12 @@ class CreateTaskService(
      * @param projectId The id of the project
      * @return [CreateTaskResponse] data class
      */
-    override suspend fun createTask(projectId: String): CreateTaskResponse =
+    override suspend fun createTask(projectId: String, command: CreateTaskCommand): CreateTaskResponse =
         Authorizer.getAccount(AccessProjectAuthority(projectId))
             .flatMap {
                 mono {
                     taskOutputPort.create(
-                        Task.newTask()
+                        Task.newTask(command.type)
                     ).let {
                         CreateTaskResponse(
                             it.revisionId?.value,

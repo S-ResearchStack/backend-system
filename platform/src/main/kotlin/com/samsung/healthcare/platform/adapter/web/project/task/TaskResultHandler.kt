@@ -22,6 +22,7 @@ class TaskResultHandler(
 ) {
     suspend fun uploadTaskResults(req: ServerRequest): ServerResponse {
         val userId = UserProfile.UserId.from(ContextHolder.getFirebaseToken().uid)
+
         if (!existUserProfileUseCase.existsByUserId(userId)) {
             throw ForbiddenException("This user(${userId.value}) is not registered on this project")
         }

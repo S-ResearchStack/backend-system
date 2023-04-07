@@ -6,7 +6,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonMapperBuilder
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.samsung.healthcare.platform.NEGATIVE_TEST
 import com.samsung.healthcare.platform.POSITIVE_TEST
-import com.samsung.healthcare.platform.enums.ItemType.ROW
+import com.samsung.healthcare.platform.enums.ItemType.ITEM
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
@@ -27,6 +27,7 @@ class UpdateTaskCommandTest {
           "endTime": "2022-10-20T12:00:00",
           "validTime": 600,
           "status" : "PUBLISHED",
+          "type": "SURVEY",
           "items": [
             {
                   "type": "QUESTION",
@@ -112,7 +113,7 @@ class UpdateTaskCommandTest {
     @Tag(NEGATIVE_TEST)
     @Suppress("UNCHECKED_CAST")
     fun `should throw ValueInstantiationException when status is published and item type is invalid`() {
-        (requestBody["items"] as List<MutableMap<String, Any>>)[0]["type"] = ROW.toString()
+        (requestBody["items"] as List<MutableMap<String, Any>>)[0]["type"] = ITEM.toString()
         assertThrows<ValueInstantiationException> {
             objectMapper.readValue<UpdateTaskCommand>(
                 objectMapper.writeValueAsString(requestBody)
@@ -221,36 +222,6 @@ class UpdateTaskCommandTest {
         val props = contents["properties"] as MutableMap<String, Any>
         val opt = (props["options"] as List<MutableMap<String, Any>>)[0]
         opt.remove("value")
-        assertThrows<ValueInstantiationException> {
-            objectMapper.readValue<UpdateTaskCommand>(
-                objectMapper.writeValueAsString(requestBody)
-            )
-        }
-    }
-
-    @Test
-    @Tag(NEGATIVE_TEST)
-    @Suppress("UNCHECKED_CAST")
-    fun `should throw ValueInstantiationException when goToAction is not string`() {
-        val contents = (requestBody["items"] as List<MutableMap<String, Any>>)[0]["contents"] as MutableMap<String, Any>
-        val props = contents["properties"] as MutableMap<String, Any>
-        val opt = (props["options"] as List<MutableMap<String, Any>>)[0]
-        opt["goToAction"] = mapOf("not" to "string")
-        assertThrows<ValueInstantiationException> {
-            objectMapper.readValue<UpdateTaskCommand>(
-                objectMapper.writeValueAsString(requestBody)
-            )
-        }
-    }
-
-    @Test
-    @Tag(NEGATIVE_TEST)
-    @Suppress("UNCHECKED_CAST")
-    fun `should throw ValueInstantiationException when goToItemId is not string`() {
-        val contents = (requestBody["items"] as List<MutableMap<String, Any>>)[0]["contents"] as MutableMap<String, Any>
-        val props = contents["properties"] as MutableMap<String, Any>
-        val opt = (props["options"] as List<MutableMap<String, Any>>)[0]
-        opt["goToItemId"] = mapOf("not" to "string")
         assertThrows<ValueInstantiationException> {
             objectMapper.readValue<UpdateTaskCommand>(
                 objectMapper.writeValueAsString(requestBody)

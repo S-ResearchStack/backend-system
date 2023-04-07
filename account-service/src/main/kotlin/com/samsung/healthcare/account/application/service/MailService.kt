@@ -2,6 +2,7 @@ package com.samsung.healthcare.account.application.service
 
 import com.samsung.healthcare.account.application.config.EmailVerificationProperties
 import com.samsung.healthcare.account.application.config.InvitationProperties
+import com.samsung.healthcare.account.application.config.PasswordResetProperties
 import com.samsung.healthcare.account.domain.Email
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
@@ -15,22 +16,56 @@ class MailService(
     private val mailSender: JavaMailSender,
     private val invitationProperties: InvitationProperties,
     private val emailVerificationProperties: EmailVerificationProperties,
+    private val passwordResetProperties: PasswordResetProperties,
 ) {
 
     companion object {
         // TODO use html template?
         private const val MESSAGE_TEMPLATE = """
-            Please activate your account from <a href="%s">%s</a>
+            %s <a href="%s">%s</a>
         """
     }
 
-    internal fun sendResetPasswordMail(email: Email, resetToken: String): Mono<Void> {
-        sendMail(email, "Account activation request", resetPasswordHtmlMessage(email, resetToken))
+    internal fun sendInvitationMail(email: Email, resetToken: String): Mono<Void> {
+        sendMail(
+            email,
+            "Account activation request",
+            htmlMessage(
+                invitationProperties.url,
+                email,
+                resetToken,
+                "Please activate your account from"
+            )
+        )
+        return Mono.empty()
+    }
+
+    internal fun sendPasswordResetMail(email: Email, resetToken: String): Mono<Void> {
+        sendMail(
+            email,
+            "Password reset request",
+            htmlMessage(
+                passwordResetProperties.url,
+                email,
+                resetToken,
+                "A request has been made to reset your password on the Samsung Health Stack portal. " +
+                    "Click reset password and follow the prompts."
+            )
+        )
         return Mono.empty()
     }
 
     internal fun sendVerificationMail(email: Email, token: String): Mono<Void> {
-        sendMail(email, "Please verify your email address", verificationHtmlMessage(email, token))
+        sendMail(
+            email,
+            "Please verify your email address",
+            htmlMessage(
+                emailVerificationProperties.url,
+                email,
+                token,
+                "Please activate your account from"
+            )
+        )
         return Mono.empty()
     }
 
@@ -54,17 +89,10 @@ class MailService(
             .subscribe()
     }
 
-    private fun resetPasswordHtmlMessage(email: Email, resetToken: String): String =
+    private fun htmlMessage(url: String, email: Email, resetToken: String, message: String): String =
         URLEncoder.encode(email.value, "utf-8").let { encodedEmail ->
-            "${invitationProperties.url}?reset-token=$resetToken&email=$encodedEmail".let { path ->
-                MESSAGE_TEMPLATE.format(path, path)
-            }
-        }
-
-    private fun verificationHtmlMessage(email: Email, token: String): String =
-        URLEncoder.encode(email.value, "utf-8").let { encodedEmail ->
-            "${emailVerificationProperties.url}?token=$token&email=$encodedEmail".let { path ->
-                MESSAGE_TEMPLATE.format(path, path)
+            "$url?reset-token=$resetToken&email=$encodedEmail".let { path ->
+                MESSAGE_TEMPLATE.format(message, path, path)
             }
         }
 }

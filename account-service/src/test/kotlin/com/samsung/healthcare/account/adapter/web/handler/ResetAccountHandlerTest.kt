@@ -12,6 +12,7 @@ import com.samsung.healthcare.account.adapter.web.router.ResetAccountRouter
 import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
 import com.samsung.healthcare.account.application.port.input.ResetPasswordCommand
 import com.samsung.healthcare.account.application.port.input.ResetPasswordUseCase
+import com.samsung.healthcare.account.application.port.input.SignInUseCase
 import com.samsung.healthcare.account.application.port.input.UpdateAccountProfileUseCase
 import io.mockk.every
 import org.assertj.core.api.Assertions.assertThat
@@ -23,7 +24,6 @@ import org.springframework.context.annotation.Import
 import org.springframework.http.HttpStatus
 import org.springframework.test.web.reactive.server.WebTestClient
 import reactor.core.publisher.Mono
-import java.util.UUID
 
 @WebFluxTest
 @Import(
@@ -45,6 +45,9 @@ internal class ResetAccountHandlerTest {
     @MockkBean
     private lateinit var updateAccountProfileService: UpdateAccountProfileUseCase
 
+    @MockkBean
+    private lateinit var signInService: SignInUseCase
+
     @Autowired
     private lateinit var webClient: WebTestClient
 
@@ -59,7 +62,7 @@ internal class ResetAccountHandlerTest {
                     resetRequest.password!!
                 )
             )
-        } returns Mono.just(UUID.randomUUID().toString())
+        } returns Mono.empty()
 
         val result = webClient.post(RESET_PASSWORD_PATH, resetRequest)
             .expectBody()

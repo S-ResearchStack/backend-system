@@ -7,6 +7,7 @@ data class GetTaskCommand(
     val endTime: LocalDateTime?,
     val lastSyncTime: LocalDateTime?,
     val status: String?,
+    val type: String?
 ) {
     init {
         if (startTime != null && endTime != null) {

@@ -40,6 +40,7 @@ class TaskHandler(
             endTime = req.getEndTime(),
             lastSyncTime = req.getLastSyncTime(),
             status = req.queryParam("status").orElse(null),
+            type = req.queryParam("type").orElse(null),
         )
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(
             if (idToken.isNullOrEmpty()) getTaskUseCase.findByPeriodFromResearcher(req.getProjectId(), command)
@@ -64,7 +65,7 @@ class TaskHandler(
     }
 
     suspend fun createTask(req: ServerRequest): ServerResponse {
-        val task = createTaskUseCase.createTask(req.getProjectId())
+        val task = createTaskUseCase.createTask(req.getProjectId(), req.awaitBody())
         return ServerResponse.created(URI.create("/api/projects/${req.getProjectId()}/tasks/${task.id}"))
             .bodyValue(task)
             .awaitSingle()

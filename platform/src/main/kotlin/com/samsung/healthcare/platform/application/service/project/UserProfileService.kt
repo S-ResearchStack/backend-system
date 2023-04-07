@@ -3,6 +3,7 @@ package com.samsung.healthcare.platform.application.service.project
 import com.samsung.healthcare.platform.adapter.web.context.ContextHolder.getFirebaseToken
 import com.samsung.healthcare.platform.application.exception.ForbiddenException
 import com.samsung.healthcare.platform.application.port.input.CreateUserCommand
+import com.samsung.healthcare.platform.application.port.input.UpdateUserCommand
 import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
 import com.samsung.healthcare.platform.application.port.input.project.UpdateUserProfileLastSyncedTimeUseCase
 import com.samsung.healthcare.platform.application.port.input.project.UserProfileInputPort
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserProfileService(
-    private val userProfileOutputPort: UserProfileOutputPort
+    private val userProfileOutputPort: UserProfileOutputPort,
 ) : UserProfileInputPort, UpdateUserProfileLastSyncedTimeUseCase, ExistUserProfileUseCase {
 
     /**
@@ -28,6 +29,22 @@ class UserProfileService(
             throw ForbiddenException("This operation can only be done by owner of token.")
 
         userProfileOutputPort.create(UserProfile.newUserProfile(command.userId, command.profile))
+    }
+
+    /**
+     * Updates a profile of specific user.
+     *
+     * Prior to user profile creation, a validation check is completed using a Firebase token.
+     *
+     * @param requesstUserId [String] from API Path variable.
+     * @param command [UpdateUserCommand] with request parameters.
+     * @throws [ForbiddenException] if the uid associated with the Firebase token does not match the userId.
+     */
+    override suspend fun updateUser(requestedUserId: String, command: UpdateUserCommand) {
+        if (requestedUserId != getFirebaseToken().uid)
+            throw ForbiddenException("This operation can only be done by owner of token.")
+
+        userProfileOutputPort.update(UserProfile.newUserProfile(requestedUserId, command.profile))
     }
 
     /**

@@ -19,6 +19,7 @@ import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.ItemType
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -59,6 +60,7 @@ internal class GetTaskServiceTest {
         "test-task1",
         emptyMap(),
         TaskStatus.PUBLISHED,
+        TaskType.SURVEY,
         createdAt = LocalDateTime.parse("1999-12-31T23:59", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
         publishedAt = LocalDateTime.parse("2022-10-01T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
     )
@@ -67,6 +69,7 @@ internal class GetTaskServiceTest {
         "test-task2",
         emptyMap(),
         TaskStatus.PUBLISHED,
+        TaskType.SURVEY,
         createdAt = LocalDateTime.parse("2022-01-20T10:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
         publishedAt = LocalDateTime.parse("2022-08-20T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
     )
@@ -78,6 +81,7 @@ internal class GetTaskServiceTest {
             "description" to "For testing, has items"
         ),
         TaskStatus.PUBLISHED,
+        TaskType.SURVEY,
         createdAt = LocalDateTime.parse("2022-03-01T07:50", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
         publishedAt = LocalDateTime.parse("2022-10-19T11:52", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
     )
@@ -108,7 +112,7 @@ internal class GetTaskServiceTest {
     @Test
     @Tag(NEGATIVE_TEST)
     fun `findByPeriodFromResearcher should throw exception if TaskStatus invalid`() = runTest {
-        val getTaskCommand = GetTaskCommand(null, null, null, "invalid")
+        val getTaskCommand = GetTaskCommand(null, null, null, "invalid", "SURVEY")
 
         assertThrows<BadRequestException>("should require valid status") {
             getTaskService.findByPeriodFromResearcher(projectId.toString(), getTaskCommand)
@@ -123,7 +127,7 @@ internal class GetTaskServiceTest {
 
         val wrongProjectId = Project.ProjectId.from(2)
         val endTime = LocalDateTime.parse("2022-02-24T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-        val getTaskCommand = GetTaskCommand(null, endTime, null, "PUBLISHED")
+        val getTaskCommand = GetTaskCommand(null, endTime, null, "PUBLISHED", "SURVEY")
 
         assertThrows<ForbiddenException>("should throw an forbidden exception") {
             getTaskService.findByPeriodFromResearcher(wrongProjectId.toString(), getTaskCommand)
@@ -137,13 +141,14 @@ internal class GetTaskServiceTest {
         every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
 
         val endTime = LocalDateTime.parse("2022-02-24T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-        val getTaskCommand = GetTaskCommand(null, endTime, null, "PUBLISHED")
+        val getTaskCommand = GetTaskCommand(null, endTime, null, "PUBLISHED", "SURVEY")
 
         coEvery {
             taskOutputPort.findByPeriod(
                 LocalDateTime.parse("1900-01-01T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                 endTime,
-                "PUBLISHED"
+                "PUBLISHED",
+                "SURVEY"
             )
         } returns flowOf(task1, task2)
 
@@ -166,7 +171,7 @@ internal class GetTaskServiceTest {
     @Test
     @Tag(NEGATIVE_TEST)
     fun `findByPeriodFromParticipant should throw exception if TaskStatus invalid`() = runTest {
-        val getTaskCommand = GetTaskCommand(null, null, null, "invalid")
+        val getTaskCommand = GetTaskCommand(null, null, null, "invalid", null)
 
         assertThrows<BadRequestException>("should require valid status") {
             getTaskService.findByPeriodFromParticipant(getTaskCommand)
@@ -178,13 +183,13 @@ internal class GetTaskServiceTest {
     fun `findByPeriodFromParticipant should throw exception if range not given_byPublishedAt`() = runTest {
         assertThrows<BadRequestException>("should require endTime") {
             getTaskService.findByPeriodFromParticipant(
-                GetTaskCommand(null, null, LocalDateTime.now(), "PUBLISHED")
+                GetTaskCommand(null, null, LocalDateTime.now(), "PUBLISHED", null)
             )
         }
 
         assertThrows<BadRequestException>("should require lastSyncTime") {
             getTaskService.findByPeriodFromParticipant(
-                GetTaskCommand(null, LocalDateTime.now(), null, "PUBLISHED")
+                GetTaskCommand(null, LocalDateTime.now(), null, "PUBLISHED", null)
             )
         }
     }
@@ -194,7 +199,7 @@ internal class GetTaskServiceTest {
     fun `findByPeriodFromParticipant should work properly`() = runTest {
         val lastSyncTime = LocalDateTime.parse("2022-09-30T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         val endTime = LocalDateTime.parse("2022-10-21T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-        val getTaskCommand = GetTaskCommand(null, endTime, lastSyncTime, null)
+        val getTaskCommand = GetTaskCommand(null, endTime, lastSyncTime, null, null)
 
         coEvery {
             taskOutputPort.findByPublishedAt(
@@ -253,7 +258,8 @@ internal class GetTaskServiceTest {
             revisionId,
             taskId,
             properties,
-            TaskStatus.DRAFT
+            TaskStatus.DRAFT,
+            TaskType.SURVEY
         )
 
         coEvery {

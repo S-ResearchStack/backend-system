@@ -4,6 +4,7 @@ create TABLE "tasks"
     "id"           VARCHAR(320) NOT NULL,
     "properties"   JSONB        NOT NULL,
     "status"       VARCHAR(20)  NOT NULL,
+    "type"         VARCHAR(20)  NOT NULL,
     "created_at"   timestamptz  NOT NULL,
     "published_at" timestamptz,
     "outdated_at"  timestamptz,

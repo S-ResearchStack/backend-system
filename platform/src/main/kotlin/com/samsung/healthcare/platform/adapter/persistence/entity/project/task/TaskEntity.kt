@@ -14,6 +14,7 @@ data class TaskEntity(
     val id: String,
     var properties: Map<String, Any>,
     var status: String,
+    val type: String,
     @CreatedDate
     var createdAt: LocalDateTime?,
     var publishedAt: LocalDateTime?,

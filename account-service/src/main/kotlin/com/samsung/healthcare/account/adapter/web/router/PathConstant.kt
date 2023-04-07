@@ -4,6 +4,8 @@ const val SERVICE_PATH = "/account-service"
 
 const val INVITATION_PATH = "$SERVICE_PATH/invitations"
 
+const val FORGOT_PASSWORD_PATH = "$SERVICE_PATH/user/password/forgot"
+
 const val RESET_PASSWORD_PATH = "$SERVICE_PATH/user/password/reset"
 
 const val SIGN_IN_PATH = "$SERVICE_PATH/signin"

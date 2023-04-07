@@ -1,6 +1,7 @@
 package com.samsung.healthcare.platform.domain.project.task
 
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -21,6 +22,7 @@ data class Task(
     val id: String,
     val properties: Map<String, Any>,
     val status: TaskStatus,
+    val type: TaskType,
     val createdAt: LocalDateTime? = null,
     var publishedAt: LocalDateTime? = null,
     val outdatedAt: LocalDateTime? = null,
@@ -28,12 +30,13 @@ data class Task(
 ) {
     companion object {
         const val TASK_ID_LENGTH = 320
-        fun newTask(): Task =
+        fun newTask(type: TaskType): Task =
             Task(
                 null,
                 UUID.randomUUID().toString(),
                 emptyMap(),
-                TaskStatus.DRAFT
+                TaskStatus.DRAFT,
+                type
             )
     }
 
@@ -42,6 +45,7 @@ data class Task(
         ret["revisionId"] = this.revisionId?.value
         ret["id"] = this.id
         ret["status"] = this.status
+        ret["type"] = this.type
         ret["createdAt"] = this.createdAt
         ret["publishedAt"] = this.publishedAt
         ret["outdatedAt"] = this.outdatedAt

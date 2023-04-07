@@ -10,6 +10,7 @@ interface TaskOutputPort {
         startTime: LocalDateTime,
         endTime: LocalDateTime,
         status: String?,
+        type: String?
     ): Flow<Task>
 
     suspend fun findByPublishedAt(

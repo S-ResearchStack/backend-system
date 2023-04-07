@@ -7,6 +7,7 @@ import com.samsung.healthcare.platform.adapter.persistence.entity.project.task.t
 import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.TaskStatus.DRAFT
+import com.samsung.healthcare.platform.enums.TaskType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -22,7 +23,8 @@ internal class TaskMapperTest {
             "2b3b286c-4000-454c-bd8e-875b123aa73c",
             emptyMap(),
             DRAFT,
-            LocalDateTime.now()
+            TaskType.SURVEY,
+            LocalDateTime.now(),
         )
 
         val taskEntity = task.toEntity()
@@ -41,6 +43,7 @@ internal class TaskMapperTest {
             "2b3b286c-4000-454c-bd8e-875b123aa73c",
             emptyMap(),
             "DRAFT",
+            "SURVEY",
             LocalDateTime.now(),
             null,
             null,
@@ -63,6 +66,7 @@ internal class TaskMapperTest {
             "2b3b286c-4000-454c-bd8e-875b123aa73c",
             emptyMap(),
             "DRAFT",
+            "SURVEY",
             null,
             null,
             null,
@@ -79,6 +83,25 @@ internal class TaskMapperTest {
             1,
             "2b3b286c-4000-454c-bd8e-875b123aa73c",
             emptyMap(),
+            "invalid",
+            "SURVEY",
+            null,
+            null,
+            null,
+            null
+        )
+
+        assertThrows<IllegalArgumentException> { TaskMapper.INSTANCE.toDomain(taskEntity) }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `should throw IllegalArgumentException if type is invalid`() {
+        val taskEntity = TaskEntity(
+            1,
+            "2b3b286c-4000-454c-bd8e-875b123aa73c",
+            emptyMap(),
+            "DRAFT",
             "invalid",
             null,
             null,

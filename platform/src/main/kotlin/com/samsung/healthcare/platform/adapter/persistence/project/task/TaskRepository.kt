@@ -18,6 +18,19 @@ interface TaskRepository : CoroutineCrudRepository<TaskEntity, Int> {
         status: String,
     ): Flow<TaskEntity>
 
+    suspend fun findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndType(
+        startTime: LocalDateTime,
+        endTime: LocalDateTime,
+        type: String,
+    ): Flow<TaskEntity>
+
+    suspend fun findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndStatusAndType(
+        startTime: LocalDateTime,
+        endTime: LocalDateTime,
+        status: String,
+        type: String,
+    ): Flow<TaskEntity>
+
     suspend fun findByPublishedAtGreaterThanEqualAndPublishedAtLessThanAndStatusEquals(
         lastSyncTime: LocalDateTime,
         currentTime: LocalDateTime,

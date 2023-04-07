@@ -1,6 +1,8 @@
 package com.samsung.healthcare.platform.domain.project.healthdata
 
 import com.fasterxml.jackson.annotation.JsonValue
+import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataId
+import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType
 
 /**
  * HealthData is the base class for health data types collected
@@ -49,7 +51,11 @@ abstract class HealthData(
 
         SLEEP_STAGE("SleepStage", false, SleepStage::class.java),
 
-        STEPS("Steps", false, Steps::class.java);
+        STEPS("Steps", false, Steps::class.java),
+
+        WEIGHT("Weight", true, Weight::class.java),
+
+        OXYGEN_SATURATION("OxygenSaturation", true, OxygenSaturation::class.java);
 
         companion object {
             private val stringToType = values().associateBy(HealthDataType::type)

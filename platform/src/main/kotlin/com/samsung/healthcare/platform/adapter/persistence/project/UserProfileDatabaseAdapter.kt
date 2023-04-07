@@ -2,6 +2,7 @@ package com.samsung.healthcare.platform.adapter.persistence.project
 
 import com.samsung.healthcare.platform.adapter.persistence.entity.project.toEntity
 import com.samsung.healthcare.platform.application.exception.ForbiddenException
+import com.samsung.healthcare.platform.application.exception.NotFoundException
 import com.samsung.healthcare.platform.application.exception.UserAlreadyExistsException
 import com.samsung.healthcare.platform.application.port.output.project.UserProfileOutputPort
 import com.samsung.healthcare.platform.domain.project.UserProfile
@@ -11,7 +12,7 @@ import java.time.LocalDateTime
 
 @Component
 class UserProfileDatabaseAdapter(
-    private val repository: UserProfileRepository
+    private val repository: UserProfileRepository,
 ) : UserProfileOutputPort {
     override suspend fun create(userProfile: UserProfile) {
         try {
@@ -19,6 +20,12 @@ class UserProfileDatabaseAdapter(
         } catch (_: DataIntegrityViolationException) {
             throw UserAlreadyExistsException()
         }
+    }
+
+    override suspend fun update(userProfile: UserProfile) {
+        (repository.findById(userProfile.userId.value) ?: throw NotFoundException("The requested user does not exist."))
+            .copy(profile = userProfile.profile)
+            .let { repository.save(it) }
     }
 
     override suspend fun updateLastSyncedAt(userId: UserProfile.UserId) {

@@ -9,6 +9,7 @@ import com.samsung.healthcare.platform.application.port.output.project.task.Item
 import com.samsung.healthcare.platform.application.port.output.project.task.TaskOutputPort
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
@@ -38,7 +39,10 @@ class GetTaskService(
         command: GetTaskCommand
     ): Flow<Map<String, Any?>> {
         if (command.status != null && !TaskStatus.values().any { it.name == command.status })
-            throw BadRequestException("Invalid TaskStatus type: ${command.status}")
+            throw BadRequestException("Invalid TaskStatus value: ${command.status}")
+
+        if (command.type != null && !TaskType.values().any { it.name == command.type })
+            throw BadRequestException("Invalid TaskType value: ${command.type}")
 
         return Authorizer.getAccount(AccessProjectAuthority(projectId))
             .flatMap {
@@ -63,7 +67,7 @@ class GetTaskService(
     }
 
     /**
-     * Returns all tasks with relevant [createdAt][Task.createdAt] and [TaskStatus] values specified by [GetTaskCommand].
+     * Returns all tasks with relevant [createdAt][Task.createdAt], [TaskStatus] and [TaskType] values specified by [GetTaskCommand].
      *
      * If no startTime and endTime values are provided, they respectively default to provided values to limit the search range.
      *
@@ -75,6 +79,7 @@ class GetTaskService(
             command.startTime ?: LocalDateTime.parse("1900-01-01T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             command.endTime ?: LocalDateTime.parse("9999-12-31T23:59", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             command.status,
+            command.type
         )
     )
 

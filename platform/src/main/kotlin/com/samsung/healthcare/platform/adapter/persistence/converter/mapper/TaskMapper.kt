@@ -4,6 +4,7 @@ import com.samsung.healthcare.platform.adapter.persistence.entity.project.task.T
 import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
@@ -20,7 +21,8 @@ abstract class TaskMapper {
 
     @Mappings(
         Mapping(target = "revisionId", source = "."),
-        Mapping(target = "status", source = ".")
+        Mapping(target = "status", source = "."),
+        Mapping(target = "type", source = ".")
     )
     abstract fun toDomain(taskEntity: TaskEntity): Task
 
@@ -29,4 +31,7 @@ abstract class TaskMapper {
 
     fun mapStatus(value: TaskEntity): TaskStatus =
         TaskStatus.valueOf(value.status)
+
+    fun mapType(value: TaskEntity): TaskType =
+        TaskType.valueOf(value.type)
 }

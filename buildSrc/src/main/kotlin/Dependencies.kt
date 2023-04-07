@@ -27,6 +27,9 @@ object Versions {
     const val MAPSTRUCT = "1.5.2.Final"
     const val NETFLIX_GRAPHQL_DGS = "5.5.1"
     const val CRON_EXPRESSION = "2.3.2"
+    const val ANTLR = "4.11.1"
+    const val LIBRARIES_BOM = "26.10.0"
+    const val GOOGLE_CLOUD_STORAGE = "2.20.1"
 
     const val KOTLIN_REACTOR_EXTENSION = "1.1.5"
     const val KOTLIN_REFLECT = "1.6.10"
@@ -82,6 +85,9 @@ object Libs {
     const val SPRING_MOCKK = "com.ninja-squad:springmockk:${Versions.SPRING_MOCKK}"
     const val KOTLIN_LOGGING = "io.github.microutils:kotlin-logging-jvm:${Versions.KOTLIN_LOGGING}"
     const val LOGBACK = "ch.qos.logback:logback-classic:${Versions.LOGBACK}"
+    const val ANTLR = "org.antlr:antlr4:${Versions.ANTLR}"
+    const val LIBRARIES_BOM = "com.google.cloud:libraries-bom:${Versions.LIBRARIES_BOM}"
+    const val GOOGLE_CLOUD_STORAGE = "com.google.cloud:google-cloud-storage:${Versions.GOOGLE_CLOUD_STORAGE}"
 
     const val FEIGN_REACTOR_WEBCLIENT =
         "com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:${Versions.FEIGN_REACTOR}"

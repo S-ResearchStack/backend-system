@@ -20,7 +20,6 @@ data class ItemResult(
     val result: String,
 ) {
     companion object {
-        const val ITEM_RESULT_LENGTH = 320
         fun newItemResult(
             taskResult: TaskResult,
             itemName: String,

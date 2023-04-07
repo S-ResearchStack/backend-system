@@ -248,6 +248,59 @@ internal class SuperTokenAdapterTest {
 
     @Test
     @Tag(POSITIVE_TEST)
+    fun `generateResetToken with email should return reset token when supertoken returns ok`() {
+        val resetToken = "ZTRiOTBjNz...jI5MTZlODkxw"
+        wm.post {
+            url equalTo SUPER_TOKEN_GENERATE_RESET_TOKEN_PATH
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "token": "$resetToken"
+}"""
+        }
+
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?email=${URLEncoder.encode(email.value, "utf-8")}"
+        } returnsJson {
+            body =
+                """{
+  "status": "OK",
+  "user": {
+    "email": "$email",
+    "id": "$id",
+    "timeJoined": 1659407200104
+    }
+}
+"""
+        }
+
+        StepVerifier.create(
+            superTokenAdapter.generateResetToken(email)
+        ).expectNext(resetToken)
+            .verifyComplete()
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `generateResetToken with email throws UnknownEmailException`() {
+        wm.get {
+            url equalTo "$GET_ACCOUNT_PATH?email=${URLEncoder.encode(email.value, "utf-8")}"
+        } returnsJson {
+            body =
+                """{
+  "status": "UNKNOWN_EMAIL_ERROR"
+}
+"""
+        }
+
+        StepVerifier.create(
+            superTokenAdapter.generateResetToken(email)
+        ).verifyError<UnknownEmailException>()
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
     fun `resetPassword should not emit event when supertoken returns ok`() {
         wm.post {
             url equalTo SUPER_TOKEN_RESET_PASSWORD_PATH

@@ -2,7 +2,6 @@ package com.samsung.healthcare.platform.application.port.input.project.task
 
 import com.samsung.healthcare.platform.domain.project.UserProfile.Companion.USER_PROFILE_LENGTH
 import com.samsung.healthcare.platform.domain.project.task.Item.Companion.ITEM_NAME_LENGTH
-import com.samsung.healthcare.platform.domain.project.task.ItemResult.Companion.ITEM_RESULT_LENGTH
 import com.samsung.healthcare.platform.domain.project.task.Task.Companion.TASK_ID_LENGTH
 import java.time.LocalDateTime
 
@@ -25,7 +24,6 @@ data class UploadTaskResultCommand(
     ) {
         init {
             require(itemName.length < ITEM_NAME_LENGTH)
-            require(result.length < ITEM_RESULT_LENGTH)
         }
     }
 }

@@ -5,6 +5,6 @@ create TABLE "item_results"
     "task_id"       VARCHAR(320)    NOT NULL,
     "user_id"       VARCHAR(320)    NOT NULL,
     "item_name"     VARCHAR(320)    NOT NULL,
-    "result"        VARCHAR(320)    NOT NULL,
+    "result"        TEXT            NOT NULL,
     PRIMARY KEY ("id")
 );

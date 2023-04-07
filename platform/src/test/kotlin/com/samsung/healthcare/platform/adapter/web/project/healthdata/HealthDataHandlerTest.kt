@@ -20,6 +20,7 @@ import com.samsung.healthcare.platform.application.port.input.project.healthdata
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData
 import io.mockk.coEvery
 import io.mockk.coJustRun
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -34,6 +35,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
+import java.time.Instant
 
 @WebFluxTest
 @Import(
@@ -182,5 +184,37 @@ internal class HealthDataHandlerTest {
             .returnResult()
 
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `should return accepted when health data type is spo2 and data is valid`() {
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance().verifyIdToken(any()) } returns mockk(relaxed = true)
+        val saveHealthDataCommand = SaveHealthDataCommand(
+            HealthData.HealthDataType.OXYGEN_SATURATION,
+            listOf(
+                mapOf(
+                    "time" to Instant.now().toString(),
+                    "value" to 77
+                )
+            )
+        )
+        coJustRun { updateUserProfileLastSyncedTimeUseCase.updateLastSyncedTime(any()) }
+        coJustRun { saveHealthDataUseCase.saveHealthData(any(), any()) }
+
+        val result = webTestClient.post()
+            .uri("/api/projects/$projectId/health-data")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("id-token", "testToken")
+            .body(BodyInserters.fromValue(saveHealthDataCommand))
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.ACCEPTED)
+        coVerify(exactly = 1) {
+            saveHealthDataUseCase.saveHealthData(any(), saveHealthDataCommand)
+        }
     }
 }

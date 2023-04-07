@@ -23,6 +23,7 @@ import com.samsung.healthcare.platform.application.exception.BadRequestException
 import com.samsung.healthcare.platform.application.exception.GlobalErrorAttributes
 import com.samsung.healthcare.platform.application.port.input.GetProjectQuery
 import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
+import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskCommand
 import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskResponse
 import com.samsung.healthcare.platform.application.port.input.project.task.CreateTaskUseCase
 import com.samsung.healthcare.platform.application.port.input.project.task.GetTaskCommand
@@ -32,6 +33,7 @@ import com.samsung.healthcare.platform.application.port.input.project.task.Updat
 import com.samsung.healthcare.platform.domain.Project
 import com.samsung.healthcare.platform.domain.project.UserProfile
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.every
@@ -156,7 +158,8 @@ internal class TaskHandlerTest {
             null,
             testLocalDateTime,
             null,
-            "DRAFT"
+            "DRAFT",
+            "SURVEY"
         )
         val testMap1 = mapOf("test1" to "shouldBeTask")
         val testMap2 = mapOf("test2" to "shouldAlsoBeTask")
@@ -165,7 +168,7 @@ internal class TaskHandlerTest {
         } returns flowOf(testMap1, testMap2)
 
         val result = webTestClient.get()
-            .uri("/api/projects/1/tasks?end_time=2022-10-21T00:00&status=DRAFT")
+            .uri("/api/projects/1/tasks?end_time=2022-10-21T00:00&status=DRAFT&type=SURVEY")
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwt")
             .exchange()
             .expectBodyList(Map::class.java)
@@ -218,11 +221,13 @@ internal class TaskHandlerTest {
         every { getAccountUseCase.getAccountFromToken(jwt) } returns Mono.just(account)
 
         val createTaskResponse = CreateTaskResponse(1, "testCreate")
-        coEvery { createTaskUseCase.createTask(projectId.toString()) } returns createTaskResponse
+        val createTaskCommand = CreateTaskCommand(TaskType.SURVEY)
+        coEvery { createTaskUseCase.createTask(projectId.toString(), createTaskCommand) } returns createTaskResponse
 
         val result = webTestClient.post()
             .uri("/api/projects/$projectId/tasks")
             .header(HttpHeaders.AUTHORIZATION, "Bearer $jwt")
+            .bodyValue(createTaskCommand)
             .exchange()
             .expectBody(CreateTaskResponse::class.java)
             .returnResult()
@@ -237,7 +242,12 @@ internal class TaskHandlerTest {
         mockkObject(Authorizer)
         every { getAccountUseCase.getAccountFromToken(jwt) } returns Mono.just(account)
 
-        val updateTaskCommand = UpdateTaskCommand(title = "testUpdate", status = TaskStatus.DRAFT, items = emptyList())
+        val updateTaskCommand = UpdateTaskCommand(
+            title = "testUpdate",
+            status = TaskStatus.DRAFT,
+            type = TaskType.SURVEY,
+            items = emptyList()
+        )
         coJustRun {
             updateTaskUseCase.updateTask(projectId.toString(), "test", match { it.value == 1 }, updateTaskCommand)
         }

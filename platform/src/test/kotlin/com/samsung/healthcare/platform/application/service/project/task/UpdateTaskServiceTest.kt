@@ -17,6 +17,7 @@ import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.ItemType
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import io.mockk.coEvery
 import io.mockk.coJustRun
 import io.mockk.coVerify
@@ -62,7 +63,12 @@ internal class UpdateTaskServiceTest {
                 wrongProjectId.toString(),
                 "test-task",
                 RevisionId.from(1),
-                UpdateTaskCommand(title = "title", status = TaskStatus.DRAFT, items = emptyList()),
+                UpdateTaskCommand(
+                    title = "title",
+                    status = TaskStatus.DRAFT,
+                    type = TaskType.SURVEY,
+                    items = emptyList()
+                ),
             )
         }
     }
@@ -79,13 +85,15 @@ internal class UpdateTaskServiceTest {
             title = "not yet published",
             description = "updating without publishing",
             status = TaskStatus.DRAFT,
+            type = TaskType.SURVEY,
             items = emptyList()
         )
         val task = Task(
             revisionId,
             taskId,
             updateTaskCommand.properties,
-            updateTaskCommand.status
+            updateTaskCommand.status,
+            updateTaskCommand.type
         )
 
         coEvery { taskOutputPort.findByIdAndRevisionId(taskId, revisionId) } returns task
@@ -128,6 +136,7 @@ internal class UpdateTaskServiceTest {
             startTime = LocalDateTime.parse("2022-01-20T10:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             validTime = 12,
             status = TaskStatus.PUBLISHED,
+            type = TaskType.SURVEY,
             items = listOf(
                 UpdateTaskCommand.UpdateItemCommand(contentsSample, ItemType.QUESTION, 0),
                 UpdateTaskCommand.UpdateItemCommand(contentsSample, ItemType.QUESTION, 1)
@@ -142,6 +151,7 @@ internal class UpdateTaskServiceTest {
             taskId,
             updateTaskCommand.properties,
             TaskStatus.DRAFT,
+            TaskType.SURVEY
         )
 
         val task = Task(
@@ -149,6 +159,7 @@ internal class UpdateTaskServiceTest {
             taskId,
             updateTaskCommand.properties,
             updateTaskCommand.status,
+            updateTaskCommand.type,
             publishedAt = testLocalDateTime
         )
 

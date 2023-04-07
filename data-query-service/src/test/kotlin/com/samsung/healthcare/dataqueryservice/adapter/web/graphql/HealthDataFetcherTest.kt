@@ -36,6 +36,7 @@ import org.springframework.http.HttpHeaders
 internal class HealthDataFetcherTest {
     @MockkBean
     lateinit var healthDataQuery: HealthDataQuery
+
     @MockkBean
     lateinit var userDataQuery: UserDataQuery
 

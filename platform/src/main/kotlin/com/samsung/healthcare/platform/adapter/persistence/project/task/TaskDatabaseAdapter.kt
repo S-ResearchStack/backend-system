@@ -17,12 +17,24 @@ class TaskDatabaseAdapter(
         startTime: LocalDateTime,
         endTime: LocalDateTime,
         status: String?,
+        type: String?,
     ): Flow<Task> {
-        return if (status == null) {
-            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqual(startTime, endTime)
+        return if (status != null && type != null) {
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndStatusAndType(
+                startTime,
+                endTime,
+                status,
+                type
+            )
+                .map { it.toDomain() }
+        } else if (status != null) {
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndStatus(startTime, endTime, status)
+                .map { it.toDomain() }
+        } else if (type != null) {
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndType(startTime, endTime, type)
                 .map { it.toDomain() }
         } else {
-            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndStatus(startTime, endTime, status)
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqual(startTime, endTime)
                 .map { it.toDomain() }
         }
     }
@@ -46,6 +58,7 @@ class TaskDatabaseAdapter(
         return taskRepository.findById(task.revisionId.value)?.copy(
             properties = task.properties,
             status = task.status.name,
+            type = task.type.name,
             publishedAt = task.publishedAt
         ).let {
             requireNotNull(it)

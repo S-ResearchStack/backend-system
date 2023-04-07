@@ -11,6 +11,8 @@ interface AuthServicePort {
 
     fun generateResetToken(accountId: String): Mono<String>
 
+    fun generateResetToken(email: Email): Mono<String>
+
     fun resetPassword(resetToken: String, newPassword: String): Mono<String>
 
     fun assignRoles(accountId: String, roles: Collection<Role>): Mono<Void>
@@ -29,6 +31,7 @@ interface AuthServicePort {
 
     // TODO handle pagination
     fun listUsers(): Mono<List<Account>>
+
     fun retrieveUsersAssociatedWithRoles(projectRoles: List<ProjectRole>): Mono<List<Account>>
 
     fun updateAccountProfile(accountId: String, profile: Map<String, Any>): Mono<Map<String, Any>>

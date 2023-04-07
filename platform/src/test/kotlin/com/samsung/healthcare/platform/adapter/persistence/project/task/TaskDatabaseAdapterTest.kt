@@ -6,6 +6,7 @@ import com.samsung.healthcare.platform.adapter.persistence.entity.project.task.T
 import com.samsung.healthcare.platform.domain.project.task.RevisionId
 import com.samsung.healthcare.platform.domain.project.task.Task
 import com.samsung.healthcare.platform.enums.TaskStatus
+import com.samsung.healthcare.platform.enums.TaskType
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -29,6 +30,7 @@ internal class TaskDatabaseAdapterTest {
         id = "random-uuid",
         properties = emptyMap(),
         status = TaskStatus.PUBLISHED,
+        type = TaskType.SURVEY
     )
 
     private val taskEntity = TaskEntity(
@@ -36,6 +38,7 @@ internal class TaskDatabaseAdapterTest {
         id = "random-uuid",
         properties = emptyMap(),
         status = "PUBLISHED",
+        type = "SURVEY",
         createdAt = null,
         publishedAt = null,
         outdatedAt = null,
@@ -47,6 +50,7 @@ internal class TaskDatabaseAdapterTest {
         id = "random-uuid",
         properties = emptyMap(),
         status = "published",
+        type = "survey",
         createdAt = null,
         publishedAt = null,
         outdatedAt = null,
@@ -58,6 +62,7 @@ internal class TaskDatabaseAdapterTest {
         id = "random-uuid",
         properties = emptyMap(),
         status = TaskStatus.COMPLETED,
+        type = TaskType.SURVEY
     )
 
     private val updatedTaskEntity = TaskEntity(
@@ -65,6 +70,7 @@ internal class TaskDatabaseAdapterTest {
         id = "random-uuid",
         properties = emptyMap(),
         status = "COMPLETED",
+        type = "SURVEY",
         createdAt = null,
         publishedAt = null,
         outdatedAt = null,
@@ -86,7 +92,7 @@ internal class TaskDatabaseAdapterTest {
         val startTime = LocalDateTime.now()
         val endTime = LocalDateTime.now()
 
-        assertEquals(1, taskDatabaseAdapter.findByPeriod(startTime, endTime, "PUBLISHED").toList().size)
+        assertEquals(1, taskDatabaseAdapter.findByPeriod(startTime, endTime, "PUBLISHED", null).toList().size)
     }
 
     @Test
@@ -103,7 +109,9 @@ internal class TaskDatabaseAdapterTest {
         val startTime = LocalDateTime.now()
         val endTime = LocalDateTime.now()
 
-        assertThrows<IllegalArgumentException> { taskDatabaseAdapter.findByPeriod(startTime, endTime, null).toList() }
+        assertThrows<IllegalArgumentException> {
+            taskDatabaseAdapter.findByPeriod(startTime, endTime, null, null).toList()
+        }
     }
 
     @Test
@@ -122,7 +130,27 @@ internal class TaskDatabaseAdapterTest {
         val endTime = LocalDateTime.now()
 
         assertThrows<IllegalArgumentException> {
-            taskDatabaseAdapter.findByPeriod(startTime, endTime, "published").toList()
+            taskDatabaseAdapter.findByPeriod(startTime, endTime, "published", null).toList()
+        }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `findByPeriod with type should throw Exception if repository has invalid type`() = runTest {
+
+        coEvery {
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndType(
+                any(),
+                any(),
+                any()
+            )
+        } returns flowOf(invalidTaskEntity)
+
+        val startTime = LocalDateTime.now()
+        val endTime = LocalDateTime.now()
+
+        assertThrows<IllegalArgumentException> {
+            taskDatabaseAdapter.findByPeriod(startTime, endTime, null, "survey").toList()
         }
     }
 
@@ -212,6 +240,7 @@ internal class TaskDatabaseAdapterTest {
                     id = "random-uuid",
                     properties = emptyMap(),
                     status = TaskStatus.COMPLETED,
+                    type = TaskType.SURVEY
                 )
             )
         }

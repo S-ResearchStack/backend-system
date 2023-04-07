@@ -11,6 +11,7 @@ tasks.named("jar") {
 
 dependencies {
     implementation(project(":account-role"))
+    implementation(project(":branch-logic-engine"))
     implementation(Libs.SPRING_BOOT_STARTER_WEBFLUX)
     implementation(Libs.SPRING_BOOT_STARTER_SECURITY)
     implementation(Libs.SPRING_BOOT_STARTER_OAUTH2_CLIENT)

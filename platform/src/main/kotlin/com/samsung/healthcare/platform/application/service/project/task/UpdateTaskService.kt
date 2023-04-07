@@ -45,9 +45,16 @@ class UpdateTaskService(
             .flatMap {
                 mono {
                     val task: Task = if (command.status == TaskStatus.PUBLISHED)
-                        Task(revisionId, taskId, command.properties, command.status, publishedAt = LocalDateTime.now())
+                        Task(
+                            revisionId,
+                            taskId,
+                            command.properties,
+                            command.status,
+                            command.type,
+                            publishedAt = LocalDateTime.now()
+                        )
                     else
-                        Task(revisionId, taskId, command.properties, command.status)
+                        Task(revisionId, taskId, command.properties, command.status, command.type)
 
                     if (taskOutputPort.findByIdAndRevisionId(taskId, revisionId) == null)
                         throw NotFoundException("Not Found")

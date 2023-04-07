@@ -12,15 +12,16 @@ import org.springframework.web.reactive.function.server.coRouter
 
 @Configuration
 class UserProfileRouter(
-    private val handler: UserProfileHandler
+    private val handler: UserProfileHandler,
 ) {
     @Bean("routeUserProfile")
     fun router(
         idTokenFilterFunction: IdTokenFilterFunction,
-        tenantHandlerFilterFunction: TenantHandlerFilterFunction
+        tenantHandlerFilterFunction: TenantHandlerFilterFunction,
     ): RouterFunction<ServerResponse> = coRouter {
         "/api/projects/{projectId}/users".nest {
             POST(Strings.EMPTY, contentType(MediaType.APPLICATION_JSON), handler::registerUser)
+            PATCH("{userId}", contentType(MediaType.APPLICATION_JSON), handler::updateUser)
         }
     }
         .filter(idTokenFilterFunction)
