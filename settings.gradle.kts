@@ -1,5 +1,6 @@
 rootProject.name = "healthcare_research_platform"
 include("platform")
+include("cloud-storage-service")
 include("data-query-service")
 include("account-role")
 include("account-service")

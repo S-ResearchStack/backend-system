@@ -1,6 +1,7 @@
 package com.samsung.healthcare.platform.application.port.input.project.task
 
 import com.samsung.healthcare.branchlogicengine.validateExpression
+import com.samsung.healthcare.platform.application.exception.BranchLogicSyntaxErrorException
 import com.samsung.healthcare.platform.enums.ActivityType
 import com.samsung.healthcare.platform.enums.ItemType
 import com.samsung.healthcare.platform.enums.TaskStatus
@@ -33,11 +34,20 @@ data class UpdateTaskCommand(
             requireNotNull(validTime)
             if (endTime == null)
                 endTime = startTime.plusMonths(DEFAULT_END_TIME_MONTH)
+            require(items.isNotEmpty())
         }
-        when (this.type) {
-            TaskType.SURVEY -> require(items.all { it.type == ItemType.QUESTION || it.type == ItemType.SECTION })
-            TaskType.ACTIVITY -> require(items.all { it.type == ItemType.ACTIVITY })
-        }
+        if (this.type == TaskType.SURVEY) {
+            require(items.all { it.type == ItemType.QUESTION || it.type == ItemType.SECTION })
+
+            if (items.any { it.type == ItemType.SECTION }) {
+                require(items.first().type == ItemType.SECTION)
+                require(items.last().type == ItemType.QUESTION)
+
+                require(
+                    items.windowed(2).all { it[0].type == ItemType.QUESTION || it[1].type == ItemType.QUESTION }
+                )
+            }
+        } else require(items.all { it.type == ItemType.ACTIVITY })
     }
 
     data class UpdateItemCommand(
@@ -65,11 +75,15 @@ data class UpdateTaskCommand(
                             require(contents["title"] is String)
                             validateContentOptionalField(contents)
                             val props = contents["properties"] as Map<*, *>
-                            require(listOf("RADIO", "CHECKBOX", "DROPDOWN").contains(props["tag"]))
+                            require(listOf("RADIO", "CHECKBOX", "DROPDOWN", "IMAGE").contains(props["tag"]))
                             val options = props["options"] as List<Map<String, Any>>
-                            options.forEach {
-                                require(it["value"] is String)
+                            val optionKeys = options.distinctBy { it.keys }.single().keys
+                            if (props["tag"] == "IMAGE") {
+                                require(listOf(setOf("value"), setOf("value", "label")).contains(optionKeys))
+                            } else {
+                                require(optionKeys == setOf("value"))
                             }
+                            require(options.flatMap { it.values }.all { it is String })
                             if (props.containsKey("skip_logic")) {
                                 val skipLogics = props["skip_logic"] as List<Map<String, Any>>
                                 skipLogics.forEach {
@@ -77,7 +91,38 @@ data class UpdateTaskCommand(
                                 }
                             }
                         }
-
+                        "TEXT" -> {
+                            require(contents["title"] is String)
+                            validateContentOptionalField(contents)
+                            val props = contents["properties"] as Map<*, *>
+                            require(props["tag"] == "TEXT")
+                        }
+                        "RANK" -> {
+                            require(contents["title"] is String)
+                            validateContentOptionalField(contents)
+                            val props = contents["properties"] as Map<*, *>
+                            require(props["tag"] == "RANK")
+                            val options = props["options"] as List<Map<String, Any>>
+                            options.forEach {
+                                require(it["value"] is String)
+                            }
+                        }
+                        "SCALE" -> {
+                            require(contents["title"] is String)
+                            validateContentOptionalField(contents)
+                            val props = contents["properties"] as Map<*, *>
+                            require(props["tag"] == "SLIDER")
+                            require(props["low"] is Int && props["high"] is Int)
+                            if (props.containsKey("lowLabel")) require(props["lowLabel"] is String)
+                            if (props.containsKey("highLabel")) require(props["highLabel"] is String)
+                        }
+                        "DATETIME" -> {
+                            require(contents["title"] is String)
+                            validateContentOptionalField(contents)
+                            val props = contents["properties"] as Map<*, *>
+                            require(props["tag"] == "DATETIME")
+                            validateDateTimeOptionalProperties(props)
+                        }
                         else -> require(false)
                     }
                 }
@@ -98,7 +143,15 @@ data class UpdateTaskCommand(
         private fun validateSkipLogic(option: Map<String, Any>) {
             require(option.containsKey("condition"))
             require(option["condition"] is String)
-            require(validateExpression(option["condition"] as String).isEmpty())
+
+            val expressionErrors = validateExpression(option["condition"] as String)
+            if (expressionErrors.isNotEmpty()) {
+                throw BranchLogicSyntaxErrorException(
+                    option["condition"] as String,
+                    expressionErrors.first().message ?: ""
+                )
+            }
+
             require(option.containsKey("goToItemSequence"))
             require(option["goToItemSequence"] is Int)
         }
@@ -107,6 +160,23 @@ data class UpdateTaskCommand(
             if (contents.containsKey("required")) require(contents["required"] is Boolean)
             if (contents.containsKey("explanation")) require(contents["explanation"] is String)
             if (contents.containsKey("completionDescription")) require(contents["completionDescription"] is String)
+        }
+
+        private fun validateDateTimeOptionalProperties(properties: Map<*, *>) {
+            val isTime: Boolean = if (properties.containsKey("isTime")) {
+                require(properties["isTime"] is Boolean)
+                properties["isTime"] as Boolean
+            } else {
+                true
+            }
+            val isDate: Boolean = if (properties.containsKey("isDate")) {
+                require(properties["isDate"] is Boolean)
+                properties["isDate"] as Boolean
+            } else {
+                true
+            }
+            if (properties.containsKey("isRange")) require(properties["isRange"] is Boolean)
+            require(isTime || isDate)
         }
     }
 

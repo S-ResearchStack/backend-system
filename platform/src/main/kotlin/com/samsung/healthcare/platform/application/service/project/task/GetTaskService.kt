@@ -1,6 +1,6 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.AccessTaskAuthority
 import com.samsung.healthcare.platform.application.authorize.Authorizer
 import com.samsung.healthcare.platform.application.exception.BadRequestException
 import com.samsung.healthcare.platform.application.port.input.project.task.GetTaskCommand
@@ -44,7 +44,7 @@ class GetTaskService(
         if (command.type != null && !TaskType.values().any { it.name == command.type })
             throw BadRequestException("Invalid TaskType value: ${command.type}")
 
-        return Authorizer.getAccount(AccessProjectAuthority(projectId))
+        return Authorizer.getAccount(AccessTaskAuthority(projectId))
             .flatMap {
                 mono {
                     byCreatedAt(command)
@@ -121,7 +121,7 @@ class GetTaskService(
      * @return A parsed Flow of the task with the given id.
      */
     override suspend fun findById(projectId: String, taskId: String): Flow<Map<String, Any?>> {
-        return Authorizer.getAccount(AccessProjectAuthority(projectId))
+        return Authorizer.getAccount(AccessTaskAuthority(projectId))
             .flatMap {
                 mono {
                     taskOutputPort.findById(taskId)

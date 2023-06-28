@@ -1,7 +1,7 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
 import com.samsung.healthcare.account.application.context.ContextHolder
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.AccessTaskAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
@@ -51,7 +51,7 @@ internal class GetTaskServiceTest {
     val account = Account(
         "account-id",
         Email("cubist@test.com"),
-        listOf(Role.ProjectRole.Researcher(projectId.value.toString()))
+        listOf(Role.ProjectRole.ResearchAssistant(projectId.value.toString()))
     )
 
     // Test Tasks
@@ -138,7 +138,7 @@ internal class GetTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `findByPeriodFromResearcher should work properly`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val endTime = LocalDateTime.parse("2022-02-24T00:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         val getTaskCommand = GetTaskCommand(null, endTime, null, "PUBLISHED", "SURVEY")
@@ -228,7 +228,7 @@ internal class GetTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `findById should return empty Flow if Task with id does not exist`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         coEvery {
             taskOutputPort.findById(any())
@@ -246,7 +246,7 @@ internal class GetTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `findById should return Task with matching id`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val taskId = "test-id"
         val revisionId = RevisionId.from(1)

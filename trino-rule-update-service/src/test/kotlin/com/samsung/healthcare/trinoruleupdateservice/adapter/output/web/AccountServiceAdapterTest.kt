@@ -12,6 +12,7 @@ import com.samsung.healthcare.trinoruleupdateservice.application.config.Applicat
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.AccountServiceConfig
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.DatabaseConfig
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.TrinoConfig
+import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.TrinoConfig.Catalogs
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.Tag
@@ -31,7 +32,10 @@ internal class AccountServiceAdapterTest {
             ApplicationProperties(
                 databaseConfig = DatabaseConfig("prefix", "postfix"),
                 accountService = AccountServiceConfig("http://localhost:${wm.port}"),
-                trino = TrinoConfig(AccessControlConfig("/etc/trino/access-control/rules.json"))
+                trino = TrinoConfig(
+                    Catalogs(Catalogs.Db("db1"), Catalogs.Db("db2")),
+                    AccessControlConfig("/etc/trino/access-control/rules.json"),
+                )
             )
         )
     }
@@ -50,7 +54,7 @@ internal class AccountServiceAdapterTest {
 {
   "email": "$email",
   "id": "$uuid",
-  "roles": ["1:researcher"],
+  "roles": ["1:research-assistant"],
   "profile": {}
 }
 ]"""

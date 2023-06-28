@@ -97,6 +97,27 @@ internal class TaskDatabaseAdapterTest {
 
     @Test
     @Tag(NEGATIVE_TEST)
+    fun `findByPeriod with status and type should throw Exception if repository has invalid status`() = runTest {
+
+        coEvery {
+            taskRepository.findByCreatedAtGreaterThanEqualAndCreatedAtLessThanEqualAndStatusAndType(
+                any(),
+                any(),
+                any(),
+                any(),
+            )
+        } returns flowOf(invalidTaskEntity)
+
+        val startTime = LocalDateTime.now()
+        val endTime = LocalDateTime.now()
+
+        assertThrows<IllegalArgumentException> {
+            taskDatabaseAdapter.findByPeriod(startTime, endTime, "PUBLISHED", "survey").toList()
+        }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
     fun `findByPeriod without status should throw Exception if repository has invalid status`() = runTest {
 
         coEvery {
@@ -197,6 +218,16 @@ internal class TaskDatabaseAdapterTest {
         } returns flowOf(taskEntity)
 
         assertEquals(1, taskDatabaseAdapter.findById("id").toList().size)
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `findByIdAndRevisionId should not emit event`() = runTest {
+        coEvery {
+            taskRepository.findByIdAndRevisionId(any(), any())
+        } returns null
+
+        assertEquals(null, taskDatabaseAdapter.findByIdAndRevisionId("id", RevisionId.from(1)))
     }
 
     @Test

@@ -12,8 +12,8 @@ import com.samsung.healthcare.account.NEGATIVE_TEST
 import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.account.domain.Role.TeamAdmin
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -258,8 +258,8 @@ internal class GetAccountServiceTest {
         @JvmStatic
         private fun providesRoles() =
             Stream.of(
-                Arguments.of(listOf(ProjectOwner("project-x"))),
-                Arguments.of(listOf(ProjectOwner("project-y"), Researcher("project-z"))),
+                Arguments.of(listOf(StudyCreator("project-x"))),
+                Arguments.of(listOf(StudyCreator("project-y"), ResearchAssistant("project-z"))),
                 Arguments.of(listOf(TeamAdmin)),
             )
     }

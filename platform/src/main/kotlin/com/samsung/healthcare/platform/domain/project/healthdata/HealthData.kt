@@ -55,7 +55,15 @@ abstract class HealthData(
 
         WEIGHT("Weight", true, Weight::class.java),
 
-        OXYGEN_SATURATION("OxygenSaturation", true, OxygenSaturation::class.java);
+        OXYGEN_SATURATION("OxygenSaturation", true, OxygenSaturation::class.java),
+
+        HEIGHT("Height", true, Height::class.java),
+
+        RESPIRATORY_RATE("RespiratoryRate", true, RespiratoryRate::class.java),
+
+        TOTAL_CALORIES_BURNED("TotalCaloriesBurned", false, TotalCaloriesBurned::class.java),
+
+        BLOOD_GLUCOSE("BloodGlucose", true, BloodGlucose::class.java);
 
         companion object {
             private val stringToType = values().associateBy(HealthDataType::type)

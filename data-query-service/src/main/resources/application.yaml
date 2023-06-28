@@ -1,7 +1,8 @@
 config:
   trino:
     url: jdbc:trino://${TRINO_HOST}:${TRINO_PORT}
-    catalog: ${TRINO_CATALOG}
+    original-catalog: ${TRINO_ORIGINAL_CATALOG}
+    de-identified-catalog: ${TRINO_DE_IDENTIFIED_CATALOG}
     user: ${TRINO_DEFAULT_USER}
   db:
     prefix: project_

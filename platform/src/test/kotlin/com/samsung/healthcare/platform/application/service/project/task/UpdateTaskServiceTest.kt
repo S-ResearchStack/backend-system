@@ -1,6 +1,6 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.AccessTaskAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
@@ -48,7 +48,7 @@ internal class UpdateTaskServiceTest {
     val account = Account(
         "account-id",
         Email("cubist@test.com"),
-        listOf(Role.ProjectRole.Researcher(projectId.value.toString()))
+        listOf(Role.ProjectRole.ResearchAssistant(projectId.value.toString()))
     )
 
     @Test
@@ -56,7 +56,7 @@ internal class UpdateTaskServiceTest {
     fun `should throw forbidden when account do not have project authority`() = runTest {
         mockkObject(Authorizer)
         val wrongProjectId = Project.ProjectId.from(2)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         assertThrows<ForbiddenException>("should throw an forbidden exception") {
             updateTaskService.updateTask(
@@ -77,7 +77,7 @@ internal class UpdateTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `should not update publishedAt`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val taskId = "test-task"
         val revisionId = RevisionId.from(1)
@@ -115,7 +115,7 @@ internal class UpdateTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `should default endTime to 3mo after startTime if no value provided`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val taskId = "test-task"
         val revisionId = RevisionId.from(1)

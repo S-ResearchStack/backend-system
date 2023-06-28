@@ -1,10 +1,10 @@
 package com.samsung.healthcare.account.domain
 
 import com.samsung.healthcare.account.domain.Role.ProjectRole
-import com.samsung.healthcare.account.domain.Role.ProjectRole.CustomRole
-import com.samsung.healthcare.account.domain.Role.ProjectRole.HeadResearcher
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.DataScientist
+import com.samsung.healthcare.account.domain.Role.ProjectRole.PrincipalInvestigator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.account.domain.Role.ServiceAccount
 import com.samsung.healthcare.account.domain.Role.TeamAdmin
 
@@ -27,11 +27,13 @@ object RoleFactory {
     }
 
     private fun createProjectRole(projectId: String, roleName: String): Role {
+        require(roleName.isNotBlank())
         return when (roleName) {
-            Role.HEAD_RESEARCHER -> HeadResearcher(projectId)
-            Role.RESEARCHER -> Researcher(projectId)
-            Role.PROJECT_OWNER -> ProjectOwner(projectId)
-            else -> CustomRole(projectId, roleName)
+            Role.PRINCIPAL_INVESTIGATOR -> PrincipalInvestigator(projectId)
+            Role.RESEARCH_ASSISTANT -> ResearchAssistant(projectId)
+            Role.STUDY_CREATOR -> StudyCreator(projectId)
+            Role.DATA_SCIENTIST -> DataScientist(projectId)
+            else -> throw IllegalArgumentException()
         }
     }
 }

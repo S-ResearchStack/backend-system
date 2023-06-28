@@ -23,6 +23,9 @@ class UserProfileRouter(
             POST(Strings.EMPTY, contentType(MediaType.APPLICATION_JSON), handler::registerUser)
             PATCH("{userId}", contentType(MediaType.APPLICATION_JSON), handler::updateUser)
         }
+        "/internal/api/projects/{projectId}/users/exists".nest {
+            GET(Strings.EMPTY, handler::exists)
+        }
     }
         .filter(idTokenFilterFunction)
         .filter(tenantHandlerFilterFunction)

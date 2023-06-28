@@ -49,6 +49,39 @@ internal const val GET_AVERAGE_HR_QUERY =
         WHERE date(hr.time) = date(up.last_synced_at)
     """
 
+internal const val AVERAGE_BG_COLUMN = "avg_bg_mmpl"
+
+// NOTES check where clause, is this right condition?
+internal const val GET_AVERAGE_BG_QUERY =
+    """
+        SELECT bg.user_id as $USER_ID_COLUMN, avg(bg.millimoles_per_liter) as $AVERAGE_BG_COLUMN
+        FROM blood_glucoses as bg
+        JOIN user_profiles up on bg.user_id = up.user_id
+        WHERE date(bg.time) = date(up.last_synced_at)
+    """
+
+internal const val AVERAGE_RR_COLUMN = "avg_rr_rpm"
+
+// NOTES check where clause, is this right condition?
+internal const val GET_AVERAGE_RR_QUERY =
+    """
+        SELECT rr.user_id as $USER_ID_COLUMN, avg(rr.rpm) as $AVERAGE_RR_COLUMN
+        FROM respiratory_rates as rr
+        JOIN user_profiles up on rr.user_id = up.user_id
+        WHERE date(rr.time) = date(up.last_synced_at)
+    """
+
+internal const val AVERAGE_SPO2_COLUMN = "avg_spo2"
+
+// NOTES check where clause, is this right condition?
+internal const val GET_AVERAGE_SPO2_QUERY =
+    """
+        SELECT spo2.user_id as $USER_ID_COLUMN, avg(spo2.value) as $AVERAGE_SPO2_COLUMN
+        FROM oxygen_saturations as spo2
+        JOIN user_profiles up on spo2.user_id = up.user_id
+        WHERE date(spo2.time) = date(up.last_synced_at)
+    """
+
 internal const val AVERAGE_BP_SYSTOLIC_COLUMN = "avg_systolic_mmhg"
 internal const val AVERAGE_BP_DIASTOLIC_COLUMN = "avg_diastolic_mmhg"
 
@@ -144,6 +177,30 @@ internal const val GET_LATEST_HEART_RATES_QUERY =
         WHERE date(hr.time) = date(up.last_synced_at)
     """
 
+internal const val GET_LATEST_BLOOD_GLUCOSES_QUERY =
+    """
+        SELECT up.user_id, millimoles_per_liter
+        FROM blood_glucoses as bg
+        JOIN user_profiles up on bg.user_id = up.user_id
+        WHERE date(bg.time) = date(up.last_synced_at)
+    """
+
+internal const val GET_LATEST_RESPIRATORY_RATES_QUERY =
+    """
+        SELECT up.user_id, rpm
+        FROM respiratory_rates as rr
+        JOIN user_profiles up on rr.user_id = up.user_id
+        WHERE date(rr.time) = date(up.last_synced_at)
+    """
+
+internal const val GET_LATEST_OXYGEN_SATURATIONS_QUERY =
+    """
+        SELECT up.user_id, value
+        FROM oxygen_saturations as spo2
+        JOIN user_profiles up on spo2.user_id = up.user_id
+        WHERE date(spo2.time) = date(up.last_synced_at)
+    """
+
 internal fun makeGetUserQuery(offset: Int, limit: Int, orderByColumn: ParticipantListColumn, orderBySort: Sort) =
     when (orderByColumn) {
         ParticipantListColumn.ID ->
@@ -169,6 +226,36 @@ internal fun makeGetUserQuery(offset: Int, limit: Int, orderByColumn: Participan
                 ORDER BY avg_hr_bpm $orderBySort, up.$USER_ID_COLUMN
                 OFFSET $offset LIMIT $limit
             """
+        ParticipantListColumn.AVG_BG ->
+            """
+                SELECT up.user_id as $USER_ID_COLUMN, avg(bg.millimoles_per_liter) as avg_bg_mmpl, up.profile as $PROFILE_COLUMN, up.last_synced_at as $LAST_SYNC_TIME_COLUMN
+                FROM user_profiles as up
+                LEFT JOIN ($GET_LATEST_BLOOD_GLUCOSES_QUERY) bg
+                ON up.user_id = bg.user_id
+                GROUP BY up.user_id, up.profile, up.last_synced_at
+                ORDER BY avg_bg_mmpl $orderBySort, up.$USER_ID_COLUMN
+                OFFSET $offset LIMIT $limit
+            """
+        ParticipantListColumn.AVG_RR ->
+            """
+                SELECT up.user_id as $USER_ID_COLUMN, avg(rr.rpm) as avg_rr_rpm, up.profile as $PROFILE_COLUMN, up.last_synced_at as $LAST_SYNC_TIME_COLUMN
+                FROM user_profiles as up
+                LEFT JOIN ($GET_LATEST_RESPIRATORY_RATES_QUERY) rr
+                ON up.user_id = rr.user_id
+                GROUP BY up.user_id, up.profile, up.last_synced_at
+                ORDER BY avg_rr_rpm $orderBySort, up.$USER_ID_COLUMN
+                OFFSET $offset LIMIT $limit
+            """
+        ParticipantListColumn.AVG_SPO2 ->
+            """
+                SELECT up.user_id as $USER_ID_COLUMN, avg(spo2.value) as avg_spo2, up.profile as $PROFILE_COLUMN, up.last_synced_at as $LAST_SYNC_TIME_COLUMN
+                FROM user_profiles as up
+                LEFT JOIN ($GET_LATEST_OXYGEN_SATURATIONS_QUERY) spo2
+                ON up.user_id = spo2.user_id
+                GROUP BY up.user_id, up.profile, up.last_synced_at
+                ORDER BY avg_spo2 $orderBySort, up.$USER_ID_COLUMN
+                OFFSET $offset LIMIT $limit
+            """
         ParticipantListColumn.TOTAL_STEPS ->
             """
                 SELECT up.user_id as $USER_ID_COLUMN, sum(steps.count) as total_steps, up.profile as $PROFILE_COLUMN, up.last_synced_at as $LAST_SYNC_TIME_COLUMN
@@ -192,6 +279,27 @@ internal fun makeAverageHRQuery(count: Int) =
         $GET_AVERAGE_HR_QUERY
         AND up.$USER_ID_COLUMN IN ${makeInConditionString(count)}
         GROUP BY hr.$USER_ID_COLUMN
+    """
+
+internal fun makeAverageBGQuery(count: Int) =
+    """
+        $GET_AVERAGE_BG_QUERY
+        AND up.$USER_ID_COLUMN IN ${makeInConditionString(count)}
+        GROUP BY bg.$USER_ID_COLUMN
+    """
+
+internal fun makeAverageRRQuery(count: Int) =
+    """
+        $GET_AVERAGE_RR_QUERY
+        AND up.$USER_ID_COLUMN IN ${makeInConditionString(count)}
+        GROUP BY rr.$USER_ID_COLUMN
+    """
+
+internal fun makeAverageSPO2Query(count: Int) =
+    """
+        $GET_AVERAGE_SPO2_QUERY
+        AND up.$USER_ID_COLUMN IN ${makeInConditionString(count)}
+        GROUP BY spo2.$USER_ID_COLUMN
     """
 
 internal fun makeAverageBPQuery(count: Int) =

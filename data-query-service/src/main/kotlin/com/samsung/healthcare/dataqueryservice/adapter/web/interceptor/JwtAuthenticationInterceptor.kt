@@ -3,6 +3,7 @@ package com.samsung.healthcare.dataqueryservice.adapter.web.interceptor
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
+import com.samsung.healthcare.account.domain.Role.ProjectRole.Companion.SEPARATOR
 import com.samsung.healthcare.account.domain.RoleFactory
 import com.samsung.healthcare.dataqueryservice.application.context.AuthContext
 import com.samsung.healthcare.dataqueryservice.application.exception.UnauthorizedException
@@ -20,12 +21,21 @@ class JwtAuthenticationInterceptor(
     private val bearerPrefix = "Bearer "
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
         val bearerString = request.getHeader(HttpHeaders.AUTHORIZATION) ?: throw UnauthorizedException()
+        val account = getAccountFromToken(bearerString.substring(bearerPrefix.length))
         if (!bearerString.startsWith(bearerPrefix)) throw UnauthorizedException()
 
-        AuthContext.setValue(
-            AuthContext.ACCOUNT_ID_KEY_NAME,
-            getAccountFromToken(bearerString.substring(bearerPrefix.length)).id
-        )
+        AuthContext.setValue(AuthContext.ACCOUNT_ID_KEY_NAME, account.id)
+        account.roles.filter {
+            role ->
+            role.roleName.count { it == SEPARATOR } == 1
+        }.onEach {
+            role ->
+            role.roleName.split(SEPARATOR).also {
+                val projectId = it[0]
+                val roleName = it[1]
+                AuthContext.setValue("project:$projectId", roleName)
+            }
+        }
         return true
     }
 

@@ -58,7 +58,7 @@ internal class RoleTest {
     @Tag(NEGATIVE_TEST)
     @ValueSource(strings = ["", "  "])
     fun `newRole should IllegalArgumentException when projectId is empty or blank `(projectId: String) {
-        val roleName = "researcher:$projectId"
+        val roleName = "research-assistant:$projectId"
         assertThrows<IllegalArgumentException> { Role.newRole(roleName) }
     }
 }

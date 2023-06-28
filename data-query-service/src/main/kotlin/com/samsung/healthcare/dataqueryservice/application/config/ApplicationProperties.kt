@@ -17,7 +17,8 @@ data class ApplicationProperties(
 
     data class Trino(
         val url: String,
-        val catalog: String,
+        val originalCatalog: String,
+        val deIdentifiedCatalog: String,
         val user: String,
     )
 

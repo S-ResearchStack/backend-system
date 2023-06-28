@@ -1,10 +1,10 @@
 package com.samsung.healthcare.platform.application.service
 
 import com.samsung.healthcare.account.application.context.ContextHolder
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.ReadStudyOverviewAuthority
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.platform.NEGATIVE_TEST
 import com.samsung.healthcare.platform.POSITIVE_TEST
 import com.samsung.healthcare.platform.application.authorize.Authorizer
@@ -44,9 +44,9 @@ internal class GetProjectServiceTest {
         val account = Account(
             "account-id",
             Email("cubist@test.com"),
-            listOf(Researcher(projectId.value.toString()))
+            listOf(ResearchAssistant(projectId.value.toString()))
         )
-        every { Authorizer.getAccount(AccessProjectAuthority("1")) } returns mono { account }
+        every { Authorizer.getAccount(ReadStudyOverviewAuthority("1")) } returns mono { account }
         coEvery { loadProjectPort.findById(projectId) } returns Project(
             projectId,
             "project",
@@ -69,9 +69,9 @@ internal class GetProjectServiceTest {
         val account = Account(
             "account-id",
             Email("cubist@test.com"),
-            listOf(Researcher(projectId.value.toString()))
+            listOf(ResearchAssistant(projectId.value.toString()))
         )
-        every { Authorizer.getAccount(AccessProjectAuthority("1")) } returns mono { account }
+        every { Authorizer.getAccount(ReadStudyOverviewAuthority("1")) } returns mono { account }
         coEvery { loadProjectPort.findById(projectId) } returns null
         assertThrows<NotFoundException>("should throw an exception") {
             getProjectService.findProjectById(projectId)
@@ -99,7 +99,7 @@ internal class GetProjectServiceTest {
         val account = Account(
             "account-id",
             Email("cubist@test.com"),
-            listOf(Researcher("1"), Researcher("2"))
+            listOf(ResearchAssistant("1"), ResearchAssistant("2"))
         )
         every { ContextHolder.getAccount() } returns Mono.just(account)
 

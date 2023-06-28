@@ -20,8 +20,18 @@ data class ApplicationProperties(
     )
 
     data class TrinoConfig(
+        val catalogs: Catalogs,
         val accessControl: AccessControlConfig,
-    )
+    ) {
+        data class Catalogs(
+            val originalDb: Db,
+            val deIdentifiedDb: Db,
+        ) {
+            data class Db(
+                val name: String,
+            )
+        }
+    }
 
     data class AccessControlConfig(
         val configFilePath: String,

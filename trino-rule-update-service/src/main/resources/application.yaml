@@ -7,6 +7,11 @@ config:
   account-service:
     url: ${ACCOUNT_SERVICE_URL:http://127.0.0.1:8080}
   trino:
+    catalogs:
+      original-db:
+        name: ${ORIGINAL_DB_NAME:postgresql}
+      de-identified-db:
+        name: ${DE_IDENTIFIED_DB_NAME:di-postgresql}
     access-control:
       config-file-path: ${TRINO_ACCESS_CONTROL_CONFIG_FILE_PATH:/etc/trino/access-control/rules.json}
 

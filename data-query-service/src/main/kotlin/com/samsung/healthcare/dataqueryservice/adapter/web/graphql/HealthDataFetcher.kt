@@ -8,8 +8,11 @@ import com.netflix.graphql.dgs.InputArgument
 import com.netflix.graphql.dgs.context.DgsContext
 import com.samsung.healthcare.dataqueryservice.adapter.web.graphql.DgsContextExtension.getAccount
 import com.samsung.healthcare.dataqueryservice.adapter.web.graphql.DgsContextExtension.getProjectId
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageBG
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageBP
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageHR
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageRR
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageSPO2
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageSleep
 import com.samsung.healthcare.dataqueryservice.application.port.input.HealthData
 import com.samsung.healthcare.dataqueryservice.application.port.input.HealthDataQuery
@@ -80,6 +83,9 @@ class HealthDataFetcher(
         if (userIds.isEmpty()) return emptyHealthStatusContext
         return HealthStatusContext(
             userIdToHeartRate = preloadHeartRate(dfe, userIds),
+            userIdToBloodGlucose = preloadBloodGlucose(dfe, userIds),
+            userIdToRespiratoryRate = preloadRespiratoryRate(dfe, userIds),
+            userIdToOxygenSaturation = preloadOxygenSaturation(dfe, userIds),
             userIdToBloodPressure = preloadBloodPressure(dfe, userIds),
             userIdToStep = preloadStep(dfe, userIds),
             userIdToSleep = preloadSleep(dfe, userIds)
@@ -95,6 +101,42 @@ class HealthDataFetcher(
 
         val context = DgsContext.from(dfe)
         return healthDataQuery.fetchLatestAverageHR(context.getProjectId(), userIds, context.getAccount())
+            .associateBy { it.userId }
+    }
+
+    private fun preloadBloodGlucose(
+        dfe: DataFetchingEnvironment,
+        userIds: List<String>
+    ): Map<String, AverageBG> {
+        if (!dfe.selectionSet.contains("latestAverageBG"))
+            return emptyMap()
+
+        val context = DgsContext.from(dfe)
+        return healthDataQuery.fetchLatestAverageBG(context.getProjectId(), userIds, context.getAccount())
+            .associateBy { it.userId }
+    }
+
+    private fun preloadRespiratoryRate(
+        dfe: DataFetchingEnvironment,
+        userIds: List<String>
+    ): Map<String, AverageRR> {
+        if (!dfe.selectionSet.contains("latestAverageRR"))
+            return emptyMap()
+
+        val context = DgsContext.from(dfe)
+        return healthDataQuery.fetchLatestAverageRR(context.getProjectId(), userIds, context.getAccount())
+            .associateBy { it.userId }
+    }
+
+    private fun preloadOxygenSaturation(
+        dfe: DataFetchingEnvironment,
+        userIds: List<String>
+    ): Map<String, AverageSPO2> {
+        if (!dfe.selectionSet.contains("latestAverageSPO2"))
+            return emptyMap()
+
+        val context = DgsContext.from(dfe)
+        return healthDataQuery.fetchLatestAverageSPO2(context.getProjectId(), userIds, context.getAccount())
             .associateBy { it.userId }
     }
 
@@ -150,6 +192,27 @@ class HealthDataFetcher(
         val user = dfe.getSource<User>()
         return dfe.getLocalContext<HealthStatusContext>()
             .userIdToHeartRate[user.userId]?.average
+    }
+
+    @DgsData(parentType = "HealthDataOverview", field = "latestAverageBG")
+    fun latestAverageBG(dfe: DgsDataFetchingEnvironment): Double? {
+        val user = dfe.getSource<User>()
+        return dfe.getLocalContext<HealthStatusContext>()
+            .userIdToBloodGlucose[user.userId]?.average
+    }
+
+    @DgsData(parentType = "HealthDataOverview", field = "latestAverageRR")
+    fun latestAverageRR(dfe: DgsDataFetchingEnvironment): Double? {
+        val user = dfe.getSource<User>()
+        return dfe.getLocalContext<HealthStatusContext>()
+            .userIdToRespiratoryRate[user.userId]?.average
+    }
+
+    @DgsData(parentType = "HealthDataOverview", field = "latestAverageSPO2")
+    fun latestAverageSPO2(dfe: DgsDataFetchingEnvironment): Float? {
+        val user = dfe.getSource<User>()
+        return dfe.getLocalContext<HealthStatusContext>()
+            .userIdToOxygenSaturation[user.userId]?.average
     }
 
     @DgsData(parentType = "HealthDataOverview", field = "latestAverageSystolicBP")
@@ -267,6 +330,9 @@ class HealthDataFetcher(
 
     private data class HealthStatusContext(
         val userIdToHeartRate: Map<String, AverageHR> = emptyMap(),
+        val userIdToBloodGlucose: Map<String, AverageBG> = emptyMap(),
+        val userIdToRespiratoryRate: Map<String, AverageRR> = emptyMap(),
+        val userIdToOxygenSaturation: Map<String, AverageSPO2> = emptyMap(),
         val userIdToBloodPressure: Map<String, AverageBP> = emptyMap(),
         val userIdToStep: Map<String, TotalStep> = emptyMap(),
         val userIdToSleep: Map<String, AverageSleep> = emptyMap()

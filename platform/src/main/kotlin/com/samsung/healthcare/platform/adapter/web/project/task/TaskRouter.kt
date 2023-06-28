@@ -24,7 +24,7 @@ class TaskRouter(
         "/api/projects/{projectId}/tasks".nest {
             GET(Strings.EMPTY, handler::findByPeriod)
             GET("{taskId}", handler::findById)
-            POST(Strings.EMPTY, handler::createTask)
+            POST(Strings.EMPTY, contentType(MediaType.APPLICATION_JSON), handler::createTask)
             PATCH("{taskId}", contentType(MediaType.APPLICATION_JSON), handler::updateTask)
         }
     }

@@ -4,7 +4,7 @@ import com.samsung.healthcare.platform.POSITIVE_TEST
 import com.samsung.healthcare.platform.adapter.persistence.entity.project.healthdata.toEntity
 import com.samsung.healthcare.platform.domain.project.UserProfile
 import com.samsung.healthcare.platform.domain.project.healthdata.BloodPressure
-import com.samsung.healthcare.platform.domain.project.healthdata.HealthData
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -17,16 +17,13 @@ internal class BloodPressureMapperTest {
     @Tag(POSITIVE_TEST)
     fun `should convert domain to entity`() {
         val localDateTime = LocalDateTime.of(2022, 9, 7, 12, 0, 0)
-        val bloodPressure = BloodPressure(
-            HealthData.HealthDataId.from(1),
+        val bloodPressure = BloodPressure.newBloodPressure(
             localDateTime.toInstant(ZoneOffset.UTC),
             120.0,
             80.0,
-            BloodPressure.BodyPosition.SITTING_DOWN,
-            BloodPressure.MeasurementLocation.LEFT_UPPER_ARM
         )
-        val userId = UserProfile.UserId.from("jjyun.do")
 
+        val userId = UserProfile.UserId.from("jjyun.do")
         val bloodPressureEntity = bloodPressure.toEntity(userId)
 
         assertAll(
@@ -39,5 +36,19 @@ internal class BloodPressureMapperTest {
             { assertEquals(bloodPressure.bodyPosition?.name, bloodPressureEntity.bodyPosition) },
             { assertEquals(bloodPressure.measurementLocation?.name, bloodPressureEntity.measurementLocation) }
         )
+
+        val bodyPosition = BloodPressure.BodyPosition.SITTING_DOWN
+        val measurementLocation = BloodPressure.MeasurementLocation.LEFT_UPPER_ARM
+
+        val detailedBloodPressure = BloodPressure.newBloodPressure(
+            localDateTime.toInstant(ZoneOffset.UTC),
+            120.0,
+            80.0,
+            bodyPosition,
+            measurementLocation
+        )
+
+        assertThat(detailedBloodPressure.bodyPosition!!.value).isEqualTo(bodyPosition.value)
+        assertThat(detailedBloodPressure.measurementLocation!!.value).isEqualTo(measurementLocation.value)
     }
 }

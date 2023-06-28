@@ -37,7 +37,6 @@ class UserDataQueryService(
         includeAttributes: List<String>,
         accountId: String
     ): List<User> {
-        println(makeGetUserQuery(pageable.offset, pageable.limit, orderByColumn, orderBySort))
         return queryDataPort.executeQuery(
             projectId,
             accountId,

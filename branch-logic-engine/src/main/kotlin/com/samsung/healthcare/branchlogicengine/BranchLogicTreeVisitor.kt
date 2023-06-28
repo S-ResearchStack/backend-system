@@ -30,7 +30,7 @@ class BranchLogicTreeVisitor(val variables: Map<String, Any>) : BranchLogicBaseV
 
     override fun visitMembershipExpression(ctx: BranchLogicParser.MembershipExpressionContext): Boolean {
         val leftValue = visitLeftValue(ctx.left).toString().split(",").map { it.toFloatOrNull() ?: it }
-        val rightValue = ctx.right.text.toFloatOrNull() ?: ctx.right.text
+        val rightValue = ctx.right.text.toFloatOrNull() ?: ctx.right.text.substring(1, ctx.right.text.length - 1)
 
         return if (ctx.op.CONTAINS() != null) rightValue in leftValue
         else rightValue !in leftValue

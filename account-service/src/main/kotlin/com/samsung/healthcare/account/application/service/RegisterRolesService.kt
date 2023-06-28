@@ -4,9 +4,10 @@ import com.samsung.healthcare.account.application.port.input.CreateProjectRoleRe
 import com.samsung.healthcare.account.application.port.input.RegisterRolesUseCase
 import com.samsung.healthcare.account.application.port.output.AuthServicePort
 import com.samsung.healthcare.account.domain.Role
-import com.samsung.healthcare.account.domain.Role.ProjectRole.HeadResearcher
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.DataScientist
+import com.samsung.healthcare.account.domain.Role.ProjectRole.PrincipalInvestigator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
@@ -27,12 +28,13 @@ class RegisterRolesService(
     private fun setOwnerRoleToAccount(createProjectRoleRequest: CreateProjectRoleRequest) =
         authServicePort.assignRoles(
             createProjectRoleRequest.accountId,
-            listOf(ProjectOwner(createProjectRoleRequest.projectId))
+            listOf(StudyCreator(createProjectRoleRequest.projectId))
         )
 
     private fun projectRoles(projectId: String): Collection<Role> = listOf(
-        ProjectOwner(projectId),
-        HeadResearcher(projectId),
-        Researcher(projectId)
+        StudyCreator(projectId),
+        PrincipalInvestigator(projectId),
+        ResearchAssistant(projectId),
+        DataScientist(projectId),
     )
 }

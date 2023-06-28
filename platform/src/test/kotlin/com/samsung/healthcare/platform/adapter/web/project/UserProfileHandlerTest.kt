@@ -15,6 +15,7 @@ import com.samsung.healthcare.platform.adapter.web.security.SecurityConfig
 import com.samsung.healthcare.platform.application.exception.GlobalErrorAttributes
 import com.samsung.healthcare.platform.application.port.input.CreateUserCommand
 import com.samsung.healthcare.platform.application.port.input.GetProjectQuery
+import com.samsung.healthcare.platform.application.port.input.project.ExistUserProfileUseCase
 import com.samsung.healthcare.platform.application.port.input.project.UserProfileInputPort
 import com.samsung.healthcare.platform.domain.Project.ProjectId
 import io.mockk.coEvery
@@ -49,6 +50,9 @@ import org.springframework.web.reactive.function.BodyInserters
 internal class UserProfileHandlerTest {
     @MockkBean
     private lateinit var userProfileInputPort: UserProfileInputPort
+
+    @MockkBean
+    private lateinit var existUserProfileUseCase: ExistUserProfileUseCase
 
     @MockkBean
     private lateinit var getProjectQuery: GetProjectQuery
@@ -185,5 +189,53 @@ internal class UserProfileHandlerTest {
             .returnResult()
 
         assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `exists should return ok`() {
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance().verifyIdToken(any()) } returns mockk(relaxed = true)
+        coEvery { existUserProfileUseCase.existsByUserId(any()) } returns true
+
+        val result = webTestClient.get()
+            .uri("/internal/api/projects/1/users/exists")
+            .header("id-token", "testToken")
+            .exchange()
+            .expectBody()
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.OK)
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `exists should throw unauthorized exception if id token is not provided`() {
+        val result = webTestClient.get()
+            .uri("/internal/api/projects/1/users/exists")
+            .exchange()
+            .expectBody(ErrorResponse::class.java)
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.UNAUTHORIZED)
+        assertThat(result.responseBody?.message).isEqualTo("You must provide id-token")
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `exists should throw forbidden exception if userid is not registered`() {
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance().verifyIdToken(any()) } returns mockk(relaxed = true)
+        coEvery { existUserProfileUseCase.existsByUserId(any()) } returns false
+
+        val result = webTestClient.get()
+            .uri("/internal/api/projects/1/users/exists")
+            .header("id-token", "testToken")
+            .exchange()
+            .expectBody(ErrorResponse::class.java)
+            .returnResult()
+
+        assertThat(result.status).isEqualTo(HttpStatus.FORBIDDEN)
+        assertThat(result.responseBody?.message).isEqualTo("Not registered user on this project")
     }
 }

@@ -3,7 +3,6 @@ package com.samsung.healthcare.platform.adapter.persistence.converter.mapper.sub
 import com.samsung.healthcare.platform.POSITIVE_TEST
 import com.samsung.healthcare.platform.adapter.persistence.entity.project.healthdata.toEntity
 import com.samsung.healthcare.platform.domain.project.UserProfile.UserId
-import com.samsung.healthcare.platform.domain.project.healthdata.HealthData
 import com.samsung.healthcare.platform.domain.project.healthdata.HeartRate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Tag
@@ -16,8 +15,7 @@ internal class HeartRateMapperTest {
     @Tag(POSITIVE_TEST)
     fun `should convert domain to entity`() {
         val localDateTime = LocalDateTime.of(2022, 9, 7, 12, 0, 0)
-        val heartRate = HeartRate(
-            HealthData.HealthDataId.from(1),
+        val heartRate = HeartRate.newHeartRate(
             localDateTime.toInstant(ZoneOffset.UTC),
             180
         )

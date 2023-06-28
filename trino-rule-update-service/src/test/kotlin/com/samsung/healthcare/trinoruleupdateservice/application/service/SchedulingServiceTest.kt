@@ -8,6 +8,7 @@ import com.samsung.healthcare.trinoruleupdateservice.application.config.Applicat
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.AccountServiceConfig
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.DatabaseConfig
 import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.TrinoConfig
+import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties.TrinoConfig.Catalogs
 import com.samsung.healthcare.trinoruleupdateservice.application.port.output.GetUsersPort
 import com.samsung.healthcare.trinoruleupdateservice.application.port.output.UpdateRulePort
 import io.mockk.every
@@ -25,7 +26,10 @@ internal class SchedulingServiceTest {
     private val properties = ApplicationProperties(
         DatabaseConfig("prefix", "postfix"),
         AccountServiceConfig("localhost"),
-        TrinoConfig(AccessControlConfig("/"))
+        TrinoConfig(
+            Catalogs(Catalogs.Db("db1"), Catalogs.Db("db2")),
+            AccessControlConfig("/"),
+        )
     )
 
     private val schedulingService = SchedulingService(properties, getUsersPort, updateRulePort)

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.samsung.healthcare.platform.NEGATIVE_TEST
 import com.samsung.healthcare.platform.POSITIVE_TEST
 import com.samsung.healthcare.platform.enums.ItemType.ITEM
+import com.samsung.healthcare.platform.enums.TaskStatus
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Tag
@@ -124,6 +125,7 @@ class UpdateTaskCommandTest {
     @Test
     @Tag(POSITIVE_TEST)
     fun `should return instance when items is empty`() {
+        requestBody["status"] = TaskStatus.DRAFT
         requestBody["items"] = emptyList<Any>()
         val command = objectMapper.readValue<UpdateTaskCommand>(
             objectMapper.writeValueAsString(requestBody)

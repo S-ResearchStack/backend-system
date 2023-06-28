@@ -1,7 +1,10 @@
 package com.samsung.healthcare.dataqueryservice.application.service
 
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageBG
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageBP
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageHR
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageRR
+import com.samsung.healthcare.dataqueryservice.application.port.input.AverageSPO2
 import com.samsung.healthcare.dataqueryservice.application.port.input.AverageSleep
 import com.samsung.healthcare.dataqueryservice.application.port.input.HealthDataQuery
 import com.samsung.healthcare.dataqueryservice.application.port.input.HeartRate
@@ -30,6 +33,57 @@ class HealthDataQueryService(
             userIds,
         ).data.map {
             it.toAverageHR()
+        }
+    }
+
+    override fun fetchLatestAverageBG(
+        projectId: String,
+        userIds: List<String>,
+        accountId: String
+    ): List<AverageBG> {
+        require(userIds.isNotEmpty())
+
+        return queryDataPort.executeQuery(
+            projectId,
+            accountId,
+            makeAverageBGQuery(userIds.size),
+            userIds,
+        ).data.map {
+            it.toAverageBG()
+        }
+    }
+
+    override fun fetchLatestAverageRR(
+        projectId: String,
+        userIds: List<String>,
+        accountId: String
+    ): List<AverageRR> {
+        require(userIds.isNotEmpty())
+
+        return queryDataPort.executeQuery(
+            projectId,
+            accountId,
+            makeAverageRRQuery(userIds.size),
+            userIds,
+        ).data.map {
+            it.toAverageRR()
+        }
+    }
+
+    override fun fetchLatestAverageSPO2(
+        projectId: String,
+        userIds: List<String>,
+        accountId: String,
+    ): List<AverageSPO2> {
+        require(userIds.isNotEmpty())
+
+        return queryDataPort.executeQuery(
+            projectId,
+            accountId,
+            makeAverageSPO2Query(userIds.size),
+            userIds,
+        ).data.map {
+            it.toAverageSPO2()
         }
     }
 
@@ -116,6 +170,24 @@ class HealthDataQueryService(
         AverageHR(
             this[USER_ID_COLUMN] as String,
             (this[AVERAGE_HR_COLUMN] as Double),
+        )
+
+    private fun Map<String, Any?>.toAverageBG() =
+        AverageBG(
+            this[USER_ID_COLUMN] as String,
+            (this[AVERAGE_BG_COLUMN] as Double),
+        )
+
+    private fun Map<String, Any?>.toAverageRR() =
+        AverageRR(
+            this[USER_ID_COLUMN] as String,
+            (this[AVERAGE_RR_COLUMN] as Double),
+        )
+
+    private fun Map<String, Any?>.toAverageSPO2() =
+        AverageSPO2(
+            this[USER_ID_COLUMN] as String,
+            this[AVERAGE_SPO2_COLUMN].toString().toFloat(),
         )
 
     private fun Map<String, Any?>.toAverageBP() =

@@ -70,6 +70,7 @@ internal class BranchLogicEngineTest {
         assertEquals(true, evalExpression("eq val1 \"test\"", mapOf("val1" to "test")))
         assertEquals(true, evalExpression("eq val1 \"\"", mapOf("val1" to "")))
         assertEquals(true, evalExpression("gt val1 \"0\"", mapOf("val1" to "1")))
+        assertEquals(true, evalExpression("contains val1 \"I don't know\"", mapOf("val1" to "bad,I don't know")))
     }
 
     @Test

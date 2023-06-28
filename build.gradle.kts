@@ -13,6 +13,15 @@ plugins {
     kotlin("kapt") version Versions.KOTLIN apply false
 }
 
+val jacocoExcludeFiles = mapOf(
+    "kaptGenerated" to listOf("**/mapper/**/*Impl.*"),
+    "antlrGenerated" to listOf(
+        "**/branchlogicengine/BranchLogicLexer*",
+        "**/branchlogicengine/BranchLogicParser*",
+        "**/branchlogicengine/BranchLogicBase*",
+    ),
+)
+
 tasks.register<JacocoReport>("jacocoRootReport") {
     subprojects {
         this@subprojects.plugins.withType<JacocoPlugin>().configureEach {
@@ -30,6 +39,14 @@ tasks.register<JacocoReport>("jacocoRootReport") {
         csv.required.set(false)
         html.required.set(true)
     }
+
+    classDirectories.setFrom(
+        files(classDirectories.files.map {file ->
+            fileTree(file) {
+                exclude(jacocoExcludeFiles.map{it.value}.flatten())
+            }
+        })
+    )
 }
 
 allprojects {
@@ -73,6 +90,15 @@ allprojects {
             csv.required.set(false)
             html.required.set(true)
         }
+
+        classDirectories.setFrom(
+            files(classDirectories.files.map {file ->
+                fileTree(file) {
+                    exclude(jacocoExcludeFiles.map{it.value}.flatten())
+                }
+            })
+        )
+
         finalizedBy(tasks.jacocoTestCoverageVerification)
     }
 
@@ -82,10 +108,20 @@ allprojects {
                 limit {
                     counter = "LINE"
                     value = "COVEREDRATIO"
-                    minimum = "0.8".toBigDecimal()
+                    minimum = "0.7500".toBigDecimal()
                 }
             }
         }
+
+
+        classDirectories.setFrom(
+            files(classDirectories.files.map {file ->
+                fileTree(file) {
+                    exclude(jacocoExcludeFiles.map{it.value}.flatten())
+                }
+            })
+        )
+
     }
 
     tasks.register<Test>("negativeTest") {

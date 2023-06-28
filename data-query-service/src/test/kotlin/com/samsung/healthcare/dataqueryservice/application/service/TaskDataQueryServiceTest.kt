@@ -1,6 +1,7 @@
 package com.samsung.healthcare.dataqueryservice.application.service
 
 import com.samsung.healthcare.dataqueryservice.POSITIVE_TEST
+import com.samsung.healthcare.dataqueryservice.application.port.input.Attribute
 import com.samsung.healthcare.dataqueryservice.application.port.input.CompletionTime
 import com.samsung.healthcare.dataqueryservice.application.port.input.Task
 import com.samsung.healthcare.dataqueryservice.application.port.input.TaskItemResponse
@@ -9,6 +10,7 @@ import com.samsung.healthcare.dataqueryservice.application.port.output.QueryData
 import com.samsung.healthcare.dataqueryservice.application.port.output.QueryDataResult
 import io.mockk.every
 import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -169,5 +171,8 @@ internal class TaskDataQueryServiceTest {
             taskItemResponses,
             taskDataQueryService.fetchTaskItemResponse(testProjectId, "taskId", emptyList(), testAccountId)
         )
+        taskItemResponses.forEach {
+            assertThat(it.profiles).isEqualTo(emptyList<Attribute>())
+        }
     }
 }

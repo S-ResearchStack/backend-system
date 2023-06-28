@@ -14,7 +14,7 @@ import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
 import com.samsung.healthcare.account.application.service.AccountService
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.account.domain.RoleFactory
 import io.mockk.every
 import org.assertj.core.api.Assertions.assertThat
@@ -49,7 +49,7 @@ internal class RemoveUserRolesHandlerTest {
     private lateinit var webClient: WebTestClient
 
     private val normalRequest =
-        TestRequest("account-id", roles = listOf(Researcher("project-1").roleName))
+        TestRequest("account-id", roles = listOf(ResearchAssistant("project-1").roleName))
 
     private val jwt =
         "eyJhb...6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkw...MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
@@ -140,7 +140,7 @@ internal class RemoveUserRolesHandlerTest {
             REMOVE_USER_ROLE_PATH,
             TestRequest(
                 "account-id",
-                listOf("1:researcher")
+                listOf("1:research-assistant")
             ),
         )
             .expectBody()

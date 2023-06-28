@@ -38,9 +38,9 @@ import com.samsung.healthcare.account.application.port.output.JwtGenerationComma
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
-import com.samsung.healthcare.account.domain.Role.ProjectRole.HeadResearcher
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.PrincipalInvestigator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.account.domain.Role.TeamAdmin
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -362,7 +362,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, StudyCreator("project-x")))
         ).verifyComplete()
     }
 
@@ -396,7 +396,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(accountId, listOf(TeamAdmin, StudyCreator("project-x")))
         ).verifyError<UnknownRoleException>()
     }
 
@@ -446,7 +446,7 @@ internal class SuperTokenAdapterTest {
 }"""
         }
         StepVerifier.create(
-            superTokenAdapter.assignRoles(Email(email), listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(Email(email), listOf(TeamAdmin, StudyCreator("project-x")))
         ).verifyComplete()
     }
 
@@ -466,7 +466,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.assignRoles(Email(email), listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.assignRoles(Email(email), listOf(TeamAdmin, StudyCreator("project-x")))
         ).verifyError<UnknownEmailException>()
     }
 
@@ -483,14 +483,14 @@ internal class SuperTokenAdapterTest {
 
         wm.put {
             url equalTo SUPER_TOKEN_ASSIGN_ROLE_PATH
-            body contains "role" equalTo ProjectOwner("project-x").roleName
+            body contains "role" equalTo StudyCreator("project-x").roleName
         } returns {
             this.statusCode = HttpStatus.SC_OK
         }
 
         StepVerifier.create(
             superTokenAdapter.assignRoles(
-                UUID.randomUUID().toString(), listOf(TeamAdmin, ProjectOwner("project-x"))
+                UUID.randomUUID().toString(), listOf(TeamAdmin, StudyCreator("project-x"))
             )
         ).verifyError<Exception>()
     }
@@ -525,7 +525,7 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.removeRolesFromAccount(accountId, listOf(TeamAdmin, ProjectOwner("project-x")))
+            superTokenAdapter.removeRolesFromAccount(accountId, listOf(TeamAdmin, StudyCreator("project-x")))
         ).verifyComplete()
     }
 
@@ -545,9 +545,9 @@ internal class SuperTokenAdapterTest {
         StepVerifier.create(
             superTokenAdapter.createRoles(
                 listOf(
-                    ProjectOwner(projectId),
-                    Researcher(projectId),
-                    HeadResearcher(projectId)
+                    StudyCreator(projectId),
+                    ResearchAssistant(projectId),
+                    PrincipalInvestigator(projectId)
                 )
             )
         ).verifyComplete()
@@ -557,7 +557,7 @@ internal class SuperTokenAdapterTest {
     @Tag(POSITIVE_TEST)
     fun `listUserRoles should return roles when supertoken returns ok`() {
         val accountId = UUID.randomUUID().toString()
-        val projectRole = HeadResearcher("project-x")
+        val projectRole = PrincipalInvestigator("project-x")
         wm.get {
             url equalTo "$SUPER_TOKEN_GET_USER_ROLE_PATH?userId=$accountId"
         } returnsJson {
@@ -723,7 +723,7 @@ internal class SuperTokenAdapterTest {
     @Tag(POSITIVE_TEST)
     fun `listUsers should return all accounts`() {
         val accountId = UUID.randomUUID().toString()
-        val projectRole = HeadResearcher("project-x")
+        val projectRole = PrincipalInvestigator("project-x")
 
         wm.get {
             url equalTo SUPER_TOKEN_LIST_USERS_PATH
@@ -776,32 +776,36 @@ internal class SuperTokenAdapterTest {
     @Test
     @Tag(POSITIVE_TEST)
     fun `retrieveUsersAssociatedWithRoles should return users with roles`() {
-        val headResearcherRole = HeadResearcher("project-x")
+        val principalInvestigatorRole = PrincipalInvestigator("project-x")
 
-        val headResearcherAccount =
-            Account(UUID.randomUUID().toString(), Email("email1@research-hub.test.com"), listOf(headResearcherRole))
+        val principalInvestigatorAccount =
+            Account(
+                UUID.randomUUID().toString(),
+                Email("email1@research-hub.test.com"),
+                listOf(principalInvestigatorRole)
+            )
 
         wm.get {
             url equalTo
-                "$SUPER_TOKEN_GET_ROLE_USER_PATH?role=${URLEncoder.encode(headResearcherRole.roleName, "utf-8")}"
+                "$SUPER_TOKEN_GET_ROLE_USER_PATH?role=${URLEncoder.encode(principalInvestigatorRole.roleName, "utf-8")}"
         } returnsJson {
             body = """{
   "status": "OK",
   "users": [
-    "${headResearcherAccount.id}"
+    "${principalInvestigatorAccount.id}"
   ]
 }"""
         }
 
         wm.get {
-            url equalTo "$GET_ACCOUNT_PATH?userId=${headResearcherAccount.id}"
+            url equalTo "$GET_ACCOUNT_PATH?userId=${principalInvestigatorAccount.id}"
         } returnsJson {
             body =
                 """{
   "status": "OK",
   "user": {
-    "email": "${headResearcherAccount.email.value}",
-    "id": "${headResearcherAccount.id}",
+    "email": "${principalInvestigatorAccount.email.value}",
+    "id": "${principalInvestigatorAccount.id}",
     "timeJoined": 1659407200104
     }
 }
@@ -809,17 +813,17 @@ internal class SuperTokenAdapterTest {
         }
 
         wm.get {
-            url equalTo "$SUPER_TOKEN_GET_USER_ROLE_PATH?userId=${headResearcherAccount.id}"
+            url equalTo "$SUPER_TOKEN_GET_USER_ROLE_PATH?userId=${principalInvestigatorAccount.id}"
         } returnsJson {
             body =
                 """{
   "status": "OK",
-   "roles": ["${headResearcherRole.roleName}"]
+   "roles": ["${principalInvestigatorRole.roleName}"]
 }"""
         }
 
         wm.get {
-            url equalTo "$SUPER_TOKEN_USER_META_DATA_PATH?userId=${headResearcherAccount.id}"
+            url equalTo "$SUPER_TOKEN_USER_META_DATA_PATH?userId=${principalInvestigatorAccount.id}"
         } returnsJson {
             body =
                 """{
@@ -829,8 +833,8 @@ internal class SuperTokenAdapterTest {
         }
 
         StepVerifier.create(
-            superTokenAdapter.retrieveUsersAssociatedWithRoles(listOf(headResearcherRole))
-        ).expectNext(listOf(headResearcherAccount)).verifyComplete()
+            superTokenAdapter.retrieveUsersAssociatedWithRoles(listOf(principalInvestigatorRole))
+        ).expectNext(listOf(principalInvestigatorAccount)).verifyComplete()
     }
 
     @Test

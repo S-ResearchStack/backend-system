@@ -12,7 +12,8 @@ import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.client.RestTemplate
 
 private val ROLE_REGEX: Regex =
-    "^(team-admin|service-account|\\d+:(project-owner|head-researcher|researcher))$".toRegex()
+    "^(team-admin|service-account|\\d+:(study-creator|principal-investigator|research-assistant|data-scientist))$"
+        .toRegex()
 
 @Component
 class AccountServiceAdapter(

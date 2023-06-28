@@ -1,7 +1,7 @@
 package com.samsung.healthcare.account.domain
 
 import com.samsung.healthcare.account.domain.Role.ProjectRole
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
 import com.samsung.healthcare.account.domain.Role.ServiceAccount
 import org.springframework.security.core.GrantedAuthority
 
@@ -12,7 +12,7 @@ data class Account(
     val profiles: Map<String, Any> = emptyMap()
 ) {
     fun canAssignProjectRole(projectId: String): Boolean =
-        roles.filterIsInstance<ProjectOwner>()
+        roles.filterIsInstance<StudyCreator>()
             .any { it.canAccessProject(projectId) }
 
     fun canCreateRole(): Boolean =

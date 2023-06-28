@@ -112,7 +112,7 @@ internal class ProjectHandlerTest {
         } returns Account(
             "testUser",
             Email("test@s-healthstack.com"),
-            listOf(Role.ProjectRole.Researcher("1"))
+            listOf(Role.ProjectRole.ResearchAssistant("1"))
         ).toMono()
 
         val result = webTestClient.get()
@@ -136,7 +136,7 @@ internal class ProjectHandlerTest {
         } returns Account(
             "testUser",
             Email("test@s-healthstack.com"),
-            listOf(Role.ProjectRole.ProjectOwner("1"), Role.ProjectRole.HeadResearcher("2"))
+            listOf(Role.ProjectRole.StudyCreator("1"), Role.ProjectRole.PrincipalInvestigator("2"))
         ).toMono()
         every { getProjectQuery.listProject() } returns flowOf(project1, project2)
 

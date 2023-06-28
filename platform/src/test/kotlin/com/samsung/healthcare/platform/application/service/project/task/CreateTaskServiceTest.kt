@@ -1,7 +1,7 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
 import com.samsung.healthcare.account.application.context.ContextHolder
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.AccessTaskAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
 import com.samsung.healthcare.account.domain.Role
@@ -40,7 +40,7 @@ internal class CreateTaskServiceTest {
     val account = Account(
         "account-id",
         Email("cubist@test.com"),
-        listOf(Role.ProjectRole.Researcher(projectId.value.toString()))
+        listOf(Role.ProjectRole.ResearchAssistant(projectId.value.toString()))
     )
     val command = CreateTaskCommand(TaskType.SURVEY)
 
@@ -60,7 +60,7 @@ internal class CreateTaskServiceTest {
     @Tag(POSITIVE_TEST)
     fun `should match properties of generated task`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val revisionId = RevisionId.from(1)
         val task = Task(
@@ -87,7 +87,7 @@ internal class CreateTaskServiceTest {
     @Tag(NEGATIVE_TEST)
     fun `should not allow null RevisionId`() = runTest {
         mockkObject(Authorizer)
-        every { Authorizer.getAccount(AccessProjectAuthority(projectId.toString())) } returns mono { account }
+        every { Authorizer.getAccount(AccessTaskAuthority(projectId.toString())) } returns mono { account }
 
         val illegalTask = Task(
             null,

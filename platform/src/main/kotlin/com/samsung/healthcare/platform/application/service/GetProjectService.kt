@@ -1,6 +1,6 @@
 package com.samsung.healthcare.platform.application.service
 
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.ReadStudyOverviewAuthority
 import com.samsung.healthcare.platform.application.authorize.Authorizer
 import com.samsung.healthcare.platform.application.exception.NotFoundException
 import com.samsung.healthcare.platform.application.port.input.GetProjectQuery
@@ -28,7 +28,7 @@ class GetProjectService(
      * @return [Project] with the corresponding ProjectId.
      */
     override suspend fun findProjectById(id: ProjectId): Project =
-        Authorizer.getAccount(AccessProjectAuthority(id.value.toString()))
+        Authorizer.getAccount(ReadStudyOverviewAuthority(id.value.toString()))
             .flatMap {
                 mono {
                     loadProjectPort.findById(id)

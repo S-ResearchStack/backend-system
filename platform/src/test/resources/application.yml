@@ -11,9 +11,9 @@ config:
     prefix: project_
     postfix: _research
   jwks:
-    url: http://localhost:3567/recipe/jwt/jwks
+    url: http://127.0.0.1:3567/recipe/jwt/jwks
   account-service:
-    url: http://localhost:8080
+    url: http://127.0.0.1:8080
 
 spring:
   r2dbc:

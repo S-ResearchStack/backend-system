@@ -16,7 +16,7 @@ import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
 import com.samsung.healthcare.account.application.service.AccountService
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import io.mockk.every
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -71,7 +71,7 @@ internal class AssignRoleHandlerTest {
         webClient.mutate().defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer $jwt")
         val result = webClient.put(
             ASSIGN_ROLE_PATH,
-            TestRequest("test-account", listOf(Researcher("project-id").roleName)),
+            TestRequest("test-account", listOf(ResearchAssistant("project-id").roleName)),
         )
             .expectBody()
             .returnResult()
@@ -84,7 +84,7 @@ internal class AssignRoleHandlerTest {
     fun `should return bad request when account id is null`() {
         val result = webClient.put(
             ASSIGN_ROLE_PATH,
-            TestRequest(null, listOf(Researcher("project-id").roleName)),
+            TestRequest(null, listOf(ResearchAssistant("project-id").roleName)),
         )
             .expectBody()
             .returnResult()
@@ -112,7 +112,7 @@ internal class AssignRoleHandlerTest {
 
         val result = webClient.put(
             ASSIGN_ROLE_PATH,
-            TestRequest("account-id", listOf("1:researcher")),
+            TestRequest("account-id", listOf("1:research-assistant")),
         )
             .expectBody()
             .returnResult()
@@ -127,7 +127,7 @@ internal class AssignRoleHandlerTest {
 
         val result = webClient.put(
             ASSIGN_ROLE_PATH,
-            TestRequest("account-id", listOf("1:researcher")),
+            TestRequest("account-id", listOf("1:research-assistant")),
         )
             .expectBody()
             .returnResult()

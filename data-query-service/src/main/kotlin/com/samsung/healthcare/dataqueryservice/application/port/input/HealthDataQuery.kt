@@ -7,6 +7,21 @@ data class AverageHR(
     val average: Double,
 )
 
+data class AverageBG(
+    val userId: String,
+    val average: Double,
+)
+
+data class AverageRR(
+    val userId: String,
+    val average: Double,
+)
+
+data class AverageSPO2(
+    val userId: String,
+    val average: Float,
+)
+
 data class TotalStep(
     val userId: String,
     val total: Int,
@@ -39,6 +54,12 @@ data class HeartRate(
 
 interface HealthDataQuery {
     fun fetchLatestAverageHR(projectId: String, userIds: List<String>, accountId: String): List<AverageHR>
+
+    fun fetchLatestAverageBG(projectId: String, userIds: List<String>, accountId: String): List<AverageBG>
+
+    fun fetchLatestAverageRR(projectId: String, userIds: List<String>, accountId: String): List<AverageRR>
+
+    fun fetchLatestAverageSPO2(projectId: String, userIds: List<String>, accountId: String): List<AverageSPO2>
 
     fun fetchLatestAverageBP(projectId: String, userIds: List<String>, accountId: String): List<AverageBP>
 

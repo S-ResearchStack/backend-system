@@ -1,6 +1,6 @@
 package com.samsung.healthcare.platform.application.service.project.task
 
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
+import com.samsung.healthcare.account.domain.AccessTaskAuthority
 import com.samsung.healthcare.platform.application.authorize.Authorizer
 import com.samsung.healthcare.platform.application.exception.BadRequestException
 import com.samsung.healthcare.platform.application.exception.NotFoundException
@@ -41,7 +41,7 @@ class UpdateTaskService(
         revisionId: RevisionId,
         command: UpdateTaskCommand
     ) {
-        Authorizer.getAccount(AccessProjectAuthority(projectId))
+        Authorizer.getAccount(AccessTaskAuthority(projectId))
             .flatMap {
                 mono {
                     val task: Task = if (command.status == TaskStatus.PUBLISHED)

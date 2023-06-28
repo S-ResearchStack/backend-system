@@ -30,6 +30,12 @@ object Versions {
     const val ANTLR = "4.11.1"
     const val LIBRARIES_BOM = "26.10.0"
     const val GOOGLE_CLOUD_STORAGE = "2.20.1"
+    const val AWS_JAVA_SDK = "1.12.472"
+    const val AWSSDK_BOM = "2.20.58"
+    const val S3_TRANSFER_MANAGER = "2.20.58"
+    const val AZURE_STORAGE_BLOB = "12.21.1"
+    const val AZURE_STORAGE_COMMON = "12.20.1"
+    const val AZURE_IDENTITY = "1.7.3"
 
     const val KOTLIN_REACTOR_EXTENSION = "1.1.5"
     const val KOTLIN_REFLECT = "1.6.10"
@@ -88,6 +94,12 @@ object Libs {
     const val ANTLR = "org.antlr:antlr4:${Versions.ANTLR}"
     const val LIBRARIES_BOM = "com.google.cloud:libraries-bom:${Versions.LIBRARIES_BOM}"
     const val GOOGLE_CLOUD_STORAGE = "com.google.cloud:google-cloud-storage:${Versions.GOOGLE_CLOUD_STORAGE}"
+    const val AWS_JAVA_SDK = "com.amazonaws:aws-java-sdk:${Versions.AWS_JAVA_SDK}"
+    const val AWSSDK_BOM = "software.amazon.awssdk:bom:${Versions.AWSSDK_BOM}"
+    const val S3_TRANSFER_MANAGER = "software.amazon.awssdk:s3-transfer-manager:${Versions.S3_TRANSFER_MANAGER}"
+    const val AZURE_STORAGE_BLOB = "com.azure:azure-storage-blob:${Versions.AZURE_STORAGE_BLOB}"
+    const val AZURE_STORAGE_COMMON = "com.azure:azure-storage-common:${Versions.AZURE_STORAGE_COMMON}"
+    const val AZURE_IDENTITY = "com.azure:azure-identity:${Versions.AZURE_IDENTITY}"
 
     const val FEIGN_REACTOR_WEBCLIENT =
         "com.playtika.reactivefeign:feign-reactor-spring-cloud-starter:${Versions.FEIGN_REACTOR}"

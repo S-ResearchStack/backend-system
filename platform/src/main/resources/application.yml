@@ -1,19 +1,19 @@
 config:
   db:
-    url: postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
-    host: ${DB_HOST:localhost}
-    port: ${DB_PORT:5432}
-    name: ${DB_NAME:postgres}
-    schema: ${DB_SCHEMA:public}
-    user: ${DB_USERNAME:postgres}
+    url: postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    host: ${DB_HOST}
+    port: ${DB_PORT}
+    name: ${DB_NAME}
+    schema: ${DB_SCHEMA}
+    user: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   new-database-config:
     prefix: project_
     postfix: _research
   jwks:
-    url: ${JWK_URL:http://localhost:3567/recipe/jwt/jwks}
+    url: ${JWK_URL:http://127.0.0.1:3567/recipe/jwt/jwks}
   account-service:
-    url: ${ACCOUNT_SERVICE_URL:http://localhost:8080}
+    url: ${ACCOUNT_SERVICE_URL:http://127.0.0.1:8080}
 
 logging:
   level:

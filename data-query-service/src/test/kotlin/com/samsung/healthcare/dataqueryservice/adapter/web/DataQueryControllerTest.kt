@@ -2,7 +2,7 @@ package com.samsung.healthcare.dataqueryservice.adapter.web
 
 import com.ninjasquad.springmockk.MockkBean
 import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
-import com.samsung.healthcare.account.domain.Role.ProjectRole.HeadResearcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.PrincipalInvestigator
 import com.samsung.healthcare.dataqueryservice.NEGATIVE_TEST
 import com.samsung.healthcare.dataqueryservice.POSITIVE_TEST
 import com.samsung.healthcare.dataqueryservice.adapter.web.exception.GlobalExceptionHandler
@@ -62,7 +62,7 @@ internal class DataQueryControllerTest {
         mapOf(
             Pair("sub", "random-uuid"),
             Pair("email", "test@research-hub.test.com"),
-            Pair("roles", listOf(HeadResearcher("1").roleName))
+            Pair("roles", listOf(PrincipalInvestigator("1").roleName))
         )
     )
 
@@ -115,7 +115,7 @@ internal class DataQueryControllerTest {
             mapOf(
                 Pair("subject", "random-uuid"),
                 Pair("email", "test@research-hub.test.com"),
-                Pair("roles", listOf(HeadResearcher("1").roleName))
+                Pair("roles", listOf(PrincipalInvestigator("1").roleName))
             )
         )
 

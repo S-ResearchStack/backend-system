@@ -3,13 +3,13 @@ package com.samsung.healthcare.account.application.accesscontrol
 import com.samsung.healthcare.account.NEGATIVE_TEST
 import com.samsung.healthcare.account.POSITIVE_TEST
 import com.samsung.healthcare.account.application.context.ContextHolder
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.AssignRoleAuthority
 import com.samsung.healthcare.account.domain.Email
+import com.samsung.healthcare.account.domain.ReadStudyOverviewAuthority
 import com.samsung.healthcare.account.domain.Role
-import com.samsung.healthcare.account.domain.Role.ProjectRole.ProjectOwner
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.StudyCreator
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.aop.aspectj.annotation.AspectJProxyFactory
@@ -19,15 +19,15 @@ import reactor.test.StepVerifier
 
 interface Target {
     fun testAssignRole(roles: List<Role>): Mono<Void>
-    fun testAccessProject(projectId: String): Mono<Void>
+    fun testReadStudyOverviewAuthority(projectId: String): Mono<Void>
 }
 
 open class TestTarget : Target {
     @Requires([AssignRoleAuthority::class])
     override fun testAssignRole(roles: List<Role>) = Mono.empty<Void>()
 
-    @Requires([AccessProjectAuthority::class])
-    override fun testAccessProject(projectId: String) = Mono.empty<Void>()
+    @Requires([ReadStudyOverviewAuthority::class])
+    override fun testReadStudyOverviewAuthority(projectId: String) = Mono.empty<Void>()
 }
 
 internal class AccessControlAspectTest {
@@ -45,23 +45,23 @@ internal class AccessControlAspectTest {
         StepVerifier.create(
             withAccountContext(
                 target.testAssignRole(
-                    listOf(Researcher(projectId))
+                    listOf(ResearchAssistant(projectId))
                 ),
-                testAccount(Researcher(projectId))
+                testAccount(ResearchAssistant(projectId))
             )
         ).verifyError<IllegalAccessException>()
     }
 
     @Test
     @Tag(POSITIVE_TEST)
-    fun `should return ok when account does have project owner roles and assign researcher`() {
+    fun `should return ok when account does have study creator roles and assign research-assistant`() {
         val projectId = "project-id"
-        val roles = listOf(Researcher(projectId))
+        val roles = listOf(ResearchAssistant(projectId))
 
         StepVerifier.create(
             withAccountContext(
                 target.testAssignRole(roles),
-                testAccount(ProjectOwner(projectId))
+                testAccount(StudyCreator(projectId))
             )
         ).verifyComplete()
     }
@@ -74,7 +74,7 @@ internal class AccessControlAspectTest {
         ).verifyError<IllegalAccessException>()
 
         StepVerifier.create(
-            target.testAccessProject("project-id")
+            target.testReadStudyOverviewAuthority("project-id")
         ).verifyError<IllegalAccessException>()
     }
 
@@ -84,10 +84,10 @@ internal class AccessControlAspectTest {
         val projectId = "project-id"
         StepVerifier.create(
             withAccountContext(
-                target.testAccessProject(
+                target.testReadStudyOverviewAuthority(
                     projectId
                 ),
-                testAccount(Researcher("another-project-id"))
+                testAccount(ResearchAssistant("another-project-id"))
             )
         ).verifyError<IllegalAccessException>()
     }
@@ -99,15 +99,15 @@ internal class AccessControlAspectTest {
 
         StepVerifier.create(
             withAccountContext(
-                target.testAccessProject(projectId),
-                testAccount(Researcher(projectId))
+                target.testReadStudyOverviewAuthority(projectId),
+                testAccount(ResearchAssistant(projectId))
             )
         ).verifyComplete()
 
         StepVerifier.create(
             withAccountContext(
-                target.testAccessProject(projectId),
-                testAccount(ProjectOwner(projectId))
+                target.testReadStudyOverviewAuthority(projectId),
+                testAccount(StudyCreator(projectId))
             )
         ).verifyComplete()
     }

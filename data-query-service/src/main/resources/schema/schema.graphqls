@@ -10,7 +10,7 @@ type Query {
 }
 
 enum ParticipantListColumn {
-    ID, EMAIL, AVG_HR, TOTAL_STEPS, LAST_SYNCED
+    ID, EMAIL, AVG_HR, AVG_BG, AVG_RR, AVG_SPO2, AVG_BP, AVG_SLEEP, TOTAL_STEPS, LAST_SYNCED
 }
 
 enum Sort {
@@ -63,6 +63,9 @@ type HealthDataOverview {
     lastSyncTime: String
     profiles: [Attribute]
     latestAverageHR: Float
+    latestAverageBG: Float
+    latestAverageRR: Float
+    latestAverageSPO2: Float
     latestAverageSystolicBP: Float
     latestAverageDiastolicBP: Float
     averageSleep: Float

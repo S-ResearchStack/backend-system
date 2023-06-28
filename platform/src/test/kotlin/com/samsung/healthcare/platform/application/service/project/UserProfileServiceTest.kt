@@ -7,6 +7,7 @@ import com.samsung.healthcare.platform.adapter.web.context.ContextHolder.getFire
 import com.samsung.healthcare.platform.application.exception.ForbiddenException
 import com.samsung.healthcare.platform.application.exception.UserAlreadyExistsException
 import com.samsung.healthcare.platform.application.port.input.CreateUserCommand
+import com.samsung.healthcare.platform.application.port.input.UpdateUserCommand
 import com.samsung.healthcare.platform.application.port.output.project.UserProfileOutputPort
 import com.samsung.healthcare.platform.domain.project.UserProfile
 import com.samsung.healthcare.platform.domain.project.UserProfile.UserId
@@ -83,6 +84,33 @@ internal class UserProfileServiceTest {
         userProfileService.updateLastSyncedTime(userId)
 
         coVerify { userProfileOutputPort.updateLastSyncedAt(userId) }
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `should update user profile`() = runTest {
+        mockkObject(ContextHolder)
+        val uid = "legalUID"
+        coEvery { getFirebaseToken().uid } returns uid
+        val updateUserCommand = UpdateUserCommand()
+
+        mockkStatic(LocalDateTime::class)
+        val testLocalDateTime = LocalDateTime.parse("2022-10-21T17:00", DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        every { LocalDateTime.now() } returns testLocalDateTime
+
+        coJustRun {
+            userProfileOutputPort.update(
+                match { it.profile == updateUserCommand.profile && it.lastSyncedAt == testLocalDateTime }
+            )
+        }
+
+        userProfileService.updateUser(uid, updateUserCommand)
+
+        coVerify {
+            userProfileOutputPort.update(
+                match { it.profile == updateUserCommand.profile && it.lastSyncedAt == testLocalDateTime }
+            )
+        }
     }
 
     private fun MockKMatcherScope.userMatchesCommand(

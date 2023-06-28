@@ -6,9 +6,10 @@ sealed class Role private constructor(val roleName: String) {
     companion object {
         const val TEAM_ADMIN = "team-admin"
         const val SERVICE_ACCOUNT = "service-account"
-        const val PROJECT_OWNER = "project-owner"
-        const val HEAD_RESEARCHER = "head-researcher"
-        const val RESEARCHER = "researcher"
+        const val STUDY_CREATOR = "study-creator"
+        const val PRINCIPAL_INVESTIGATOR = "principal-investigator"
+        const val RESEARCH_ASSISTANT = "research-assistant"
+        const val DATA_SCIENTIST = "data-scientist"
     }
 
     abstract val authorities: Collection<GrantedAuthority>
@@ -39,33 +40,65 @@ sealed class Role private constructor(val roleName: String) {
 
         fun canAccessProject(pid: String): Boolean = projectId == pid
 
-        class ProjectOwner(projectId: String) : ProjectRole(projectId, PROJECT_OWNER) {
+        class StudyCreator(projectId: String) : ProjectRole(projectId, STUDY_CREATOR) {
             override val authorities: Collection<GrantedAuthority> = listOf(
                 AssignRoleAuthority(projectId),
-                AccessProjectAuthority(projectId)
+                ReadStudyOverviewAuthority(projectId),
+                ReadParticipantDataAuthority(projectId),
+                ReadDeIdentifiedParticipantDataAuthority(projectId),
+                AccessInLabVisitAuthority(projectId),
+                AccessTaskAuthority(projectId),
+                AccessDocumentAuthority(projectId),
+                ReadAggSensorDataAuthority(projectId),
+                QueryRawDataAuthority(projectId),
+                QueryDeIdentifiedDataAuthority(projectId),
+                ReadProjectMemberAuthority(projectId),
+                AccessProjectMemberAuthority(projectId),
             )
         }
 
-        class HeadResearcher(projectId: String) : ProjectRole(projectId, HEAD_RESEARCHER) {
+        class PrincipalInvestigator(projectId: String) : ProjectRole(projectId, PRINCIPAL_INVESTIGATOR) {
             override val authorities: Collection<GrantedAuthority> = listOf(
                 AssignRoleAuthority(projectId),
-                AccessProjectAuthority(projectId)
+                ReadStudyOverviewAuthority(projectId),
+                ReadParticipantDataAuthority(projectId),
+                ReadDeIdentifiedParticipantDataAuthority(projectId),
+                AccessInLabVisitAuthority(projectId),
+                AccessTaskAuthority(projectId),
+                AccessDocumentAuthority(projectId),
+                ReadAggSensorDataAuthority(projectId),
+                QueryRawDataAuthority(projectId),
+                QueryDeIdentifiedDataAuthority(projectId),
+                ReadProjectMemberAuthority(projectId),
+                AccessProjectMemberAuthority(projectId),
             )
         }
 
-        class Researcher(projectId: String) : ProjectRole(projectId, RESEARCHER) {
+        class ResearchAssistant(projectId: String) : ProjectRole(projectId, RESEARCH_ASSISTANT) {
             override val authorities: Collection<GrantedAuthority> = listOf(
-                AccessProjectAuthority(projectId)
+                ReadStudyOverviewAuthority(projectId),
+                ReadParticipantDataAuthority(projectId),
+                ReadDeIdentifiedParticipantDataAuthority(projectId),
+                AccessInLabVisitAuthority(projectId),
+                AccessTaskAuthority(projectId),
+                AccessDocumentAuthority(projectId),
+                ReadAggSensorDataAuthority(projectId),
+                QueryRawDataAuthority(projectId),
+                QueryDeIdentifiedDataAuthority(projectId),
+                ReadProjectMemberAuthority(projectId),
+                AccessProjectMemberAuthority(projectId),
             )
         }
 
-        class CustomRole(projectId: String, projectRoleName: String) : ProjectRole(projectId, projectRoleName) {
-            init {
-                require(projectRoleName.isNotBlank())
-            }
-
+        class DataScientist(projectId: String) : ProjectRole(projectId, DATA_SCIENTIST) {
             override val authorities: Collection<GrantedAuthority> = listOf(
-                AccessProjectAuthority(projectId)
+                ReadStudyOverviewAuthority(projectId),
+                ReadDeIdentifiedParticipantDataAuthority(projectId),
+                AccessTaskAuthority(projectId),
+                AccessDocumentAuthority(projectId),
+                ReadAggSensorDataAuthority(projectId),
+                QueryDeIdentifiedDataAuthority(projectId),
+                ReadProjectMemberAuthority(projectId),
             )
         }
     }

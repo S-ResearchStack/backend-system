@@ -12,7 +12,7 @@ data class Pageable(val offset: Int, val limit: Int) {
 }
 
 enum class ParticipantListColumn {
-    ID, EMAIL, AVG_HR, TOTAL_STEPS, LAST_SYNCED,
+    ID, EMAIL, AVG_HR, AVG_BG, AVG_RR, AVG_SPO2, TOTAL_STEPS, LAST_SYNCED,
 }
 
 enum class Sort {

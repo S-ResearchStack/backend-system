@@ -313,6 +313,114 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /projects/{projectId}/in-lab-visits:
+    parameters:
+      - name: projectId
+        in: path
+        required: true
+        description: The id of the project to retrieve
+        schema:
+          type: string
+    post:
+      summary: Create in-lab visit data.
+      tags:
+        - Project
+        - In-lab Visit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InLabVisitReq"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InLabVisitRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: List in-lab visits
+      tags:
+        - Project
+        - In-lab Visit
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/InLabVisitRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /projects/{projectId}/in-lab-visits/{inLabVisitId}:
+    parameters:
+      - name: projectId
+        in: path
+        required: true
+        description: The id of the project to retrieve
+        schema:
+          type: string
+      - name: inLabVisitId
+        in: path
+        required: true
+        description: The id of the in-lab visit data
+        schema:
+          type: string
+    get:
+      summary: Retrieve in-lab visits with a specific inLabVisitId
+      tags:
+        - Project
+        - In-lab Visit
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InLabVisitRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Update in-lab visit data with a specific inLabVisitId
+      tags:
+        - Project
+        - In-lab Visit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InLabVisitUpdateReq"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InLabVisitRes"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Id:
@@ -381,6 +489,13 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Participant"
+    TextQuestion:
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          enum: [ TEXT ]
     ChoiceQuestion:
       required:
         - tag
@@ -388,9 +503,9 @@ components:
       properties:
         tag:
           type: string
-          enum: [ RADIO, CHECKBOX, DROPDOWN ]
+          enum: [ RADIO, CHECKBOX, DROPDOWN, IMAGE ]
           description: Only one option can be chosen for radio, dropdown.
-            Multiple options can be chosen for checkbox.
+            Multiple options can be chosen for checkbox, image.
         options:
           type: array
           items:
@@ -399,6 +514,75 @@ components:
             properties:
               value:
                 type: string
+                description: For Image Question, you have to put link of Image in this field.
+              label:
+                type: string
+                description: This field can be used when type is IMAGE to generate Image Question with label
+                  Also, if you want to create Image Question with label, all options have to include their own labels
+        display_logic:
+          type: object
+          description: not used in v1.0
+        skip_logic:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkipLogic"
+    RankQuestion:
+      required:
+        - tag
+        - options
+      properties:
+        tag:
+          type: string
+          enum: [ RANK ]
+        options:
+          type: array
+          items:
+            required:
+              - value
+            properties:
+              value:
+                type: string
+    ScaleQuestion:
+      required:
+        - tag
+        - low
+        - high
+      properties:
+        tag:
+          type: string
+          enum: [ SLIDER ]
+        low:
+          type: integer
+          description: min value of scale
+        high:
+          type: integer
+          description: max value of scale
+        lowLabel:
+          type: string
+          description: label of min value
+          example: Somewhat disagree
+        highLabel:
+          type: string
+          description: label of max value
+          example: Strongly agree
+    DateTimeQuestion:
+      required:
+        - tag
+      properties:
+        tag:
+          type: string
+          enum: [ DATETIME ]
+        isTime:
+          type: boolean
+          default: true
+          description: Either isTime or isDate has to be true
+        isDate:
+          type: boolean
+          default: true
+          description: Either isTime or isDate has to be true
+        isRange:
+          type: boolean
+          default: false
     Question:
       required:
         - title
@@ -415,12 +599,16 @@ components:
           default: true
         type:
           type: string
-          enum: [ CHOICE ]
+          enum: [ CHOICE, TEXT, RANK, SCALE, DATETIME ]
         properties:
           type: object
           description: It depends on the value of 'type'
           oneOf:
             - $ref: "#/components/schemas/ChoiceQuestion"
+            - $ref: "#/components/schemas/TextQuestion"
+            - $ref: "#/components/schemas/RankQuestion"
+            - $ref: "#/components/schemas/ScaleQuestion"
+            - $ref: "#/components/schemas/DateTimeQuestion"
     Section:
       properties:
         title:
@@ -447,7 +635,7 @@ components:
           default: true
         type:
           type: string
-          enum: [ TAPPING_SPEED, REACTION_TIME, RANGE_OF_MOTION, GAIT_AND_BALANCE, GUIDED_BREATHING, STROOP_TEST ]
+          enum: [ TAPPING_SPEED, REACTION_TIME, RANGE_OF_MOTION, GAIT_AND_BALANCE, GUIDED_BREATHING, STROOP_TEST, SPEECH_RECOGNITION, MOBILE_SPIROMETRY, SUSTAINED_PHONATION ]
         properties:
           type: object
           description: field for configurable values. This is not used for v1.0
@@ -621,6 +809,85 @@ components:
           type: string
         result:
           type: string
+    SkipLogic:
+      properties:
+        condition:
+          type: string
+          description: Expression that match BranchRule
+          example: or contains val4 1 notcontains val4 2
+        goToAction:
+          type: string
+          description: not used in v1.0
+          example:
+        goToItemSequence:
+          type: integer
+          description: If condition holds, then skip to sequence $goToItemSequence
+          example: 3
+    InLabVisitReq:
+      required:
+        - userId
+        - checkedInBy
+        - startTime
+        - endTime
+      properties:
+        userId:
+          type: string
+        checkedInBy:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        notes:
+          type: string
+    InLabVisitUpdateReq:
+      required:
+        - userId
+        - checkedInBy
+        - startTime
+        - endTime
+      properties:
+        userId:
+          type: string
+        checkedInBy:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        notes:
+          type: string
+    InLabVisitRes:
+      required:
+        - id
+        - userId
+        - checkedInBy
+        - startTime
+        - endTime
+        - notes
+        - filesPath
+      properties:
+        id:
+          type: integer
+        userId:
+          type: string
+        checkedInBy:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        notes:
+          type: string
+        filesPath:
+          type: string
+          example: in-lab-visit/u1234
     Error:
       required:
         - code

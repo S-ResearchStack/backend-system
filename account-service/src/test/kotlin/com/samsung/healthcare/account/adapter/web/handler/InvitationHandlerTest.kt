@@ -15,7 +15,7 @@ import com.samsung.healthcare.account.application.port.input.GetAccountUseCase
 import com.samsung.healthcare.account.application.service.AccountService
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import io.mockk.every
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -50,7 +50,7 @@ internal class InvitationHandlerTest {
     private lateinit var webClient: WebTestClient
 
     private val email = Email("cubist@reserch-hub.test.com")
-    private val invitedRole = Researcher("project-id")
+    private val invitedRole = ResearchAssistant("project-id")
 
     private val normalRequest =
         InvitationRequest(email = email.value, roles = listOf(invitedRole.roleName))

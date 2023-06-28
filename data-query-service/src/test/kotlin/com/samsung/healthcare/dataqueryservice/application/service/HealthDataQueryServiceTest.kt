@@ -6,6 +6,7 @@ import com.samsung.healthcare.dataqueryservice.application.port.output.QueryData
 import com.samsung.healthcare.dataqueryservice.application.port.output.QueryDataResult
 import io.mockk.every
 import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
@@ -57,6 +58,114 @@ internal class HealthDataQueryServiceTest {
     fun `fetchLatestAverageHR should throw IllegalArgumentException when users is empty`() {
         assertThrows<IllegalArgumentException> {
             healthDataQueryService.fetchLatestAverageHR(
+                testProjectId,
+                emptyList(),
+                testAccountId
+            )
+        }
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `fetchLatestAverageBG should return averageBG of users`() {
+
+        every {
+            queryDataPort.executeQuery(testProjectId, testAccountId, any(), testUserIds)
+        } returns QueryDataResult(
+            emptyList(),
+            testUserIds.map {
+                mapOf(
+                    USER_ID_COLUMN to it,
+                    AVERAGE_BG_COLUMN to Random.nextDouble(30.0, 180.0)
+                )
+            }
+        )
+
+        val averageBGs = healthDataQueryService.fetchLatestAverageBG(testProjectId, testUserIds, testAccountId)
+        assertTrue(averageBGs.size <= testUserIds.size)
+        averageBGs.forEach {
+            assertTrue(testUserIds.contains(it.userId))
+            assertThat(it.average).isBetween(30.0, 180.0)
+        }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `fetchLatestAverageBG should throw IllegalArgumentException when users is empty`() {
+        assertThrows<IllegalArgumentException> {
+            healthDataQueryService.fetchLatestAverageBG(
+                testProjectId,
+                emptyList(),
+                testAccountId
+            )
+        }
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `fetchLatestAverageRR should return averageRR of users`() {
+
+        every {
+            queryDataPort.executeQuery(testProjectId, testAccountId, any(), testUserIds)
+        } returns QueryDataResult(
+            emptyList(),
+            testUserIds.map {
+                mapOf(
+                    USER_ID_COLUMN to it,
+                    AVERAGE_RR_COLUMN to Random.nextDouble(30.0, 180.0)
+                )
+            }
+        )
+
+        val averageRRs = healthDataQueryService.fetchLatestAverageRR(testProjectId, testUserIds, testAccountId)
+        assertTrue(averageRRs.size <= testUserIds.size)
+        averageRRs.forEach {
+            assertTrue(testUserIds.contains(it.userId))
+            assertThat(it.average).isBetween(30.0, 180.0)
+        }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `fetchLatestAverageRR should throw IllegalArgumentException when users is empty`() {
+        assertThrows<IllegalArgumentException> {
+            healthDataQueryService.fetchLatestAverageRR(
+                testProjectId,
+                emptyList(),
+                testAccountId
+            )
+        }
+    }
+
+    @Test
+    @Tag(POSITIVE_TEST)
+    fun `fetchLatestAverageSPO2 should return averageSPO2 of users`() {
+
+        every {
+            queryDataPort.executeQuery(testProjectId, testAccountId, any(), testUserIds)
+        } returns QueryDataResult(
+            emptyList(),
+            testUserIds.map {
+                mapOf(
+                    USER_ID_COLUMN to it,
+                    AVERAGE_SPO2_COLUMN to Random.nextDouble(30.0, 180.0)
+                )
+            }
+        )
+
+        val averageSPO2s = healthDataQueryService.fetchLatestAverageSPO2(testProjectId, testUserIds, testAccountId)
+        assertTrue(averageSPO2s.size <= testUserIds.size)
+        averageSPO2s.forEach {
+            assertTrue(testUserIds.contains(it.userId))
+            assertThat(it.average).isBetween(30.0F, 180.0F)
+        }
+    }
+
+    @Test
+    @Tag(NEGATIVE_TEST)
+    fun `fetchLatestAverageSPO2 should throw IllegalArgumentException when users is empty`() {
+        assertThrows<IllegalArgumentException> {
+            healthDataQueryService.fetchLatestAverageSPO2(
                 testProjectId,
                 emptyList(),
                 testAccountId

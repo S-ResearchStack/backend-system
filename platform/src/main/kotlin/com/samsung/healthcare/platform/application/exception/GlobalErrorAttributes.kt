@@ -26,18 +26,21 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
             UnauthorizedException::class to HttpStatus.UNAUTHORIZED,
             NotImplementedException::class to HttpStatus.NOT_IMPLEMENTED,
             UserAlreadyExistsException::class to HttpStatus.CONFLICT,
-            DuplicateProjectNameException::class to HttpStatus.CONFLICT
+            DuplicateProjectNameException::class to HttpStatus.CONFLICT,
+            BranchLogicSyntaxErrorException::class to HttpStatus.BAD_REQUEST,
         )
     }
 
     override fun getErrorAttributes(request: ServerRequest, options: ErrorAttributeOptions): Map<String, Any> =
         getError(request).let { error ->
-            super.getErrorAttributes(request, options).also { errorAttributes ->
-                errorAttributes[STATUS] = errorStatusMap[error::class] ?: run {
-                    if (error is ResponseStatusException) error.status
-                    else HttpStatus.INTERNAL_SERVER_ERROR
+            super.getErrorAttributes(request, options).also {
+                if (error is ResponseStatusException) {
+                    it[STATUS] = errorStatusMap[(error.rootCause ?: error)::class] ?: error.status
+                    it[MESSAGE] = (error.rootCause ?: error).message
+                } else {
+                    it[STATUS] = errorStatusMap[error::class] ?: HttpStatus.INTERNAL_SERVER_ERROR
+                    it[MESSAGE] = error.message
                 }
-                errorAttributes[MESSAGE] = error.message
             }
         }
 }

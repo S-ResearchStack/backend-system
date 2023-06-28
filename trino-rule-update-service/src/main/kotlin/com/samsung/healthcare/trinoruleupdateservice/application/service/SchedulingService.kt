@@ -22,7 +22,7 @@ class SchedulingService(
         val users = getUsersPort.getUsers()
         logger.info { "${users.size} users found" }
         updateRulePort.updateAccessControlConfigFile(
-            Rule.newRule(users, config.databaseConfig.prefix, config.databaseConfig.postfix)
+            Rule.newRule(users, config)
         )
         logger.info { "Finish Updating." }
     }

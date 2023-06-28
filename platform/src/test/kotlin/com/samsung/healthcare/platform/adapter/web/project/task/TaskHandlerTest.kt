@@ -95,7 +95,7 @@ internal class TaskHandlerTest {
     val account = Account(
         "account-id",
         Email("cubist@test.com"),
-        listOf(Role.ProjectRole.Researcher(projectId.value.toString()))
+        listOf(Role.ProjectRole.ResearchAssistant(projectId.value.toString()))
     )
 
     @BeforeEach
@@ -206,6 +206,7 @@ internal class TaskHandlerTest {
     fun `should throw unauthorized when no token provided`() {
         val result = webTestClient.post()
             .uri("/api/projects/$projectId/tasks")
+            .contentType(MediaType.APPLICATION_JSON)
             .exchange()
             .expectBody(ErrorResponse::class.java)
             .returnResult()

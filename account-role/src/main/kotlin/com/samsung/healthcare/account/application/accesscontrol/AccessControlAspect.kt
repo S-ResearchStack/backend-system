@@ -1,10 +1,10 @@
 package com.samsung.healthcare.account.application.accesscontrol
 
 import com.samsung.healthcare.account.application.context.ContextHolder
-import com.samsung.healthcare.account.domain.AccessProjectAuthority
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.AssignRoleAuthority
 import com.samsung.healthcare.account.domain.GlobalAuthority
+import com.samsung.healthcare.account.domain.ProjectAuthority
 import com.samsung.healthcare.account.domain.Role.ProjectRole
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -22,7 +22,7 @@ class AccessControlAspect {
     fun withAuthorize(joinPoint: ProceedingJoinPoint, requires: Requires): Any {
         return ContextHolder.getAccount()
             .switchIfEmpty { Mono.error(IllegalAccessException()) }
-            .map { account -> checkRoles(account, requires, joinPoint) }
+            .map { account -> checkAuthorities(account, requires, joinPoint) }
             .onErrorMap { ex -> ex.printStackTrace(); IllegalAccessException() }
             .then(proceed(joinPoint))
     }
@@ -33,45 +33,42 @@ class AccessControlAspect {
         }
     }
 
-    private fun checkRoles(account: Account, requires: Requires, joinPoint: ProceedingJoinPoint) {
+    private fun checkAuthorities(account: Account, requires: Requires, joinPoint: ProceedingJoinPoint) {
         checkGlobalAuthorities(account, requires)
         checkProjectAuthorities(account, requires, joinPoint)
     }
 
     private fun checkProjectAuthorities(account: Account, requires: Requires, joinPoint: ProceedingJoinPoint) {
-        checkAccessProjectAuthorities(account, requires, joinPoint)
-        checkAssignRoleAuthorities(account, requires, joinPoint)
+        val requiredAuthorities = requires.authorities.toSet()
+            .filter { it.isSubclassOf(ProjectAuthority::class) }
+        if (requiredAuthorities.any { it.isSubclassOf(AssignRoleAuthority::class) })
+            checkAssignRoleAuthorities(account, joinPoint)
+        else {
+            val projectIds = joinPoint.args.filterIsInstance(String::class.java)
+            requiredAuthorities.forEach {
+                checkPermissions(account, it, projectIds)
+            }
+        }
     }
 
-    private fun checkAccessProjectAuthorities(account: Account, requires: Requires, joinPoint: ProceedingJoinPoint) {
-        val projectIds = joinPoint.args.filterIsInstance(String::class.java)
-        checkPermissions(account, requires, projectIds, AccessProjectAuthority::class)
-    }
-
-    private fun checkAssignRoleAuthorities(account: Account, requires: Requires, joinPoint: ProceedingJoinPoint) {
+    private fun checkAssignRoleAuthorities(account: Account, joinPoint: ProceedingJoinPoint) {
         val projectIds = joinPoint.args.filterIsInstance(Collection::class.java)
             .flatten()
             .filterIsInstance(ProjectRole::class.java)
             .map { it.projectId }
-        checkPermissions(account, requires, projectIds, AssignRoleAuthority::class)
+        checkPermissions(account, AssignRoleAuthority::class, projectIds)
     }
 
     private fun checkPermissions(
         account: Account,
-        requires: Requires,
+        authorityClass: KClass<*>,
         projectIds: List<String>,
-        authorityClass: KClass<*>
     ) {
-        val hasAllPermissions = requires.authorities
-            .filter { it.isSubclassOf(authorityClass) }
-            .flatMap { kClass ->
-                projectIds.map {
-                    kClass.primaryConstructor!!.call(it)
-                }
-            }
-            .all { authority -> account.hasPermission(authority as GrantedAuthority) }
+        val hasPermission = projectIds.map {
+            authorityClass.primaryConstructor!!.call(it)
+        }.all { authority -> account.hasPermission(authority as GrantedAuthority) }
 
-        if (!hasAllPermissions) throw IllegalAccessException()
+        if (!hasPermission) throw IllegalAccessException()
     }
 
     private fun checkGlobalAuthorities(account: Account, requires: Requires) {

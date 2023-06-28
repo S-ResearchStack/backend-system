@@ -7,7 +7,7 @@ import com.samsung.healthcare.account.application.exception.UnknownRoleException
 import com.samsung.healthcare.account.application.port.output.AuthServicePort
 import com.samsung.healthcare.account.domain.Account
 import com.samsung.healthcare.account.domain.Email
-import com.samsung.healthcare.account.domain.Role.ProjectRole.Researcher
+import com.samsung.healthcare.account.domain.Role.ProjectRole.ResearchAssistant
 import com.samsung.healthcare.account.domain.Role.TeamAdmin
 import io.mockk.every
 import io.mockk.mockk
@@ -110,7 +110,7 @@ internal class AccountServiceTest {
         every { authServicePort.assignRoles(accountId, any()) } returns Mono.error(UnknownRoleException())
 
         StepVerifier.create(
-            accountService.assignRoles(accountId, listOf(Researcher("1")))
+            accountService.assignRoles(accountId, listOf(ResearchAssistant("1")))
         ).verifyError<UnknownRoleException>()
     }
 }

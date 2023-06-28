@@ -29,3 +29,6 @@ fun ServerRequest.getRevisionId(): Int? = try {
 }
 
 fun ServerRequest.getTaskId(): String = this.pathVariable("taskId")
+
+fun ServerRequest.getInLabVisitId(): Int = this.pathVariable("inLabVisitId").toIntOrNull()
+    ?: throw IllegalArgumentException("illegal inLabVisitId")

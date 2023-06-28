@@ -1,5 +1,6 @@
 package com.samsung.healthcare.trinoruleupdateservice.domain.trino.rule
 
+import com.samsung.healthcare.trinoruleupdateservice.application.config.ApplicationProperties
 import com.samsung.healthcare.trinoruleupdateservice.domain.accountservice.Role
 import com.samsung.healthcare.trinoruleupdateservice.domain.accountservice.User
 
@@ -15,13 +16,16 @@ data class Rule(
         internal const val ALL = ".*"
         internal const val SELECT_PRIVILEGE = "SELECT"
         private val adminCatalog = Catalog(user = "admin", catalog = ALL, allow = "all")
-        private val postgresCatalog = Catalog(catalog = "postgresql", allow = "read-only")
         private val systemCatalog = Catalog(catalog = "system", allow = "none")
 
         private val defaultSchema = Schema(user = ALL, schema = ALL, owner = false)
 
-        fun newRule(users: List<User>, dbPrefix: String = "project_", dbPostfix: String = "_research"): Rule {
-            val catalogs = mutableListOf(adminCatalog, postgresCatalog, systemCatalog)
+        fun newRule(users: List<User>, config: ApplicationProperties): Rule {
+            val originalDbCatalog = Catalog(catalog = config.trino.catalogs.originalDb.name, allow = "read-only")
+            val deIdentifiedDbCatalog =
+                Catalog(catalog = config.trino.catalogs.deIdentifiedDb.name, allow = "read-only")
+
+            val catalogs = mutableListOf(adminCatalog, originalDbCatalog, deIdentifiedDbCatalog, systemCatalog)
             val schemas = mutableListOf(defaultSchema)
 
             val tables = mutableListOf<Table>()
@@ -29,12 +33,21 @@ data class Rule(
             users.forEach { user ->
                 user.roles.forEach { roleStr ->
                     val role = Role.newRole(roleStr)
-                    if (role.position in listOf("project-owner", "head-researcher", "researcher")) {
+                    if (role.position in listOf(
+                            "study-creator",
+                            "principal-investigator",
+                            "research-assistant",
+                            "data-scientist"
+                        )
+                    ) {
                         tables.add(
                             Table(
                                 user = user.id,
-                                catalog = postgresCatalog.catalog,
-                                schema = "$dbPrefix${role.projectId}$dbPostfix",
+                                catalog =
+                                if (role.position == "data-scientist") deIdentifiedDbCatalog.catalog
+                                else originalDbCatalog.catalog,
+                                schema =
+                                "${config.databaseConfig.prefix}${role.projectId}${config.databaseConfig.postfix}",
                                 table = ALL,
                                 privileges = listOf(SELECT_PRIVILEGE),
                             )
