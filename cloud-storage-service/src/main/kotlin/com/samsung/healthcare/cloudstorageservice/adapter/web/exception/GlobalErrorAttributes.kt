@@ -1,6 +1,7 @@
 package com.samsung.healthcare.cloudstorageservice.adapter.web.exception
 
 import com.samsung.healthcare.cloudstorageservice.application.exception.BadRequestException
+import com.samsung.healthcare.cloudstorageservice.application.exception.ForbiddenException
 import com.samsung.healthcare.cloudstorageservice.application.exception.NotFoundException
 import com.samsung.healthcare.cloudstorageservice.application.exception.UnauthorizedException
 import org.springframework.boot.web.error.ErrorAttributeOptions
@@ -24,6 +25,7 @@ class GlobalErrorAttributes : DefaultErrorAttributes() {
             IllegalArgumentException::class to HttpStatus.BAD_REQUEST,
             IllegalAccessException::class to HttpStatus.FORBIDDEN,
             JwtException::class to HttpStatus.UNAUTHORIZED,
+            ForbiddenException::class to HttpStatus.FORBIDDEN,
             NotFoundException::class to HttpStatus.NOT_FOUND,
             UnauthorizedException::class to HttpStatus.UNAUTHORIZED,
         )

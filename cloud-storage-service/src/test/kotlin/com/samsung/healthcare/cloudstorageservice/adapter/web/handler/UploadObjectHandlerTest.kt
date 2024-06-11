@@ -11,6 +11,7 @@ import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalEr
 import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalExceptionHandler
 import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.IdTokenFilterFunction
 import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.JwtAuthenticationFilterFunction
+import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.ProjectIdFilterFunction
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.PARTICIPANT_UPLOAD_OBJECT_URL_PATH
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.ParticipantUploadObjectRouter
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.UPLOAD_OBJECT_URL_PATH
@@ -42,6 +43,7 @@ import java.net.URL
     GlobalErrorAttributes::class,
     IdTokenFilterFunction::class,
     JwtAuthenticationFilterFunction::class,
+    ProjectIdFilterFunction::class,
     SecurityConfig::class,
 )
 internal class UploadObjectHandlerTest {

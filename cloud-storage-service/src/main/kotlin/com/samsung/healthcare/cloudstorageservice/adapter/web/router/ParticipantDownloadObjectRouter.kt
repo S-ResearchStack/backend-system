@@ -1,6 +1,7 @@
 package com.samsung.healthcare.cloudstorageservice.adapter.web.router
 
 import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.IdTokenFilterFunction
+import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.ProjectIdFilterFunction
 import com.samsung.healthcare.cloudstorageservice.adapter.web.handler.DownloadObjectHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,12 +15,14 @@ class ParticipantDownloadObjectRouter {
     fun routeParticipantDownloadObject(
         handler: DownloadObjectHandler,
         idTokenFilterFunction: IdTokenFilterFunction,
+        projectIdFilterFunction: ProjectIdFilterFunction,
     ): RouterFunction<ServerResponse> =
         RouterFunctions.route()
             .GET(
                 PARTICIPANT_DOWNLOAD_OBJECT_PATH,
                 handler::participantDownload,
             )
+            .filter(projectIdFilterFunction)
             .filter(idTokenFilterFunction)
             .build()
 }

@@ -18,8 +18,6 @@ internal class AwsStorageAdapterTest {
     fun `getUploadSignedUrl should work properly`() {
         val key = "1/in-lab-visit/u1234/test.txt"
         val url = awsStorageAdapter.getUploadSignedUrl(key, signedUrlDuration)
-        println(url.host)
-        println(url.query)
         Assertions.assertEquals(url.path, "/$key")
         Assertions.assertEquals(url.host, "${awsProperties.bucket}.s3.${awsProperties.region}.amazonaws.com")
         Assertions.assertTrue(
@@ -33,8 +31,6 @@ internal class AwsStorageAdapterTest {
     fun `getDownloadSignedUrl should work properly`() {
         val key = "1/in-lab-visit/u1234/test.txt"
         val url = awsStorageAdapter.getDownloadSignedUrl(key, signedUrlDuration)
-        println(url.host)
-        println(url.query)
         Assertions.assertEquals(url.path, "/$key")
         Assertions.assertEquals(url.host, "${awsProperties.bucket}.s3.${awsProperties.region}.amazonaws.com")
         Assertions.assertTrue(

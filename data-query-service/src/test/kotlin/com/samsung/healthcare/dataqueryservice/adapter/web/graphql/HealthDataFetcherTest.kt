@@ -128,7 +128,6 @@ internal class HealthDataFetcherTest {
             """.trimIndent()
         )
 
-        println("[error]!" + result.errors)
         assertTrue(!result.errors.isEmpty())
 
         verify {
@@ -259,7 +258,6 @@ internal class HealthDataFetcherTest {
             """.trimIndent()
         )
 
-        println(result.errors)
         assertTrue(result.errors.isEmpty())
         val data = result.getData<Map<String, List<Map<String, Any>>>>()["averageHealthData"] ?: fail("")
         assertEquals(

@@ -10,6 +10,7 @@ import com.samsung.healthcare.cloudstorageservice.adapter.web.config.SecurityCon
 import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalExceptionHandler
 import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.JwtAuthenticationFilterFunction
+import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.ProjectIdFilterFunction
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.LIST_OBJECTS_PATH
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.ListObjectsRouter
 import com.samsung.healthcare.cloudstorageservice.application.port.input.ListObjectsUseCase
@@ -34,6 +35,7 @@ import reactor.core.publisher.Mono
     GlobalExceptionHandler::class,
     GlobalErrorAttributes::class,
     JwtAuthenticationFilterFunction::class,
+    ProjectIdFilterFunction::class,
     SecurityConfig::class,
 )
 internal class ListObjectsHandlerTest {

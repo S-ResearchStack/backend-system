@@ -75,11 +75,13 @@ data class UpdateTaskCommand(
                             require(contents["title"] is String)
                             validateContentOptionalField(contents)
                             val props = contents["properties"] as Map<*, *>
-                            require(listOf("RADIO", "CHECKBOX", "DROPDOWN", "IMAGE").contains(props["tag"]))
+                            require(
+                                listOf("RADIO", "CHECKBOX", "DROPDOWN", "IMAGE", "MULTIIMAGE").contains(props["tag"])
+                            )
                             val options = props["options"] as List<Map<String, Any>>
                             val optionKeys = options.distinctBy { it.keys }.single().keys
-                            if (props["tag"] == "IMAGE") {
-                                require(listOf(setOf("value"), setOf("value", "label")).contains(optionKeys))
+                            if (props["tag"] == "IMAGE" || props["tag"] == "MULTIIMAGE") {
+                                require(optionKeys == setOf("value") || optionKeys == setOf("value", "label"))
                             } else {
                                 require(optionKeys == setOf("value"))
                             }

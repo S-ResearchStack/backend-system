@@ -503,9 +503,9 @@ components:
       properties:
         tag:
           type: string
-          enum: [ RADIO, CHECKBOX, DROPDOWN, IMAGE ]
-          description: Only one option can be chosen for radio, dropdown.
-            Multiple options can be chosen for checkbox, image.
+          enum: [ RADIO, CHECKBOX, DROPDOWN, MULTIIMAGE, IMAGE ]
+          description: Only one option can be chosen for radio, dropdown, image.
+            Multiple options can be chosen for checkbox, multi-image.
         options:
           type: array
           items:

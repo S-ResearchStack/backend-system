@@ -3,9 +3,11 @@ package com.samsung.healthcare.platform.adapter.persistence.entity.project.healt
 import com.samsung.healthcare.platform.domain.project.UserProfile.UserId
 import com.samsung.healthcare.platform.domain.project.healthdata.BloodGlucose
 import com.samsung.healthcare.platform.domain.project.healthdata.BloodPressure
+import com.samsung.healthcare.platform.domain.project.healthdata.Ecg
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.BLOOD_GLUCOSE
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.BLOOD_PRESSURE
+import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.ECG
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.HEART_RATE
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.HEIGHT
 import com.samsung.healthcare.platform.domain.project.healthdata.HealthData.HealthDataType.OXYGEN_SATURATION
@@ -45,4 +47,5 @@ fun HealthData.toEntity(userId: UserId): HealthDataEntity =
         TOTAL_CALORIES_BURNED -> (this as TotalCaloriesBurned).toEntity(userId)
         RESPIRATORY_RATE -> (this as RespiratoryRate).toEntity(userId)
         BLOOD_GLUCOSE -> (this as BloodGlucose).toEntity(userId)
+        ECG -> (this as Ecg).toEntity(userId)
     }

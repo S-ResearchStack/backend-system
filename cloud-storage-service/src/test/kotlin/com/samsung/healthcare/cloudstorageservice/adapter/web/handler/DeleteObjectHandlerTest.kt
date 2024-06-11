@@ -10,6 +10,7 @@ import com.samsung.healthcare.cloudstorageservice.adapter.web.config.SecurityCon
 import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalErrorAttributes
 import com.samsung.healthcare.cloudstorageservice.adapter.web.exception.GlobalExceptionHandler
 import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.JwtAuthenticationFilterFunction
+import com.samsung.healthcare.cloudstorageservice.adapter.web.filter.ProjectIdFilterFunction
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.DELETE_OBJECT_PATH
 import com.samsung.healthcare.cloudstorageservice.adapter.web.router.DeleteObjectRouter
 import com.samsung.healthcare.cloudstorageservice.application.port.input.DeleteObjectUseCase
@@ -36,6 +37,7 @@ import java.net.URL
     GlobalExceptionHandler::class,
     GlobalErrorAttributes::class,
     JwtAuthenticationFilterFunction::class,
+    ProjectIdFilterFunction::class,
     SecurityConfig::class,
 )
 internal class DeleteObjectHandlerTest {

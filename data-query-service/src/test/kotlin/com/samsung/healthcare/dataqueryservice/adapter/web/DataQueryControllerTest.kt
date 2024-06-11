@@ -127,7 +127,7 @@ internal class DataQueryControllerTest {
             .expectBody()
             .returnResult()
 
-        assertThat(result.status).isEqualTo(HttpStatus.BAD_REQUEST)
+        assertThat(result.status).isEqualTo(HttpStatus.UNAUTHORIZED)
     }
 
     @Test

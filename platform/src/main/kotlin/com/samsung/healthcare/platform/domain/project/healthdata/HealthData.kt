@@ -63,7 +63,9 @@ abstract class HealthData(
 
         TOTAL_CALORIES_BURNED("TotalCaloriesBurned", false, TotalCaloriesBurned::class.java),
 
-        BLOOD_GLUCOSE("BloodGlucose", true, BloodGlucose::class.java);
+        BLOOD_GLUCOSE("BloodGlucose", true, BloodGlucose::class.java),
+
+        ECG("Ecg", true, Ecg::class.java);
 
         companion object {
             private val stringToType = values().associateBy(HealthDataType::type)

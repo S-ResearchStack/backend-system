@@ -28,7 +28,7 @@ class GlobalExceptionHandler(
         reason = if (isDebug) e.message else null
     )
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(BadJwtException::class)
     fun handleBadJwtException(e: BadJwtException) = ErrorResponse(
         message = "Bad JWT Exception.",
