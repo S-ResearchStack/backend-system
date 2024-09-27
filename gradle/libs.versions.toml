@@ -1,0 +1,94 @@
+[versions]
+antlr4 = "4.11.1"
+armeria = "1.25.2"
+awsSdk = "2.20.69"
+blockhound = "1.0.8.RELEASE"
+casbinSpringBoot = "1.2.0"
+embeddedRedis = "0.7.3"
+feignReactor = "4.0.3"
+flyway = "9.22.1"
+grpc = "1.57.2"
+grpcKotlin = "1.3.0"
+guava = "31.1-jre"
+jackson = "2.14.2"
+javaxAnnotationApi = "1.3.2"
+json = "20231013"
+junit5 = "5.9.2"
+kotlin = "1.9.0"
+kotlinWiremock = "2.1.1"
+kotlinxCoroutines = "1.7.3"
+kotlinxSerialization = "1.6.0"
+logback = "1.4.7"
+mapstruct = "1.5.5.Final"
+mockk = "1.13.4"
+netty = "4.1.96.Final"
+opencsv = "5.5"
+protobuf = "3.24.0"
+reactorKotlin = "1.2.2"
+reactorTest = "3.6.8"
+slf4j = "2.0.5"
+springBoot = "3.1.1"
+springKafka = "3.1.3"
+testcontainers = "1.19.0"
+wiremock = "3.3.1"
+zip4j = "2.11.5"
+trinoJdbc = "431"
+trinoParser = "431"
+
+[libraries]
+antlr4 = { module = "org.antlr:antlr4", version.ref = "antlr4" }
+armeria-bom = { module = "com.linecorp.armeria:armeria-bom", version.ref = "armeria" }
+armeria-grpc = { module = "com.linecorp.armeria:armeria-grpc", version.ref = "armeria" }
+armeria-kotlin = { module = "com.linecorp.armeria:armeria-kotlin", version.ref = "armeria" }
+armeria-springBoot-webflux = { module = "com.linecorp.armeria:armeria-spring-boot3-webflux-starter", version.ref = "armeria" }
+aws-s3TransferManager = { module = "software.amazon.awssdk:s3-transfer-manager", version.ref = "awsSdk"}
+aws-sts = { module = "software.amazon.awssdk:sts", version.ref = "awsSdk"}
+blockhound = { module = "io.projectreactor.tools:blockhound", version.ref = "blockhound" }
+casbin-springBoot = { module = "org.casbin:casbin-spring-boot-starter", version.ref = "casbinSpringBoot" }
+embeddedRedis = { module = "it.ozimov:embedded-redis", version.ref = "embeddedRedis" }
+playtika-feignReactor = { module = "com.playtika.reactivefeign:feign-reactor-spring-cloud-starter", version.ref = "feignReactor" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
+grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpcKotlin"}
+grpc-netty-shaded = { module = "io.grpc:grpc-netty-shaded", version.ref = "grpc" }
+grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
+javax-annotationApi = { module = "javax.annotation:javax.annotation-api", version.ref = "javaxAnnotationApi" }
+json = { module = "org.json:json", version.ref = "json" }
+junit-jupiterEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit-jupiterParams = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin" }
+kotlinx-coroutinesDebug = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-debug", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutinesReactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+mapstruct = { module = "org.mapstruct:mapstruct", version.ref = "mapstruct" }
+mapstruct-processor = { module = "org.mapstruct:mapstruct-processor", version.ref = "mapstruct" }
+marcinziolo-wiremock = { module = "com.marcinziolo:kotlin-wiremock", version.ref = "kotlinWiremock" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+netty-bom = { module = "io.netty:netty-bom", version.ref = "netty" }
+opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
+protobuf-java-util = { module = "com.google.protobuf:protobuf-java-util", version.ref = "protobuf" }
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions", version.ref = "reactorKotlin" }
+reactor-test = { module = "io.projectreactor:reactor-test", version.ref = "reactorTest" }
+slf4j-log4j = { module = "org.slf4j:log4j-over-slf4j", version.ref = "slf4j"}
+springBoot-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux", version.ref = "springBoot" }
+springBoot-oauth2Client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client", version.ref = "springBoot" }
+springBoot-quartz = { module = "org.springframework.boot:spring-boot-starter-quartz", version.ref = "springBoot" }
+springBoot-aop = { module = "org.springframework.boot:spring-boot-starter-aop", version.ref = "springBoot" }
+springBoot-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc", version.ref = "springBoot" }
+springBoot-redis = { module = "org.springframework.boot:spring-boot-starter-data-redis", version.ref = "springBoot" }
+springBoot-mongodbReactive = { module = "org.springframework.boot:spring-boot-starter-data-mongodb-reactive", version.ref = "springBoot" }
+springBoot-mail = { module = "org.springframework.boot:spring-boot-starter-mail", version.ref = "springBoot" }
+springBoot-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "springBoot" }
+springKafka = { module = "org.springframework.kafka:spring-kafka", version.ref = "springKafka" }
+springKafkaTest = { module = "org.springframework.kafka:spring-kafka-test", version.ref = "springKafka" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql", version.ref = "testcontainers" }
+wiremock = { module = "org.wiremock:wiremock", version.ref = "wiremock" }
+zip4j = { module = "net.lingala.zip4j:zip4j", version.ref = "zip4j" }
+trino-jdbc = { module = "io.trino:trino-jdbc", version.ref = "trinoJdbc" }
+trino-parser = { module = "io.trino:trino-parser", version.ref = "trinoParser" }
+
+[plugins]

@@ -1,0 +1,82 @@
+g3, investigator, adminReadResources
+g3, studyManager, adminReadResources
+g3, studyResearcher, adminReadResources
+g3, educationalContent, adminReadResources
+g3, file, adminReadResources
+g3, inLabVisit, adminReadResources
+g3, study, adminReadResources
+g3, participationRequirement, adminReadResources
+g3, dashboard, adminReadResources
+g3, chart, adminReadResources
+g3, participant, adminReadResources
+g3, studyData, adminReadResources
+g3, taskSpec, adminReadResources
+
+g3, investigator, adminWriteResources
+g3, studyManager, adminWriteResources
+g3, studyResearcher, adminWriteResources
+g3, educationalContent, adminWriteResources
+g3, file, adminWriteResources
+g3, inLabVisit, adminWriteResources
+g3, study, adminWriteResources
+g3, participationRequirement, adminWriteResources
+g3, dashboard, adminWriteResources
+g3, chart, adminWriteResources
+g3, participant, adminWriteResources
+g3, studyData, adminWriteResources
+g3, taskSpec, adminWriteResources
+
+g3, investigator, managerReadResources
+g3, studyResearcher, managerReadResources
+g3, educationalContent, managerReadResources
+g3, file, managerReadResources
+g3, inLabVisit, managerReadResources
+g3, study, managerReadResources
+g3, participationRequirement, managerReadResources
+g3, dashboard, managerReadResources
+g3, chart, managerReadResources
+g3, participant, managerReadResources
+g3, studyData, managerReadResources
+g3, taskSpec, managerReadResources
+
+g3, investigator, managerWriteResources
+g3, studyResearcher, managerWriteResources
+g3, educationalContent, managerWriteResources
+g3, file, managerWriteResources
+g3, inLabVisit, managerWriteResources
+g3, study, managerWriteResources
+g3, participationRequirement, managerWriteResources
+g3, dashboard, managerWriteResources
+g3, chart, managerWriteResources
+g3, participant, managerWriteResources
+g3, studyData, managerWriteResources
+g3, taskSpec, managerWriteResources
+
+g3, investigator, researcherReadResources
+g3, educationalContent, researcherReadResources
+g3, file, researcherReadResources
+g3, inLabVisit, researcherReadResources
+g3, study, researcherReadResources
+g3, participationRequirement, researcherReadResources
+g3, dashboard, researcherReadResources
+g3, chart, researcherReadResources
+g3, studyData, researcherReadResources
+g3, taskSpec, researcherReadResources
+
+g3, educationalContent, researcherWriteResources
+g3, file, researcherWriteResources
+g3, dashboard, researcherWriteResources
+g3, chart, researcherWriteResources
+g3, studyData, researcherWriteResources
+g3, taskSpec, researcherWriteResources
+
+g3, educationalContent, participantReadResources
+g3, file, participantReadResources
+g3, study, participantReadResources
+g3, participationRequirement, participantReadResources
+g3, taskSpec, participantReadResources
+
+g3, event, participantWriteResources
+g3, file, participantWriteResources
+g3, healthData, participantWriteResources
+g3, taskResult, participantWriteResources

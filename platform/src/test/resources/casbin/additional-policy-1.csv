@@ -1,0 +1,7 @@
+p, investigator, s1, r1, read
+p, investigator, s1, r1, write
+p, investigator, s2, r1, read
+p, investigator, s2, r1, write
+
+g, u1, investigator, s1
+g, u1, investigator, s2

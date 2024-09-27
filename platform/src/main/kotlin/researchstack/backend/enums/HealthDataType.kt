@@ -1,0 +1,41 @@
+package researchstack.backend.enums
+
+enum class HealthDataType(
+    val value: String
+) {
+    UNSPECIFIED("Unspecified"),
+    BLOOD_PRESSURE("BloodPressure"),
+    HEART_RATE("HeartRate"),
+    SLEEP_SESSION("SleepSession"),
+    SLEEP_STAGE("SleepStage"),
+    STEPS("Steps"),
+    WEIGHT("Weight"),
+    OXYGEN_SATURATION("OxygenSaturation"),
+    HEIGHT("Height"),
+    RESPIRATORY_RATE("RespiratoryRate"),
+    TOTAL_CALORIES_BURNED("TotalCaloriesBurned"),
+    BLOOD_GLUCOSE("BloodGlucose"),
+    LIGHT("Light"),
+    ACCELEROMETER("Accelerometer"),
+    EXERCISE("Exercise"),
+    WEAR_ACCELEROMETER("WearAccelerometer"),
+    WEAR_BIA("WearBia"),
+    WEAR_PPG_GREEN("WearPpgGreen"),
+    WEAR_PPG_IR("WearPpgIr"),
+    WEAR_PPG_RED("WearPpgRed"),
+    WEAR_SPO2("WearSpo2"),
+    WEAR_SWEAT_LOSS("WearSweatLoss"),
+    WEAR_HEART_RATE("WearHeartRate"),
+    WEAR_HEALTH_EVENT("WearHealthEvent"),
+    WEAR_GYROSCOPE("WearGyroScope"),
+    OFF_BODY("OffBody"),
+    BATTERY("Battery"),
+    WEAR_BATTERY("WearBattery"),
+    WEAR_ECG("WearEcg"),
+    GYROSCOPE("GyroScope"),
+    WEAR_BLOOD_PRESSURE("WearBloodPressure"),
+    DEVICE_STAT_MOBILE_WEAR_CONNECTION("DeviceStatMobileWearConnection"),
+    DEVICE_STAT_WEAR_BATTERY("DeviceStatWearBattery"),
+    DEVICE_STAT_WEAR_OFF_BODY("DeviceStatWearOffBody"),
+    DEVICE_STAT_WEAR_POWER_ON_OFF("DeviceStatWearPowerOnOff");
+}

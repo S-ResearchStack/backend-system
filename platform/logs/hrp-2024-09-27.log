@@ -1,0 +1,1361 @@
+23:03:57.195 INFO  com.linecorp.armeria.common.Flags - verboseExceptionSampler: ExceptionSampler{rate-limit=10} (default)
+23:03:57.200 INFO  com.linecorp.armeria.common.Flags - verboseExceptions: rate-limit=10 (default)
+23:03:57.201 INFO  com.linecorp.armeria.common.Flags - preferredIpV4Addresses: * (default)
+23:03:57.202 INFO  com.linecorp.armeria.common.Flags - verboseSocketExceptions: false (default)
+23:03:57.202 INFO  com.linecorp.armeria.common.Flags - verboseResponses: false (default)
+23:03:57.204 INFO  com.linecorp.armeria.common.Flags - requestContextStorageProvider: thread-local (default)
+23:03:57.204 INFO  com.linecorp.armeria.common.Flags - warnNettyVersions: true (default)
+23:03:57.304 INFO  com.linecorp.armeria.common.Flags - useEpoll: true (default)
+23:03:57.305 INFO  com.linecorp.armeria.common.Flags - Using /dev/epoll
+23:03:57.305 INFO  com.linecorp.armeria.common.Flags - transportType: EPOLL (default)
+23:03:57.306 INFO  com.linecorp.armeria.common.Flags - maxNumConnections: 2147483647 (default)
+23:03:57.306 INFO  com.linecorp.armeria.common.Flags - numCommonWorkers: 32 (default)
+23:03:57.306 INFO  com.linecorp.armeria.common.Flags - numCommonBlockingTaskThreads: 200 (default)
+23:03:57.307 INFO  com.linecorp.armeria.common.Flags - defaultMaxRequestLength: 10485760 (default)
+23:03:57.307 INFO  com.linecorp.armeria.common.Flags - defaultMaxResponseLength: 10485760 (default)
+23:03:57.308 INFO  com.linecorp.armeria.common.Flags - defaultRequestTimeoutMillis: 10000 (default)
+23:03:57.308 INFO  com.linecorp.armeria.common.Flags - defaultResponseTimeoutMillis: 15000 (default)
+23:03:57.308 INFO  com.linecorp.armeria.common.Flags - defaultConnectTimeoutMillis: 3200 (default)
+23:03:57.309 INFO  com.linecorp.armeria.common.Flags - defaultWriteTimeoutMillis: 1000 (default)
+23:03:57.309 INFO  com.linecorp.armeria.common.Flags - defaultServerIdleTimeoutMillis: 15000 (default)
+23:03:57.309 INFO  com.linecorp.armeria.common.Flags - defaultServerKeepAliveOnPing: false (default)
+23:03:57.310 INFO  com.linecorp.armeria.common.Flags - defaultClientIdleTimeoutMillis: 10000 (default)
+23:03:57.310 INFO  com.linecorp.armeria.common.Flags - defaultClientKeepAliveOnPing: false (default)
+23:03:57.310 INFO  com.linecorp.armeria.common.Flags - defaultPingIntervalMillis: 0 (default)
+23:03:57.311 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerNumRequestsPerConnection: 0 (default)
+23:03:57.311 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientNumRequestsPerConnection: 0 (default)
+23:03:57.311 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerConnectionAgeMillis: 0 (default)
+23:03:57.312 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientConnectionAgeMillis: 0 (default)
+23:03:57.312 INFO  com.linecorp.armeria.common.Flags - defaultServerConnectionDrainDurationMicros: 1000000 (default)
+23:03:57.313 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialConnectionWindowSize: 1048576 (default)
+23:03:57.313 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialStreamWindowSize: 1048576 (default)
+23:03:57.313 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxFrameSize: 16384 (default)
+23:03:57.314 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxStreamsPerConnection: 2147483647 (default)
+23:03:57.314 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxHeaderListSize: 8192 (default)
+23:03:57.314 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxInitialLineLength: 4096 (default)
+23:03:57.315 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxHeaderSize: 8192 (default)
+23:03:57.316 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxChunkSize: 8192 (default)
+23:03:57.316 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2Preface: true (default)
+23:03:57.317 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2WithoutAlpn: false (default)
+23:03:57.317 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp1Pipelining: false (default)
+23:03:57.329 INFO  com.linecorp.armeria.common.Flags - defaultBackoffSpec: exponential=200:10000,jitter=0.2 (default)
+23:03:57.329 INFO  com.linecorp.armeria.common.Flags - defaultMaxTotalAttempts: 10 (default)
+23:03:57.330 INFO  com.linecorp.armeria.common.Flags - defaultRequestAutoAbortDelayMillis: 0 (default)
+23:03:57.341 INFO  com.linecorp.armeria.common.Flags - routeCacheSpec: maximumSize=4096 (default)
+23:03:57.341 INFO  com.linecorp.armeria.common.Flags - routeDecoratorCacheSpec: maximumSize=4096 (default)
+23:03:57.341 INFO  com.linecorp.armeria.common.Flags - parsedPathCacheSpec: maximumSize=4096 (default)
+23:03:57.342 INFO  com.linecorp.armeria.common.Flags - headerValueCacheSpec: maximumSize=4096 (default)
+23:03:57.343 INFO  com.linecorp.armeria.common.Flags - cachedHeaders: [:authority, :scheme, :method, accept-encoding, content-type] (default)
+23:03:57.343 INFO  com.linecorp.armeria.common.Flags - fileServiceCacheSpec: maximumSize=1024 (default)
+23:03:57.343 INFO  com.linecorp.armeria.common.Flags - dnsCacheSpec: maximumSize=4096 (default)
+23:03:57.343 INFO  com.linecorp.armeria.common.Flags - annotatedServiceExceptionVerbosity: unhandled (default)
+23:03:57.344 INFO  com.linecorp.armeria.common.Flags - useJdkDnsResolver: false (default)
+23:03:57.344 INFO  com.linecorp.armeria.common.Flags - reportBlockedEventLoop: true (default)
+23:03:57.345 INFO  com.linecorp.armeria.common.Flags - reportMaskedRoutes: true (default)
+23:03:57.345 INFO  com.linecorp.armeria.common.Flags - validateHeaders: true (default)
+23:03:57.345 INFO  com.linecorp.armeria.common.Flags - tlsAllowUnsafeCiphers: false (default)
+23:03:57.345 INFO  com.linecorp.armeria.common.Flags - transientServiceOptions: [] (default)
+23:03:57.346 INFO  com.linecorp.armeria.common.Flags - useLegacyRouteDecoratorOrdering: false (default)
+23:03:57.346 INFO  com.linecorp.armeria.common.Flags - useDefaultSocketOptions: true (default)
+23:03:57.346 INFO  com.linecorp.armeria.common.Flags - allowDoubleDotsInQueryString: false (default)
+23:03:57.346 INFO  com.linecorp.armeria.common.Flags - allowSemicolonInPathComponent: false (default)
+23:03:57.347 INFO  com.linecorp.armeria.common.Flags - defaultMultipartUploadsLocation: /tmp/armeria/multipart-uploads (default)
+23:03:57.348 INFO  com.linecorp.armeria.common.Flags - requestContextLeakDetectionSampler: never (default)
+23:03:57.358 INFO  com.linecorp.armeria.common.Flags - meterRegistry: io.micrometer.core.instrument.composite.CompositeMeterRegistry@3c64339f (default)
+23:03:57.358 INFO  com.linecorp.armeria.common.Flags - defaultUnhandledExceptionsReportIntervalMillis: 10000 (default)
+23:03:57.591 INFO  c.l.armeria.common.util.SystemInfo - hostname: hjin-400tda-400sda (from /proc/sys/kernel/hostname)
+23:03:57.673 INFO  c.l.a.i.common.JavaVersionSpecific - Using the APIs optimized for: Java 12+
+23:04:01.584 INFO  r.b.a.i.g.a.AppLogGrpcController - App Log name: app log name
+23:04:01.615 INFO  r.b.a.i.g.a.AppLogGrpcController - App Log timestamp: seconds: 1727445840
+nanos: 937552544
+
+23:04:01.615 INFO  r.b.a.i.g.a.AppLogGrpcController - App Log data map: {Note=Application Started}
+23:04:04.956 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID: 
+23:04:04.963 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID:  
+23:04:04.974 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID: 7e3ba225-0e3c-4c87-9d02-b1fbe0802239
+23:04:04.995 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID: 
+23:04:05.001 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID:  
+23:04:05.103 INFO  r.b.a.i.g.s.SubjectGrpcController - User ID: 7e3ba225-0e3c-4c87-9d02-b1fbe0802239
+23:04:05.115 INFO  r.b.a.i.r.s.SubjectRestController - User ID: test-subject-id
+23:04:05.149 INFO  r.b.a.i.r.s.SubjectRestController - User ID: 
+23:04:05.155 INFO  r.b.a.i.r.s.SubjectRestController - User ID:  
+23:04:05.165 INFO  r.b.a.i.r.s.SubjectRestController - User ID: test-subject-id
+23:04:05.174 INFO  r.b.a.i.r.s.SubjectRestController - User ID: 
+23:04:05.179 INFO  r.b.a.i.r.s.SubjectRestController - User ID:  
+23:04:08.335 INFO  org.casbin.jcasbin - Model:
+23:04:08.335 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.335 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.335 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.335 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.335 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.335 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.336 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.482 INFO  org.casbin.jcasbin - Policy:
+23:04:08.482 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.482 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.483 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.483 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.483 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.484 INFO  org.casbin.jcasbin - 
+23:04:08.485 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.485 INFO  org.casbin.jcasbin - 
+23:04:08.485 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.485 INFO  org.casbin.jcasbin - 
+23:04:08.497 INFO  org.casbin.jcasbin - Model:
+23:04:08.497 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.497 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.498 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.498 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.498 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.498 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.498 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.501 INFO  org.casbin.jcasbin - Policy:
+23:04:08.501 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.501 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.501 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.501 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.501 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.501 INFO  org.casbin.jcasbin - 
+23:04:08.501 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.501 INFO  org.casbin.jcasbin - 
+23:04:08.501 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.501 INFO  org.casbin.jcasbin - 
+23:04:08.504 INFO  org.casbin.jcasbin - Model:
+23:04:08.504 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.504 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.504 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.504 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.504 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.505 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.505 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.506 INFO  org.casbin.jcasbin - Policy:
+23:04:08.507 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: [[investigator, s1, r1, read], [investigator, s1, r1, write], [investigator, s2, r1, read], [investigator, s2, r1, write]]
+23:04:08.507 INFO  org.casbin.jcasbin - g: _, _, _: [[u1, investigator, s1], [u1, investigator, s2]]
+23:04:08.507 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.507 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.508 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.509 INFO  org.casbin.jcasbin - s1: u1 < investigator
+s2: u1 < investigator
+23:04:08.509 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.509 INFO  org.casbin.jcasbin - 
+23:04:08.509 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.509 INFO  org.casbin.jcasbin - 
+23:04:08.511 INFO  org.casbin.jcasbin - Model:
+23:04:08.512 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.512 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.512 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.512 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.512 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.512 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.512 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.514 INFO  org.casbin.jcasbin - Policy:
+23:04:08.514 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: [[investigator, s2, r1, read], [investigator, s2, r1, write], [investigator, s3, r1, read], [investigator, s3, r1, write], [investigator, s4, r1, read], [investigator, s4, r1, write]]
+23:04:08.514 INFO  org.casbin.jcasbin - g: _, _, _: [[u1, investigator, s2], [u1, investigator, s3], [u1, investigator, s4]]
+23:04:08.514 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.514 INFO  org.casbin.jcasbin - g3: _, _: [[task, r1]]
+23:04:08.514 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.514 INFO  org.casbin.jcasbin - s3: u1 < investigator
+s4: u1 < investigator
+s2: u1 < investigator
+23:04:08.514 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.514 INFO  org.casbin.jcasbin - 
+23:04:08.515 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.515 INFO  org.casbin.jcasbin - casbin::default: task < r1
+23:04:08.516 INFO  org.casbin.jcasbin - Model:
+23:04:08.516 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.516 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.516 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.516 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.516 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.516 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.516 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.517 INFO  org.casbin.jcasbin - Policy:
+23:04:08.518 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.518 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.518 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.518 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.518 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.518 INFO  org.casbin.jcasbin - 
+23:04:08.518 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.518 INFO  org.casbin.jcasbin - 
+23:04:08.518 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.518 INFO  org.casbin.jcasbin - 
+23:04:08.519 INFO  org.casbin.jcasbin - Model:
+23:04:08.519 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.519 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.519 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.519 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.519 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.519 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.519 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.520 INFO  org.casbin.jcasbin - Policy:
+23:04:08.520 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.521 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.521 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.521 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.521 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.521 INFO  org.casbin.jcasbin - 
+23:04:08.521 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.521 INFO  org.casbin.jcasbin - 
+23:04:08.521 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.521 INFO  org.casbin.jcasbin - 
+23:04:08.524 INFO  org.casbin.jcasbin - Model:
+23:04:08.525 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.525 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.525 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.525 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.525 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.525 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.525 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.527 INFO  org.casbin.jcasbin - Policy:
+23:04:08.527 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.527 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.527 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.527 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.527 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.527 INFO  org.casbin.jcasbin - 
+23:04:08.527 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.527 INFO  org.casbin.jcasbin - 
+23:04:08.527 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.527 INFO  org.casbin.jcasbin - 
+23:04:08.528 INFO  org.casbin.jcasbin - Model:
+23:04:08.528 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.528 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.528 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.528 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.528 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.528 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.528 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.530 INFO  org.casbin.jcasbin - Policy:
+23:04:08.530 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.530 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.530 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.530 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.530 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.530 INFO  org.casbin.jcasbin - 
+23:04:08.530 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.530 INFO  org.casbin.jcasbin - 
+23:04:08.530 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.530 INFO  org.casbin.jcasbin - 
+23:04:08.538 INFO  org.casbin.jcasbin - Request: [test-user, test-study, adminReadResources, read] ---> true
+23:04:08.538 INFO  org.casbin.jcasbin - Hit Policy: [studyAdmin, test-study, adminReadResources, read]
+23:04:08.542 INFO  org.casbin.jcasbin - Request: [test-user, test-study, adminWriteResources, write] ---> true
+23:04:08.542 INFO  org.casbin.jcasbin - Hit Policy: [studyAdmin, test-study, adminWriteResources, write]
+23:04:08.544 INFO  org.casbin.jcasbin - Model:
+23:04:08.544 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.544 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.544 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.544 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.544 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.544 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.544 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.546 INFO  org.casbin.jcasbin - Policy:
+23:04:08.547 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.547 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.547 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.547 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.547 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.547 INFO  org.casbin.jcasbin - 
+23:04:08.547 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.547 INFO  org.casbin.jcasbin - 
+23:04:08.547 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.547 INFO  org.casbin.jcasbin - 
+23:04:08.548 INFO  org.casbin.jcasbin - Model:
+23:04:08.548 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.548 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.548 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.548 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.548 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.548 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.548 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.550 INFO  org.casbin.jcasbin - Policy:
+23:04:08.550 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.550 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.550 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.550 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.550 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.550 INFO  org.casbin.jcasbin - 
+23:04:08.550 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.550 INFO  org.casbin.jcasbin - 
+23:04:08.550 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.550 INFO  org.casbin.jcasbin - 
+23:04:08.554 INFO  org.casbin.jcasbin - Model:
+23:04:08.554 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.554 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.554 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.554 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.554 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.554 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.554 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.555 INFO  org.casbin.jcasbin - Policy:
+23:04:08.556 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.556 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.556 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.556 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.556 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.556 INFO  org.casbin.jcasbin - 
+23:04:08.556 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.556 INFO  org.casbin.jcasbin - 
+23:04:08.556 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.556 INFO  org.casbin.jcasbin - 
+23:04:08.557 INFO  org.casbin.jcasbin - Model:
+23:04:08.557 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.557 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.557 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.557 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.557 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.557 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.557 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.558 INFO  org.casbin.jcasbin - Policy:
+23:04:08.558 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.558 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.558 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.558 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.558 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.558 INFO  org.casbin.jcasbin - 
+23:04:08.559 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.559 INFO  org.casbin.jcasbin - 
+23:04:08.559 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.559 INFO  org.casbin.jcasbin - 
+23:04:08.561 INFO  org.casbin.jcasbin - Model:
+23:04:08.561 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.561 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.561 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.561 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.561 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.561 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.561 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.563 INFO  org.casbin.jcasbin - Policy:
+23:04:08.563 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.563 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.563 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.563 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.563 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.563 INFO  org.casbin.jcasbin - 
+23:04:08.563 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.563 INFO  org.casbin.jcasbin - 
+23:04:08.563 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.563 INFO  org.casbin.jcasbin - 
+23:04:08.564 INFO  org.casbin.jcasbin - Model:
+23:04:08.564 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.564 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.564 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.564 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.564 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.564 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.564 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.565 INFO  org.casbin.jcasbin - Policy:
+23:04:08.565 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.565 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.565 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.565 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.565 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.565 INFO  org.casbin.jcasbin - 
+23:04:08.565 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.565 INFO  org.casbin.jcasbin - 
+23:04:08.565 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.565 INFO  org.casbin.jcasbin - 
+23:04:08.569 INFO  org.casbin.jcasbin - Model:
+23:04:08.569 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.569 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.569 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.569 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.569 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.569 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.569 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.570 INFO  org.casbin.jcasbin - Policy:
+23:04:08.570 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.570 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.570 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.570 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.570 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.570 INFO  org.casbin.jcasbin - 
+23:04:08.570 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.570 INFO  org.casbin.jcasbin - 
+23:04:08.570 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.570 INFO  org.casbin.jcasbin - 
+23:04:08.571 INFO  org.casbin.jcasbin - Model:
+23:04:08.571 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.571 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.571 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.571 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.571 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.571 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.571 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.572 INFO  org.casbin.jcasbin - Policy:
+23:04:08.572 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.572 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.572 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.572 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.572 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.573 INFO  org.casbin.jcasbin - 
+23:04:08.573 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.573 INFO  org.casbin.jcasbin - 
+23:04:08.573 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.573 INFO  org.casbin.jcasbin - 
+23:04:08.577 INFO  org.casbin.jcasbin - Model:
+23:04:08.577 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.577 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.577 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.577 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.577 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.577 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.577 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.578 INFO  org.casbin.jcasbin - Policy:
+23:04:08.578 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.578 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.578 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.578 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.578 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.578 INFO  org.casbin.jcasbin - 
+23:04:08.578 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.578 INFO  org.casbin.jcasbin - 
+23:04:08.578 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.579 INFO  org.casbin.jcasbin - 
+23:04:08.579 INFO  org.casbin.jcasbin - Model:
+23:04:08.580 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.580 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.580 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.580 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.580 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.580 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.580 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.581 INFO  org.casbin.jcasbin - Policy:
+23:04:08.581 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.581 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.581 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.581 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.581 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.581 INFO  org.casbin.jcasbin - 
+23:04:08.581 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.581 INFO  org.casbin.jcasbin - 
+23:04:08.581 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.581 INFO  org.casbin.jcasbin - 
+23:04:08.583 INFO  org.casbin.jcasbin - Model:
+23:04:08.583 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.583 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.583 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.583 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.583 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.584 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.584 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.585 INFO  org.casbin.jcasbin - Policy:
+23:04:08.585 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.585 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.585 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.585 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.585 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.585 INFO  org.casbin.jcasbin - 
+23:04:08.586 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.586 INFO  org.casbin.jcasbin - 
+23:04:08.586 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.586 INFO  org.casbin.jcasbin - 
+23:04:08.586 INFO  org.casbin.jcasbin - Model:
+23:04:08.586 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.587 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.587 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.587 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.587 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.587 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.587 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.588 INFO  org.casbin.jcasbin - Policy:
+23:04:08.588 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.588 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.588 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.588 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.588 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.588 INFO  org.casbin.jcasbin - 
+23:04:08.588 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.588 INFO  org.casbin.jcasbin - 
+23:04:08.589 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.589 INFO  org.casbin.jcasbin - 
+23:04:08.593 INFO  org.casbin.jcasbin - Request: [test-user, test-study, adminReadResources, read] ---> false
+23:04:08.594 INFO  org.casbin.jcasbin - Hit Policy: []
+23:04:08.595 INFO  org.casbin.jcasbin - Request: [test-user, test-study, adminWriteResources, write] ---> false
+23:04:08.596 INFO  org.casbin.jcasbin - Hit Policy: []
+23:04:08.597 INFO  org.casbin.jcasbin - Model:
+23:04:08.597 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.597 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.597 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.597 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.597 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.597 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.597 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.599 INFO  org.casbin.jcasbin - Policy:
+23:04:08.599 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.599 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.599 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.599 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.599 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.599 INFO  org.casbin.jcasbin - 
+23:04:08.599 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.599 INFO  org.casbin.jcasbin - 
+23:04:08.599 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.599 INFO  org.casbin.jcasbin - 
+23:04:08.600 INFO  org.casbin.jcasbin - Model:
+23:04:08.600 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.600 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.600 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.600 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.600 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.600 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.600 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.601 INFO  org.casbin.jcasbin - Policy:
+23:04:08.601 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.601 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.601 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.601 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.601 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.601 INFO  org.casbin.jcasbin - 
+23:04:08.601 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.601 INFO  org.casbin.jcasbin - 
+23:04:08.601 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.601 INFO  org.casbin.jcasbin - 
+23:04:08.605 INFO  org.casbin.jcasbin - Model:
+23:04:08.605 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.605 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.605 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.605 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.605 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.605 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.605 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.606 INFO  org.casbin.jcasbin - Policy:
+23:04:08.606 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.606 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.606 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.606 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.606 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.606 INFO  org.casbin.jcasbin - 
+23:04:08.606 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.606 INFO  org.casbin.jcasbin - 
+23:04:08.606 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.606 INFO  org.casbin.jcasbin - 
+23:04:08.607 INFO  org.casbin.jcasbin - Model:
+23:04:08.607 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.607 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.607 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.607 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.607 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.607 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.607 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.608 INFO  org.casbin.jcasbin - Policy:
+23:04:08.608 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.608 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.608 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.608 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.608 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.608 INFO  org.casbin.jcasbin - 
+23:04:08.608 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.608 INFO  org.casbin.jcasbin - 
+23:04:08.608 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.608 INFO  org.casbin.jcasbin - 
+23:04:08.611 INFO  org.casbin.jcasbin - Model:
+23:04:08.611 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.611 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.611 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.611 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.611 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.611 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.611 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.612 INFO  org.casbin.jcasbin - Policy:
+23:04:08.612 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.612 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.612 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.612 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.612 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.612 INFO  org.casbin.jcasbin - 
+23:04:08.612 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.612 INFO  org.casbin.jcasbin - 
+23:04:08.612 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.612 INFO  org.casbin.jcasbin - 
+23:04:08.613 INFO  org.casbin.jcasbin - Model:
+23:04:08.613 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.613 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.613 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.613 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.613 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.613 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.613 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.613 INFO  org.casbin.jcasbin - Policy:
+23:04:08.613 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.613 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.613 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.613 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.613 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.613 INFO  org.casbin.jcasbin - 
+23:04:08.614 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.614 INFO  org.casbin.jcasbin - 
+23:04:08.614 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.614 INFO  org.casbin.jcasbin - 
+23:04:08.615 INFO  org.casbin.jcasbin - Model:
+23:04:08.615 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.615 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.615 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.615 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.615 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.615 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.615 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.616 INFO  org.casbin.jcasbin - Policy:
+23:04:08.616 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.616 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.616 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.616 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.616 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.616 INFO  org.casbin.jcasbin - 
+23:04:08.616 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.616 INFO  org.casbin.jcasbin - 
+23:04:08.616 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.616 INFO  org.casbin.jcasbin - 
+23:04:08.616 INFO  org.casbin.jcasbin - Model:
+23:04:08.616 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:08.616 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:08.616 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:08.616 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:08.616 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:08.616 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:08.616 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:08.617 INFO  org.casbin.jcasbin - Policy:
+23:04:08.617 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:08.617 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:08.617 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:08.617 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:08.617 INFO  org.casbin.jcasbin - Role links for: g
+23:04:08.617 INFO  org.casbin.jcasbin - 
+23:04:08.617 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:08.617 INFO  org.casbin.jcasbin - 
+23:04:08.617 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:08.617 INFO  org.casbin.jcasbin - 
+23:04:11.677 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_REDIS_WATCHER
+23:04:11.678 INFO  r.b.a.o.c.watcher.LettuceSubThread - [message] TEST_LETTUCE_REDIS_WATCHER -> Casbin policy has a new version from redis watcher: task-id
+23:04:11.678 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:11.678 ERROR i.lettuce.core.pubsub.PubSubEndpoint - Unexpected error occurred in RedisPubSubListener callback
+kotlin.UninitializedPropertyAccessException: lateinit property runnable has not been initialized
+	at researchstack.backend.adapter.outgoing.casbin.watcher.LettuceSubscriber.onMessage(LettuceSubscriber.kt:18)
+	at researchstack.backend.adapter.outgoing.casbin.watcher.LettuceSubThread$run$1.message(LettuceSubThread.kt:53)
+	at researchstack.backend.adapter.outgoing.casbin.watcher.LettuceSubThread$run$1.message(LettuceSubThread.kt:29)
+	at io.lettuce.core.pubsub.PubSubEndpoint.notifyListeners(PubSubEndpoint.java:219)
+	at io.lettuce.core.pubsub.PubSubEndpoint.notifyMessage(PubSubEndpoint.java:208)
+	at io.lettuce.core.pubsub.PubSubCommandHandler.doNotifyMessage(PubSubCommandHandler.java:292)
+	at io.lettuce.core.pubsub.PubSubCommandHandler.decode(PubSubCommandHandler.java:130)
+	at io.lettuce.core.protocol.CommandHandler.channelRead(CommandHandler.java:599)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	at io.netty.channel.epoll.AbstractEpollStreamChannel$EpollStreamUnsafe.epollInReady(AbstractEpollStreamChannel.java:800)
+	at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:499)
+	at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:397)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+23:04:11.778 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:11.811 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/127.0.0.1:6389
+23:04:11.815 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6389]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6389
+23:04:11.888 ERROR r.b.a.o.c.watcher.LettuceSubThread - error message Unable to connect to localhost/<unresolved>:6389
+23:04:11.889 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:11.913 INFO  i.l.c.protocol.ReconnectionHandler - Reconnected to localhost/<unresolved>:6389
+23:04:11.914 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_REDIS_WATCHER
+23:04:11.982 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:12.073 ERROR r.b.a.o.c.watcher.LettuceSubThread - error message Unable to connect to wronghost/<unresolved>:6389
+23:04:12.074 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:12.112 INFO  i.l.c.protocol.ReconnectionHandler - Reconnected to localhost/<unresolved>:6389
+23:04:12.113 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_REDIS_WATCHER
+23:04:12.142 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:12.185 ERROR r.b.a.o.c.watcher.LettuceSubThread - error message Unable to connect to localhost/<unresolved>:9999
+23:04:12.185 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:12.208 INFO  i.l.c.protocol.ReconnectionHandler - Reconnected to localhost/<unresolved>:6389
+23:04:12.208 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_REDIS_WATCHER
+23:04:12.283 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:12.907 INFO  i.l.c.protocol.ReconnectionHandler - Reconnected to localhost/<unresolved>:6389
+23:04:12.908 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_REDIS_WATCHER
+23:04:16.003 ERROR r.b.a.o.c.watcher.LettuceSubThread - error message Unable to connect to localhost/<unresolved>:6389
+23:04:16.003 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:16.101 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:16.334 INFO  r.b.a.o.c.watcher.LettuceSubThread - [punsubscribed] test-p
+23:04:16.334 INFO  r.b.a.o.c.watcher.LettuceSubThread - [subscribed] TEST_LETTUCE_SUB_THREAD
+23:04:16.335 INFO  r.b.a.o.c.watcher.LettuceSubThread - [psubscribed] test-p
+23:04:16.336 INFO  r.b.a.o.c.watcher.LettuceSubThread - [unsubscribed] TEST_LETTUCE_SUB_THREAD
+23:04:16.343 INFO  r.b.a.o.c.watcher.LettuceSubThread - [message] test-p -> test-p -> test
+23:04:16.343 INFO  r.embedded.AbstractRedisInstance - Stopping redis server...
+23:04:16.442 INFO  r.embedded.AbstractRedisInstance - Redis exited
+23:04:16.539 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/127.0.0.1:6391
+23:04:16.539 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/127.0.0.1:6391
+23:04:16.542 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6391]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6391
+23:04:16.542 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6391]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6391
+23:04:16.648 WARN  i.l.c.r.DefaultClientResources - io.lettuce.core.resource.DefaultClientResources was not shut down properly, shutdown() was not called before it's garbage-collected. Call shutdown() or shutdown(long,long,TimeUnit) 
+23:04:16.648 WARN  i.l.c.r.DefaultClientResources - io.lettuce.core.resource.DefaultClientResources was not shut down properly, shutdown() was not called before it's garbage-collected. Call shutdown() or shutdown(long,long,TimeUnit) 
+23:04:16.648 WARN  i.l.c.r.DefaultClientResources - io.lettuce.core.resource.DefaultClientResources was not shut down properly, shutdown() was not called before it's garbage-collected. Call shutdown() or shutdown(long,long,TimeUnit) 
+23:04:16.905 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/<unresolved>:6389
+23:04:16.906 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6389]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6389
+23:04:16.943 WARN  i.l.c.r.DefaultClientResources - io.lettuce.core.resource.DefaultClientResources was not shut down properly, shutdown() was not called before it's garbage-collected. Call shutdown() or shutdown(long,long,TimeUnit) 
+23:04:19.798 WARN  s.a.a.transfer.s3.S3TransferManager - The provided DefaultS3AsyncClient is not an instance of S3CrtAsyncClient, and thus multipart upload/download feature is not enabled and resumable file upload is not supported. To benefit from maximum throughput, consider using S3AsyncClient.crtBuilder().build() instead.
+23:04:22.251 INFO  org.eclipse.jetty.server.Server - jetty-11.0.15; built: 2023-04-11T18:37:53.775Z; git: 5bc5e562c8d05c5862505aebe5cf83a61bdbcb96; jvm 17.0.12+7-Ubuntu-1ubuntu220.04
+23:04:22.313 INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@9a978f2{/__admin,null,AVAILABLE}
+23:04:22.328 INFO  o.e.j.s.handler.ContextHandler.ROOT - RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+23:04:22.329 INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6e3fbf73{/,null,AVAILABLE}
+23:04:22.343 INFO  o.e.jetty.server.AbstractConnector - Started NetworkTrafficServerConnector@444d2d83{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:43493}
+23:04:22.346 INFO  org.eclipse.jetty.server.Server - Started Server@748f46e2{STARTING}[11.0.15,sto=1000] @27033ms
+23:04:23.635 INFO  org.eclipse.jetty.server.Server - Stopped Server@748f46e2{STOPPING}[11.0.15,sto=1000]
+23:04:23.635 INFO  org.eclipse.jetty.server.Server - Shutdown Server@748f46e2{STOPPING}[11.0.15,sto=1000]
+23:04:23.651 INFO  o.e.jetty.server.AbstractConnector - Stopped NetworkTrafficServerConnector@444d2d83{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+23:04:23.652 INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@6e3fbf73{/,null,STOPPED}
+23:04:23.653 INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@9a978f2{/__admin,null,STOPPED}
+23:04:25.105 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/<unresolved>:6389
+23:04:25.108 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6389]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6389
+23:04:25.561 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/<unresolved>:6391
+23:04:25.561 INFO  i.l.core.protocol.ConnectionWatchdog - Reconnecting, last destination was localhost/<unresolved>:6391
+23:04:25.563 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6391]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6391
+23:04:25.563 WARN  i.l.core.protocol.ConnectionWatchdog - Cannot reconnect to [localhost/<unresolved>:6391]: finishConnect(..) failed: Connection refused: localhost/127.0.0.1:6391
+23:04:27.928 INFO  org.casbin.jcasbin - Model:
+23:04:27.928 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:27.928 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:27.928 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:27.928 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:27.928 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:27.928 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:27.928 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:27.931 INFO  org.casbin.jcasbin - Policy:
+23:04:27.931 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:27.931 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:27.931 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:27.931 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:27.931 INFO  org.casbin.jcasbin - Role links for: g
+23:04:27.931 INFO  org.casbin.jcasbin - 
+23:04:27.931 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:27.931 INFO  org.casbin.jcasbin - 
+23:04:27.931 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:27.931 INFO  org.casbin.jcasbin - 
+23:04:27.944 INFO  org.casbin.jcasbin - Model:
+23:04:27.945 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:27.945 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:27.945 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:27.945 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:27.945 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:27.945 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:27.945 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:27.947 INFO  org.casbin.jcasbin - Policy:
+23:04:27.947 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:27.947 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:27.947 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:27.947 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:27.947 INFO  org.casbin.jcasbin - Role links for: g
+23:04:27.947 INFO  org.casbin.jcasbin - 
+23:04:27.947 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:27.947 INFO  org.casbin.jcasbin - 
+23:04:27.947 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:27.947 INFO  org.casbin.jcasbin - 
+23:04:27.952 INFO  org.casbin.jcasbin - Model:
+23:04:27.953 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:27.953 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:27.953 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:27.953 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:27.953 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:27.953 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:27.953 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:27.954 INFO  org.casbin.jcasbin - Policy:
+23:04:27.954 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:27.954 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:27.955 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:27.955 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:27.955 INFO  org.casbin.jcasbin - Role links for: g
+23:04:27.955 INFO  org.casbin.jcasbin - 
+23:04:27.955 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:27.955 INFO  org.casbin.jcasbin - 
+23:04:27.955 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:27.955 INFO  org.casbin.jcasbin - 
+23:04:27.960 INFO  org.casbin.jcasbin - Model:
+23:04:27.960 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:27.960 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:27.960 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:27.960 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:27.961 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:27.961 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:27.961 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:27.962 INFO  org.casbin.jcasbin - Policy:
+23:04:27.962 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:27.962 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:27.962 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:27.963 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:27.963 INFO  org.casbin.jcasbin - Role links for: g
+23:04:27.963 INFO  org.casbin.jcasbin - 
+23:04:27.963 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:27.963 INFO  org.casbin.jcasbin - 
+23:04:27.963 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:27.963 INFO  org.casbin.jcasbin - 
+23:04:27.973 INFO  org.casbin.jcasbin - Request: [u1, s1, study, read] ---> true
+23:04:27.974 INFO  org.casbin.jcasbin - Hit Policy: [u1, s1, study, read]
+23:04:27.977 INFO  org.casbin.jcasbin - Request: [u1, s2, study, read] ---> false
+23:04:27.977 INFO  org.casbin.jcasbin - Hit Policy: []
+23:04:27.978 INFO  org.casbin.jcasbin - Request: [u1, s3, study, read] ---> true
+23:04:27.978 INFO  org.casbin.jcasbin - Hit Policy: [u1, s3, study, read]
+23:04:27.978 INFO  org.casbin.jcasbin - Request: [u1, s4, study, read] ---> false
+23:04:27.978 INFO  org.casbin.jcasbin - Hit Policy: []
+23:04:27.978 INFO  org.casbin.jcasbin - Request: [u1, s5, study, read] ---> true
+23:04:27.979 INFO  org.casbin.jcasbin - Hit Policy: [u1, s5, study, read]
+23:04:27.980 INFO  org.casbin.jcasbin - Model:
+23:04:27.980 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:04:27.980 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:04:27.980 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:04:27.980 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:04:27.980 INFO  org.casbin.jcasbin - g.g2: _, _
+23:04:27.980 INFO  org.casbin.jcasbin - g.g3: _, _
+23:04:27.980 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:04:27.982 INFO  org.casbin.jcasbin - Policy:
+23:04:27.982 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:04:27.982 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:04:27.982 INFO  org.casbin.jcasbin - g2: _, _: []
+23:04:27.982 INFO  org.casbin.jcasbin - g3: _, _: []
+23:04:27.982 INFO  org.casbin.jcasbin - Role links for: g
+23:04:27.982 INFO  org.casbin.jcasbin - 
+23:04:27.982 INFO  org.casbin.jcasbin - Role links for: g2
+23:04:27.982 INFO  org.casbin.jcasbin - 
+23:04:27.982 INFO  org.casbin.jcasbin - Role links for: g3
+23:04:27.982 INFO  org.casbin.jcasbin - 
+23:04:40.276 INFO  r.backend.HealthResearchBackendAppKt - Starting HealthResearchBackendAppKt using Java 17.0.12 with PID 19342 (/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main started by hjin in /home/hjin/release/health-research-platform/backend/platform)
+23:04:40.277 INFO  r.backend.HealthResearchBackendAppKt - The following 1 profile is active: "local"
+23:04:41.302 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+23:04:41.303 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive MongoDB repositories in DEFAULT mode.
+23:04:41.565 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 259 ms. Found 53 Reactive MongoDB repository interfaces.
+23:04:41.596 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+23:04:41.597 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+23:04:41.633 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.AppLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.634 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.ChartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.634 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.DashboardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.634 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.EducationalContentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.634 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.HealthDataGroupRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.634 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InLabVisitRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.635 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InvestigatorRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.635 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InvestigatorStudyRelationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.635 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.ParticipationRequirementRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.635 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyDataFileRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.635 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyDataFolderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.636 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.636 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.636 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.636 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectStudyRelationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.637 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.TaskResultRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.637 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.TaskSpecRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.638 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.VersionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.639 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.AccelerometerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.639 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.639 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BloodGlucoseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.639 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BloodPressureRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.639 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatMobileWearConnectionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.640 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearBatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.640 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearOffBodyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.641 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearPowerOnOffRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.641 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.ExerciseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.641 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.GyroscopeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.641 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HealthDataRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.641 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HeartRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.642 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HeightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.642 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.LightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.642 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.OffBodyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.642 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.OxygenSaturationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.642 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.RespiratoryRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.643 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.SleepSessionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.643 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.SleepStageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.643 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.StepsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.643 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.TotalCaloriesBurnedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.644 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearAccelerometerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.644 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.644 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBiaRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.644 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBloodPressureRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.644 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearEcgRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearGyroscopeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearHealthEventRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearHeartRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgGreenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgIrRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.645 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgRedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.646 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearSpo2Repository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.646 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearSweatLossRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.646 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WeightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:04:41.646 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 0 Redis repository interfaces.
+23:04:41.994 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=982decf9-ae96-3a03-8ab6-447006c80ffe
+23:04:42.181 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:04:42.184 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:04:42.188 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:04:42.268 WARN  c.l.a.s.w.r.ArmeriaReactiveWebServerFactory - Cannot disable HTTP/2 protocol for Armeria server. It will be enabled automatically.
+23:04:42.293 INFO  com.linecorp.armeria.common.Flags - verboseExceptionSampler: ExceptionSampler{rate-limit=10} (default)
+23:04:42.295 INFO  com.linecorp.armeria.common.Flags - verboseExceptions: rate-limit=10 (default)
+23:04:42.295 INFO  com.linecorp.armeria.common.Flags - preferredIpV4Addresses: * (default)
+23:04:42.296 INFO  com.linecorp.armeria.common.Flags - verboseSocketExceptions: false (default)
+23:04:42.296 INFO  com.linecorp.armeria.common.Flags - verboseResponses: false (default)
+23:04:42.297 INFO  com.linecorp.armeria.common.Flags - requestContextStorageProvider: thread-local (default)
+23:04:42.297 INFO  com.linecorp.armeria.common.Flags - warnNettyVersions: true (default)
+23:04:42.374 INFO  com.linecorp.armeria.common.Flags - useEpoll: true (default)
+23:04:42.375 INFO  com.linecorp.armeria.common.Flags - Using /dev/epoll
+23:04:42.375 INFO  com.linecorp.armeria.common.Flags - transportType: EPOLL (default)
+23:04:42.375 INFO  com.linecorp.armeria.common.Flags - maxNumConnections: 2147483647 (default)
+23:04:42.375 INFO  com.linecorp.armeria.common.Flags - numCommonWorkers: 32 (default)
+23:04:42.375 INFO  com.linecorp.armeria.common.Flags - numCommonBlockingTaskThreads: 200 (default)
+23:04:42.376 INFO  com.linecorp.armeria.common.Flags - defaultMaxRequestLength: 10485760 (default)
+23:04:42.376 INFO  com.linecorp.armeria.common.Flags - defaultMaxResponseLength: 10485760 (default)
+23:04:42.376 INFO  com.linecorp.armeria.common.Flags - defaultRequestTimeoutMillis: 10000 (default)
+23:04:42.376 INFO  com.linecorp.armeria.common.Flags - defaultResponseTimeoutMillis: 15000 (default)
+23:04:42.376 INFO  com.linecorp.armeria.common.Flags - defaultConnectTimeoutMillis: 3200 (default)
+23:04:42.377 INFO  com.linecorp.armeria.common.Flags - defaultWriteTimeoutMillis: 1000 (default)
+23:04:42.377 INFO  com.linecorp.armeria.common.Flags - defaultServerIdleTimeoutMillis: 15000 (default)
+23:04:42.377 INFO  com.linecorp.armeria.common.Flags - defaultServerKeepAliveOnPing: false (default)
+23:04:42.377 INFO  com.linecorp.armeria.common.Flags - defaultClientIdleTimeoutMillis: 10000 (default)
+23:04:42.377 INFO  com.linecorp.armeria.common.Flags - defaultClientKeepAliveOnPing: false (default)
+23:04:42.378 INFO  com.linecorp.armeria.common.Flags - defaultPingIntervalMillis: 0 (default)
+23:04:42.378 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerNumRequestsPerConnection: 0 (default)
+23:04:42.378 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientNumRequestsPerConnection: 0 (default)
+23:04:42.378 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerConnectionAgeMillis: 0 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientConnectionAgeMillis: 0 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultServerConnectionDrainDurationMicros: 1000000 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialConnectionWindowSize: 1048576 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialStreamWindowSize: 1048576 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxFrameSize: 16384 (default)
+23:04:42.379 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxStreamsPerConnection: 2147483647 (default)
+23:04:42.380 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxHeaderListSize: 8192 (default)
+23:04:42.380 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxInitialLineLength: 4096 (default)
+23:04:42.380 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxHeaderSize: 8192 (default)
+23:04:42.380 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxChunkSize: 8192 (default)
+23:04:42.380 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2Preface: true (default)
+23:04:42.381 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2WithoutAlpn: false (default)
+23:04:42.381 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp1Pipelining: false (default)
+23:04:42.385 INFO  com.linecorp.armeria.common.Flags - defaultBackoffSpec: exponential=200:10000,jitter=0.2 (default)
+23:04:42.385 INFO  com.linecorp.armeria.common.Flags - defaultMaxTotalAttempts: 10 (default)
+23:04:42.386 INFO  com.linecorp.armeria.common.Flags - defaultRequestAutoAbortDelayMillis: 0 (default)
+23:04:42.390 INFO  com.linecorp.armeria.common.Flags - routeCacheSpec: maximumSize=4096 (default)
+23:04:42.391 INFO  com.linecorp.armeria.common.Flags - routeDecoratorCacheSpec: maximumSize=4096 (default)
+23:04:42.391 INFO  com.linecorp.armeria.common.Flags - parsedPathCacheSpec: maximumSize=4096 (default)
+23:04:42.391 INFO  com.linecorp.armeria.common.Flags - headerValueCacheSpec: maximumSize=4096 (default)
+23:04:42.391 INFO  com.linecorp.armeria.common.Flags - cachedHeaders: [:authority, :scheme, :method, accept-encoding, content-type] (default)
+23:04:42.392 INFO  com.linecorp.armeria.common.Flags - fileServiceCacheSpec: maximumSize=1024 (default)
+23:04:42.392 INFO  com.linecorp.armeria.common.Flags - dnsCacheSpec: maximumSize=4096 (default)
+23:04:42.392 INFO  com.linecorp.armeria.common.Flags - annotatedServiceExceptionVerbosity: unhandled (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - useJdkDnsResolver: false (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - reportBlockedEventLoop: true (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - reportMaskedRoutes: true (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - validateHeaders: true (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - tlsAllowUnsafeCiphers: false (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - transientServiceOptions: [] (default)
+23:04:42.393 INFO  com.linecorp.armeria.common.Flags - useLegacyRouteDecoratorOrdering: false (default)
+23:04:42.394 INFO  com.linecorp.armeria.common.Flags - useDefaultSocketOptions: true (default)
+23:04:42.394 INFO  com.linecorp.armeria.common.Flags - allowDoubleDotsInQueryString: false (default)
+23:04:42.394 INFO  com.linecorp.armeria.common.Flags - allowSemicolonInPathComponent: false (default)
+23:04:42.394 INFO  com.linecorp.armeria.common.Flags - defaultMultipartUploadsLocation: /tmp/armeria/multipart-uploads (default)
+23:04:42.395 INFO  com.linecorp.armeria.common.Flags - requestContextLeakDetectionSampler: never (default)
+23:04:42.400 INFO  com.linecorp.armeria.common.Flags - meterRegistry: io.micrometer.core.instrument.composite.CompositeMeterRegistry@145fe8ab (default)
+23:04:42.401 INFO  com.linecorp.armeria.common.Flags - defaultUnhandledExceptionsReportIntervalMillis: 10000 (default)
+23:04:42.482 INFO  c.l.a.server.docs.DocStringExtractor - Using com.linecorp.armeria.grpc.descriptorDir: META-INF/armeria/grpc
+23:04:43.092 WARN  s.a.a.transfer.s3.S3TransferManager - The provided DefaultS3AsyncClient is not an instance of S3CrtAsyncClient, and thus multipart upload/download feature is not enabled and resumable file upload is not supported. To benefit from maximum throughput, consider using S3AsyncClient.crtBuilder().build() instead.
+23:04:43.247 INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|reactive-streams|spring-boot", "version": "4.9.1"}, "os": {"type": "Linux", "name": "Linux", "architecture": "amd64", "version": "5.15.0-122-generic"}, "platform": "Java/Ubuntu/17.0.12+7-Ubuntu-1ubuntu220.04"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, streamFactoryFactory=NettyStreamFactoryFactory{eventLoopGroup=io.netty.channel.nio.NioEventLoopGroup@2c1a0f82, socketChannelClass=class io.netty.channel.socket.nio.NioSocketChannel, allocator=PooledByteBufAllocator(directByDefault: true), sslContext=null}, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@60e5db1d, com.mongodb.Jep395RecordCodecProvider@1f3f0d25]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+23:04:43.289 INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=25847885}
+23:04:44.219 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+23:04:44.530 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@405d123c
+23:04:44.531 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+23:04:44.594 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.22.1 by Redgate
+23:04:44.594 INFO  o.f.c.i.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+23:04:44.594 INFO  o.f.c.i.license.VersionPrinter - 
+23:04:44.602 INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://127.0.0.1:5432/health_research (PostgreSQL 12.20)
+23:04:44.643 WARN  o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start reactive web server
+23:04:44.644 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+23:04:44.657 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+23:04:46.676 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+23:04:46.687 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.context.ApplicationContextException: Unable to start reactive web server
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.onRefresh(ReactiveWebServerApplicationContext.java:84)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:602)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at researchstack.backend.HealthResearchBackendAppKt.main(HealthResearchBackendApp.kt:18)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'armeriaServerConfigurator' defined in class path resource [researchstack/backend/config/ArmeriaConfiguration.class]: Unsatisfied dependency expressed through method 'armeriaServerConfigurator' parameter 6: Error creating bean with name 'studyGrpcController' defined in file [/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main/researchstack/backend/adapter/incoming/grpc/study/StudyGrpcController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'getStudyService' defined in file [/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main/researchstack/backend/application/service/study/GetStudyService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'enforcer' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'enforcer' parameter 1: Error creating bean with name 'autoConfigJdbcAdapter' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'autoConfigJdbcAdapter' parameter 1: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:550)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:205)
+	at com.linecorp.armeria.spring.web.reactive.ArmeriaReactiveWebServerFactory.lambda$findBeans$4(ArmeriaReactiveWebServerFactory.java:383)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:992)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at com.linecorp.armeria.spring.web.reactive.ArmeriaReactiveWebServerFactory.findBeans(ArmeriaReactiveWebServerFactory.java:384)
+	at com.linecorp.armeria.spring.web.reactive.ArmeriaReactiveWebServerFactory.getWebServer(ArmeriaReactiveWebServerFactory.java:163)
+	at org.springframework.boot.web.reactive.context.WebServerManager.<init>(WebServerManager.java:50)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.createWebServer(ReactiveWebServerApplicationContext.java:96)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.onRefresh(ReactiveWebServerApplicationContext.java:81)
+	... 8 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'studyGrpcController' defined in file [/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main/researchstack/backend/adapter/incoming/grpc/study/StudyGrpcController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'getStudyService' defined in file [/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main/researchstack/backend/application/service/study/GetStudyService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'enforcer' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'enforcer' parameter 1: Error creating bean with name 'autoConfigJdbcAdapter' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'autoConfigJdbcAdapter' parameter 1: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 30 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'getStudyService' defined in file [/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main/researchstack/backend/application/service/study/GetStudyService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'enforcer' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'enforcer' parameter 1: Error creating bean with name 'autoConfigJdbcAdapter' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'autoConfigJdbcAdapter' parameter 1: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 44 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'enforcer' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'enforcer' parameter 1: Error creating bean with name 'autoConfigJdbcAdapter' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'autoConfigJdbcAdapter' parameter 1: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:550)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 58 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'autoConfigJdbcAdapter' defined in class path resource [org/casbin/spring/boot/autoconfigure/CasbinAutoConfiguration.class]: Unsatisfied dependency expressed through method 'autoConfigJdbcAdapter' parameter 1: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:550)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 72 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [researchstack/backend/adapter/outgoing/postgres/FlywayMigrationConfig.class]: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791)
+	... 86 common frames omitted
+Caused by: org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 0.0.1
+-> Applied to database : -864238376
+-> Resolved locally    : 906107217
+Either revert the changes to the migration, or run repair to update the schema history.
+Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+	at org.flywaydb.core.Flyway.lambda$migrate$0(Flyway.java:146)
+	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:213)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:140)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1869)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1826)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 99 common frames omitted
+23:05:33.153 INFO  r.backend.HealthResearchBackendAppKt - Starting HealthResearchBackendAppKt using Java 17.0.12 with PID 20316 (/home/hjin/release/health-research-platform/backend/platform/build/classes/kotlin/main started by hjin in /home/hjin/release/health-research-platform/backend/platform)
+23:05:33.155 INFO  r.backend.HealthResearchBackendAppKt - The following 1 profile is active: "local"
+23:05:34.159 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+23:05:34.160 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive MongoDB repositories in DEFAULT mode.
+23:05:34.414 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 250 ms. Found 53 Reactive MongoDB repository interfaces.
+23:05:34.447 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+23:05:34.448 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+23:05:34.479 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.AppLogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.480 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.ChartRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.480 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.DashboardRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.480 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.EducationalContentRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.480 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.HealthDataGroupRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InLabVisitRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InvestigatorRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.InvestigatorStudyRelationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.ParticipationRequirementRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyDataFileRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.481 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyDataFolderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.482 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.StudyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.482 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.482 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.482 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.SubjectStudyRelationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.483 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.TaskResultRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.483 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.TaskSpecRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.483 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.VersionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.484 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.AccelerometerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BloodGlucoseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.BloodPressureRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatMobileWearConnectionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearBatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.485 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearOffBodyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.DeviceStatWearPowerOnOffRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.ExerciseRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.GyroscopeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HealthDataRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HeartRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.486 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.HeightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.487 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.LightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.487 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.OffBodyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.487 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.OxygenSaturationRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.488 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.RespiratoryRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.488 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.SleepSessionRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.488 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.SleepStageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.488 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.StepsRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.489 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.TotalCaloriesBurnedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.489 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearAccelerometerRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.489 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBatteryRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.489 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBiaRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.489 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearBloodPressureRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearEcgRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearGyroscopeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearHealthEventRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearHeartRateRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgGreenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.490 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgIrRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.491 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearPpgRedRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.491 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearSpo2Repository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.491 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WearSweatLossRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.491 INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface researchstack.backend.adapter.outgoing.mongo.repository.healthdata.WeightRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+23:05:34.491 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
+23:05:34.816 INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=982decf9-ae96-3a03-8ab6-447006c80ffe
+23:05:34.988 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:05:34.991 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:05:34.996 INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:05:35.083 WARN  c.l.a.s.w.r.ArmeriaReactiveWebServerFactory - Cannot disable HTTP/2 protocol for Armeria server. It will be enabled automatically.
+23:05:35.111 INFO  com.linecorp.armeria.common.Flags - verboseExceptionSampler: ExceptionSampler{rate-limit=10} (default)
+23:05:35.112 INFO  com.linecorp.armeria.common.Flags - verboseExceptions: rate-limit=10 (default)
+23:05:35.113 INFO  com.linecorp.armeria.common.Flags - preferredIpV4Addresses: * (default)
+23:05:35.113 INFO  com.linecorp.armeria.common.Flags - verboseSocketExceptions: false (default)
+23:05:35.113 INFO  com.linecorp.armeria.common.Flags - verboseResponses: false (default)
+23:05:35.114 INFO  com.linecorp.armeria.common.Flags - requestContextStorageProvider: thread-local (default)
+23:05:35.115 INFO  com.linecorp.armeria.common.Flags - warnNettyVersions: true (default)
+23:05:35.195 INFO  com.linecorp.armeria.common.Flags - useEpoll: true (default)
+23:05:35.195 INFO  com.linecorp.armeria.common.Flags - Using /dev/epoll
+23:05:35.195 INFO  com.linecorp.armeria.common.Flags - transportType: EPOLL (default)
+23:05:35.196 INFO  com.linecorp.armeria.common.Flags - maxNumConnections: 2147483647 (default)
+23:05:35.196 INFO  com.linecorp.armeria.common.Flags - numCommonWorkers: 32 (default)
+23:05:35.196 INFO  com.linecorp.armeria.common.Flags - numCommonBlockingTaskThreads: 200 (default)
+23:05:35.196 INFO  com.linecorp.armeria.common.Flags - defaultMaxRequestLength: 10485760 (default)
+23:05:35.197 INFO  com.linecorp.armeria.common.Flags - defaultMaxResponseLength: 10485760 (default)
+23:05:35.197 INFO  com.linecorp.armeria.common.Flags - defaultRequestTimeoutMillis: 10000 (default)
+23:05:35.197 INFO  com.linecorp.armeria.common.Flags - defaultResponseTimeoutMillis: 15000 (default)
+23:05:35.197 INFO  com.linecorp.armeria.common.Flags - defaultConnectTimeoutMillis: 3200 (default)
+23:05:35.197 INFO  com.linecorp.armeria.common.Flags - defaultWriteTimeoutMillis: 1000 (default)
+23:05:35.198 INFO  com.linecorp.armeria.common.Flags - defaultServerIdleTimeoutMillis: 15000 (default)
+23:05:35.198 INFO  com.linecorp.armeria.common.Flags - defaultServerKeepAliveOnPing: false (default)
+23:05:35.198 INFO  com.linecorp.armeria.common.Flags - defaultClientIdleTimeoutMillis: 10000 (default)
+23:05:35.198 INFO  com.linecorp.armeria.common.Flags - defaultClientKeepAliveOnPing: false (default)
+23:05:35.199 INFO  com.linecorp.armeria.common.Flags - defaultPingIntervalMillis: 0 (default)
+23:05:35.199 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerNumRequestsPerConnection: 0 (default)
+23:05:35.199 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientNumRequestsPerConnection: 0 (default)
+23:05:35.199 INFO  com.linecorp.armeria.common.Flags - defaultMaxServerConnectionAgeMillis: 0 (default)
+23:05:35.200 INFO  com.linecorp.armeria.common.Flags - defaultMaxClientConnectionAgeMillis: 0 (default)
+23:05:35.200 INFO  com.linecorp.armeria.common.Flags - defaultServerConnectionDrainDurationMicros: 1000000 (default)
+23:05:35.200 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialConnectionWindowSize: 1048576 (default)
+23:05:35.200 INFO  com.linecorp.armeria.common.Flags - defaultHttp2InitialStreamWindowSize: 1048576 (default)
+23:05:35.200 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxFrameSize: 16384 (default)
+23:05:35.201 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxStreamsPerConnection: 2147483647 (default)
+23:05:35.201 INFO  com.linecorp.armeria.common.Flags - defaultHttp2MaxHeaderListSize: 8192 (default)
+23:05:35.201 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxInitialLineLength: 4096 (default)
+23:05:35.201 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxHeaderSize: 8192 (default)
+23:05:35.201 INFO  com.linecorp.armeria.common.Flags - defaultHttp1MaxChunkSize: 8192 (default)
+23:05:35.202 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2Preface: true (default)
+23:05:35.202 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp2WithoutAlpn: false (default)
+23:05:35.202 INFO  com.linecorp.armeria.common.Flags - defaultUseHttp1Pipelining: false (default)
+23:05:35.206 INFO  com.linecorp.armeria.common.Flags - defaultBackoffSpec: exponential=200:10000,jitter=0.2 (default)
+23:05:35.206 INFO  com.linecorp.armeria.common.Flags - defaultMaxTotalAttempts: 10 (default)
+23:05:35.206 INFO  com.linecorp.armeria.common.Flags - defaultRequestAutoAbortDelayMillis: 0 (default)
+23:05:35.210 INFO  com.linecorp.armeria.common.Flags - routeCacheSpec: maximumSize=4096 (default)
+23:05:35.210 INFO  com.linecorp.armeria.common.Flags - routeDecoratorCacheSpec: maximumSize=4096 (default)
+23:05:35.210 INFO  com.linecorp.armeria.common.Flags - parsedPathCacheSpec: maximumSize=4096 (default)
+23:05:35.210 INFO  com.linecorp.armeria.common.Flags - headerValueCacheSpec: maximumSize=4096 (default)
+23:05:35.211 INFO  com.linecorp.armeria.common.Flags - cachedHeaders: [:authority, :scheme, :method, accept-encoding, content-type] (default)
+23:05:35.211 INFO  com.linecorp.armeria.common.Flags - fileServiceCacheSpec: maximumSize=1024 (default)
+23:05:35.211 INFO  com.linecorp.armeria.common.Flags - dnsCacheSpec: maximumSize=4096 (default)
+23:05:35.211 INFO  com.linecorp.armeria.common.Flags - annotatedServiceExceptionVerbosity: unhandled (default)
+23:05:35.212 INFO  com.linecorp.armeria.common.Flags - useJdkDnsResolver: false (default)
+23:05:35.212 INFO  com.linecorp.armeria.common.Flags - reportBlockedEventLoop: true (default)
+23:05:35.212 INFO  com.linecorp.armeria.common.Flags - reportMaskedRoutes: true (default)
+23:05:35.212 INFO  com.linecorp.armeria.common.Flags - validateHeaders: true (default)
+23:05:35.212 INFO  com.linecorp.armeria.common.Flags - tlsAllowUnsafeCiphers: false (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - transientServiceOptions: [] (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - useLegacyRouteDecoratorOrdering: false (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - useDefaultSocketOptions: true (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - allowDoubleDotsInQueryString: false (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - allowSemicolonInPathComponent: false (default)
+23:05:35.213 INFO  com.linecorp.armeria.common.Flags - defaultMultipartUploadsLocation: /tmp/armeria/multipart-uploads (default)
+23:05:35.214 INFO  com.linecorp.armeria.common.Flags - requestContextLeakDetectionSampler: never (default)
+23:05:35.220 INFO  com.linecorp.armeria.common.Flags - meterRegistry: io.micrometer.core.instrument.composite.CompositeMeterRegistry@3b347439 (default)
+23:05:35.220 INFO  com.linecorp.armeria.common.Flags - defaultUnhandledExceptionsReportIntervalMillis: 10000 (default)
+23:05:35.293 INFO  c.l.a.server.docs.DocStringExtractor - Using com.linecorp.armeria.grpc.descriptorDir: META-INF/armeria/grpc
+23:05:35.890 WARN  s.a.a.transfer.s3.S3TransferManager - The provided DefaultS3AsyncClient is not an instance of S3CrtAsyncClient, and thus multipart upload/download feature is not enabled and resumable file upload is not supported. To benefit from maximum throughput, consider using S3AsyncClient.crtBuilder().build() instead.
+23:05:36.046 INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|reactive-streams|spring-boot", "version": "4.9.1"}, "os": {"type": "Linux", "name": "Linux", "architecture": "amd64", "version": "5.15.0-122-generic"}, "platform": "Java/Ubuntu/17.0.12+7-Ubuntu-1ubuntu220.04"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, streamFactoryFactory=NettyStreamFactoryFactory{eventLoopGroup=io.netty.channel.nio.NioEventLoopGroup@60e5db1d, socketChannelClass=class io.netty.channel.socket.nio.NioSocketChannel, allocator=PooledByteBufAllocator(directByDefault: true), sslContext=null}, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@1f3f0d25, com.mongodb.Jep395RecordCodecProvider@32eac39b]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+23:05:36.096 INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=6, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=25875927}
+23:05:37.056 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+23:05:37.341 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@298f7b0a
+23:05:37.342 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+23:05:37.399 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.22.1 by Redgate
+23:05:37.399 INFO  o.f.c.i.license.VersionPrinter - See release notes here: https://rd.gt/416ObMi
+23:05:37.399 INFO  o.f.c.i.license.VersionPrinter - 
+23:05:37.407 INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://127.0.0.1:5432/health_research (PostgreSQL 12.20)
+23:05:37.427 INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "public"."flyway_schema_history" does not exist yet
+23:05:37.429 INFO  o.f.core.internal.command.DbValidate - Successfully validated 1 migration (execution time 00:00.011s)
+23:05:37.439 INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "public"."flyway_schema_history" ...
+23:05:37.503 INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": << Empty Schema >>
+23:05:37.507 INFO  o.f.core.internal.command.DbMigrate - Migrating schema "public" to version "0.0.1 - create study join table"
+23:05:37.541 INFO  o.f.core.internal.command.DbMigrate - Successfully applied 1 migration to schema "public", now at version v0.0.1 (execution time 00:00.022s)
+23:05:37.553 INFO  o.c.s.b.a.CasbinAutoConfiguration - Discover the custom Casbin data source.
+23:05:37.556 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+23:05:37.567 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@3d2af8d7
+23:05:37.567 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+23:05:37.568 INFO  o.c.s.b.a.CasbinAutoConfiguration - Casbin current use database product: postgresql
+23:05:37.624 INFO  org.casbin.jcasbin - Model:
+23:05:37.625 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:05:37.625 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:05:37.625 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:05:37.625 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:05:37.625 INFO  org.casbin.jcasbin - g.g2: _, _
+23:05:37.625 INFO  org.casbin.jcasbin - g.g3: _, _
+23:05:37.625 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:05:37.689 INFO  org.casbin.jcasbin - Policy:
+23:05:37.689 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:05:37.689 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:05:37.689 INFO  org.casbin.jcasbin - g2: _, _: []
+23:05:37.689 INFO  org.casbin.jcasbin - g3: _, _: []
+23:05:37.689 INFO  org.casbin.jcasbin - Role links for: g
+23:05:37.690 INFO  org.casbin.jcasbin - 
+23:05:37.690 INFO  org.casbin.jcasbin - Role links for: g2
+23:05:37.690 INFO  org.casbin.jcasbin - 
+23:05:37.690 INFO  org.casbin.jcasbin - Role links for: g3
+23:05:37.690 INFO  org.casbin.jcasbin - 
+23:05:37.802 INFO  org.casbin.jcasbin - Model:
+23:05:37.802 INFO  org.casbin.jcasbin - p.p: sub, dom, obj, act
+23:05:37.802 INFO  org.casbin.jcasbin - r.r: sub, dom, obj, act
+23:05:37.802 INFO  org.casbin.jcasbin - e.e: some(where (p_eft == allow))
+23:05:37.802 INFO  org.casbin.jcasbin - g.g: _, _, _
+23:05:37.802 INFO  org.casbin.jcasbin - g.g2: _, _
+23:05:37.802 INFO  org.casbin.jcasbin - g.g3: _, _
+23:05:37.802 INFO  org.casbin.jcasbin - m.m: g(r_sub, p_sub, r_dom) && r_dom == p_dom && g3(r_obj, p_obj) && r_act == p_act
+23:05:37.807 INFO  org.casbin.jcasbin - Policy:
+23:05:37.807 INFO  org.casbin.jcasbin - p: sub, dom, obj, act: []
+23:05:37.807 INFO  org.casbin.jcasbin - g: _, _, _: []
+23:05:37.807 INFO  org.casbin.jcasbin - g2: _, _: []
+23:05:37.807 INFO  org.casbin.jcasbin - g3: _, _: [[investigator, adminReadResources], [studyManager, adminReadResources], [studyResearcher, adminReadResources], [educationalContent, adminReadResources], [file, adminReadResources], [inLabVisit, adminReadResources], [study, adminReadResources], [participationRequirement, adminReadResources], [dashboard, adminReadResources], [chart, adminReadResources], [participant, adminReadResources], [studyData, adminReadResources], [taskSpec, adminReadResources], [investigator, adminWriteResources], [studyManager, adminWriteResources], [studyResearcher, adminWriteResources], [educationalContent, adminWriteResources], [file, adminWriteResources], [inLabVisit, adminWriteResources], [study, adminWriteResources], [participationRequirement, adminWriteResources], [dashboard, adminWriteResources], [chart, adminWriteResources], [participant, adminWriteResources], [studyData, adminWriteResources], [taskSpec, adminWriteResources], [investigator, managerReadResources], [studyResearcher, managerReadResources], [educationalContent, managerReadResources], [file, managerReadResources], [inLabVisit, managerReadResources], [study, managerReadResources], [participationRequirement, managerReadResources], [dashboard, managerReadResources], [chart, managerReadResources], [participant, managerReadResources], [studyData, managerReadResources], [taskSpec, managerReadResources], [investigator, managerWriteResources], [studyResearcher, managerWriteResources], [educationalContent, managerWriteResources], [file, managerWriteResources], [inLabVisit, managerWriteResources], [study, managerWriteResources], [participationRequirement, managerWriteResources], [dashboard, managerWriteResources], [chart, managerWriteResources], [participant, managerWriteResources], [studyData, managerWriteResources], [taskSpec, managerWriteResources], [investigator, researcherReadResources], [educationalContent, researcherReadResources], [file, researcherReadResources], [inLabVisit, researcherReadResources], [study, researcherReadResources], [participationRequirement, researcherReadResources], [dashboard, researcherReadResources], [chart, researcherReadResources], [studyData, researcherReadResources], [taskSpec, researcherReadResources], [educationalContent, researcherWriteResources], [file, researcherWriteResources], [dashboard, researcherWriteResources], [chart, researcherWriteResources], [studyData, researcherWriteResources], [taskSpec, researcherWriteResources], [educationalContent, participantReadResources], [file, participantReadResources], [study, participantReadResources], [participationRequirement, participantReadResources], [taskSpec, participantReadResources], [event, participantWriteResources], [file, participantWriteResources], [healthData, participantWriteResources], [taskResult, participantWriteResources]]
+23:05:37.807 INFO  org.casbin.jcasbin - Role links for: g
+23:05:37.807 INFO  org.casbin.jcasbin - 
+23:05:37.807 INFO  org.casbin.jcasbin - Role links for: g2
+23:05:37.807 INFO  org.casbin.jcasbin - 
+23:05:37.808 INFO  org.casbin.jcasbin - Role links for: g3
+23:05:37.809 INFO  org.casbin.jcasbin - casbin::default: educationalContent < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, participantReadResources, managerReadResources), study < (managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, participantReadResources, managerReadResources), participationRequirement < (managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, participantReadResources, managerReadResources), inLabVisit < (managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, managerReadResources), taskResult < participantWriteResources, taskSpec < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, participantReadResources, managerReadResources), studyManager < (adminWriteResources, adminReadResources), participant < (managerWriteResources, adminWriteResources, adminReadResources, managerReadResources), investigator < (managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, managerReadResources), healthData < participantWriteResources, file < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, participantWriteResources, participantReadResources, managerReadResources), event < participantWriteResources, studyResearcher < (managerWriteResources, adminWriteResources, adminReadResources, managerReadResources), chart < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, managerReadResources), dashboard < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, managerReadResources), studyData < (researcherWriteResources, managerWriteResources, adminWriteResources, researcherReadResources, adminReadResources, managerReadResources)
+23:05:38.290 INFO  c.l.armeria.common.util.SystemInfo - IPv6: disabled (no IPv6 network interface)
+23:05:38.301 INFO  com.linecorp.armeria.common.Flags - useOpenSsl: true (default)
+23:05:38.301 INFO  com.linecorp.armeria.common.Flags - Using OpenSSL: BoringSSL, 0x1010107f
+23:05:38.301 INFO  com.linecorp.armeria.common.Flags - dumpOpenSslInfo: false (default)
+23:05:38.698 WARN  c.l.a.server.cors.CorsServiceBuilder - allowCredentials has been enabled for any origin (*). It will work properly but it would be better disabled or enabled with specified origins for security. Visit https://www.w3.org/TR/cors/#supports-credentials for more information.
+23:05:39.510 INFO  c.l.armeria.common.util.SystemInfo - hostname: hjin-400tda-400sda (from /proc/sys/kernel/hostname)
+23:05:39.657 WARN  c.l.a.server.RejectedRouteHandler - Virtual host '*' has a duplicate route: /studies/:studyId/tasks/:taskId/results
+23:05:39.696 INFO  c.l.a.i.s.reflections.Reflections - Reflections took 3 ms to scan 1 urls, producing 1 keys and 1 values 
+23:05:40.540 INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+23:05:40.554 INFO  o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+23:05:40.554 INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+23:05:40.555 INFO  org.quartz.simpl.RAMJobStore - RAMJobStore initialized.
+23:05:40.556 INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+23:05:40.556 INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+23:05:40.556 INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+23:05:40.556 INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@6bce1a7f
+23:05:40.679 WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+23:05:40.731 INFO  com.linecorp.armeria.server.Server - Serving HTTP at /[0:0:0:0:0:0:0:0%0]:50001 - http://127.0.0.1:50001/
+23:05:40.756 INFO  o.s.s.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+23:05:40.756 INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+23:05:40.763 INFO  r.backend.HealthResearchBackendAppKt - Started HealthResearchBackendAppKt in 7.903 seconds (process running for 8.229)
+23:05:42.109 ERROR r.b.a.o.c.watcher.LettuceSubThread - error message Unable to connect to 127.0.0.1/<unresolved>:6379
+23:05:50.304 INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+23:05:57.342 INFO  o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+23:05:57.342 INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+23:05:57.342 INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+23:05:57.342 INFO  org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+23:05:59.365 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+23:05:59.367 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+23:05:59.368 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+23:05:59.370 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

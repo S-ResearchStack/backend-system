@@ -1,0 +1,89 @@
+database-type: ${DATABASE_TYPE:MONGO}
+
+app:
+  invitation:
+    url: ${INVITATION_URL}
+
+jwk:
+  url:
+    samsung-account: ${SAMSUNG_ACCOUNT_JWK_URL:https://api.account.samsung.com/v1/oidc/certs}
+    google: ${GOOGLE_JWK_URL:https://www.googleapis.com/oauth2/v3/certs}
+    cognito: ${COGNITO_JWK_URL}
+    super-tokens: ${super-tokens.url}/recipe/jwt/jwks
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    primary:
+      url: jdbc:postgresql://${CASBIN_DB_HOST}:${CASBIN_DB_PORT:5432}/${HRP_DATABASE:health_research}
+      username: ${CASBIN_DB_USERNAME}
+      password: ${CASBIN_DB_PASSWORD}
+    secondary:
+      url: jdbc:trino://${TRINO_HOST:127.0.0.1}:${TRINO_PORT:8080}/${TRINO_CATALOG:mongodb}
+      username: ${TRINO_USERNAME:admin}
+      driver-class-name: io.trino.jdbc.TrinoDriver
+
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      ssl:
+        enabled: ${REDIS_SSL_ENABLED:true}
+    mongodb:
+      database: ${MONGODB_DATABASE:health_research}
+      uri: ${MONGODB_URI:mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@${MONGODB_HOST}/${spring.data.mongodb.database}?retryWrites=true&w=majority&authMechanism=SCRAM-SHA-1}
+      autoIndexCreation: true
+  mail:
+    host: ${SMTP_HOST:smtp.gmail.com}
+    port: ${SMTP_PORT:587}
+    username: ${MAIL_USER}
+    password: ${MAIL_USER_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+server:
+  port: ${BACKEND_PORT:50001}
+aws:
+  access-key-id: ${AWS_ACCESS_KEY_ID}
+  secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+  s3:
+    presigned-url-duration: ${AWS_PRESIGNED_URL_DURATION:60}
+    region: ${AWS_REGION:ap-northeast-2}
+    bucket: ${AWS_BUCKET_NAME}
+oidc:
+  google:
+    oauth2-url: ${OIDC_GOOGLE_OAUTH2_URL:https://oauth2.googleapis.com}
+    client-id: ${OIDC_GOOGLE_CLIENT_ID}
+    client-secret: ${OIDC_GOOGLE_CLIENT_SECRET}
+    redirect-uri: ${OIDC_GOOGLE_REDIRECT_URI}
+
+casbin:
+  autoSave: true
+  storeType: jdbc
+  tableName: casbin_rule
+  initialize-schema: create
+  use-default-model-if-model-not-setting: false
+  model: casbin/model.conf
+  policy: casbin/predefined-policy.csv
+  policyTopic: HRP_CASBIN_POLICY_TOPIC
+  datasource:
+    url: jdbc:postgresql://${CASBIN_DB_HOST}:${CASBIN_DB_PORT:5432}/${CASBIN_DB_SCHEMA}
+    username: ${CASBIN_DB_USERNAME}
+    password: ${CASBIN_DB_PASSWORD}
+
+super-tokens:
+  url: ${SUPER_TOKENS_URL:http://localhost:3567}
+
+token:
+  access-token:
+    lifetime: ${ACCESS_TOKEN_LIFETIME:3600}
+    issuer: ${TOKEN_ISSUER:research-hub.com}
+  refresh-token:
+    lifetime: ${REFRESH_TOKEN_LIFETIME:1209600}
+    length: 500
