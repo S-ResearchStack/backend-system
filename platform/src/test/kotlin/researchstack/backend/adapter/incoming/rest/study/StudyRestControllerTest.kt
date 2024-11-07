@@ -25,7 +25,6 @@ import researchstack.backend.application.port.incoming.study.DeleteStudyUseCase
 import researchstack.backend.application.port.incoming.study.GetStudyUseCase
 import researchstack.backend.application.port.incoming.study.UpdateStudyUseCase
 import researchstack.backend.config.getUserId
-import researchstack.backend.domain.study.HealthDataGroup
 import java.nio.charset.Charset
 import kotlin.test.assertEquals
 
